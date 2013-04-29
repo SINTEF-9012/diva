@@ -3,21 +3,6 @@
 
 package diva.parser; 
 
-import java.io.*;
-import java.util.*;
-
-import org.eclipse.emf.ecore.*;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import antlr.*;
-import antlr.collections.*;
-
-import diva.*;
-import diva.impl.*;
 
 public interface DivaExpressionParserTokenTypes {
 	int EOF = 1;

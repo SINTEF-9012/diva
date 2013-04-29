@@ -6,9 +6,9 @@
  */
 package diva;
 
-import diva.visitors.Visitor;
-
 import org.eclipse.emf.common.util.EList;
+
+import diva.visitors.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,5 +141,10 @@ public interface Dimension extends NamedElement {
 	 * @generated
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
+	
+	/**
+	 * @generated NOT
+	 */
+	String alloyMult();
 
 } // Dimension

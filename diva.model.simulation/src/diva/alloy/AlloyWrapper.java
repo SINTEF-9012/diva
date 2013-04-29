@@ -5,12 +5,7 @@ import static edu.mit.csail.sdg.alloy4.A4Reporter.NOP;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Iterator;
-
-import kodkod.ast.Variable;
 
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4compiler.ast.ExprVar;

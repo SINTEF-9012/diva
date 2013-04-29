@@ -6,19 +6,16 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import diva.DivaPackage;
 import diva.NotTerm;
 import diva.Term;
-
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -185,6 +182,14 @@ public class NotTermImpl extends TermImpl implements NotTerm {
 				return term != null;
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("not ");
+		getTerm().toAlloy(builder);
 	}
 
 } //NotTermImpl

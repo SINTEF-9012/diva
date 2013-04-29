@@ -6,6 +6,17 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import diva.AndTerm;
 import diva.Annotation;
 import diva.AspectModel;
@@ -37,7 +48,6 @@ import diva.NamedElement;
 import diva.NaryTerm;
 import diva.NotTerm;
 import diva.OrTerm;
-import diva.Priorities;
 import diva.Priority;
 import diva.PriorityRule;
 import diva.Property;
@@ -58,23 +68,9 @@ import diva.VariableValue;
 import diva.Variant;
 import diva.VariantExpression;
 import diva.VariantTerm;
-
 import diva.Verdict;
 import diva.visitors.VisitorsPackage;
-
 import diva.visitors.impl.VisitorsPackageImpl;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.ETypeParameter;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

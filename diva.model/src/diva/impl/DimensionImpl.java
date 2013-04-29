@@ -6,30 +6,25 @@
  */
 package diva.impl;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import diva.Dimension;
 import diva.DivaPackage;
 import diva.MultiplicityConstraint;
 import diva.Property;
 import diva.Variant;
-
 import diva.visitors.Visitor;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -234,8 +229,8 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DivaPackage.DIMENSION__VARIANT:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariant()).basicAdd(otherEnd, msgs);
+		case DivaPackage.DIMENSION__VARIANT:
+			return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariant()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -248,10 +243,10 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DivaPackage.DIMENSION__VARIANT:
-				return ((InternalEList<?>)getVariant()).basicRemove(otherEnd, msgs);
-			case DivaPackage.DIMENSION__CONSTRAINTS:
-				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+		case DivaPackage.DIMENSION__VARIANT:
+			return ((InternalEList<?>)getVariant()).basicRemove(otherEnd, msgs);
+		case DivaPackage.DIMENSION__CONSTRAINTS:
+			return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -264,16 +259,16 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DivaPackage.DIMENSION__VARIANT:
-				return getVariant();
-			case DivaPackage.DIMENSION__PROPERTY:
-				return getProperty();
-			case DivaPackage.DIMENSION__UPPER:
-				return getUpper();
-			case DivaPackage.DIMENSION__LOWER:
-				return getLower();
-			case DivaPackage.DIMENSION__CONSTRAINTS:
-				return getConstraints();
+		case DivaPackage.DIMENSION__VARIANT:
+			return getVariant();
+		case DivaPackage.DIMENSION__PROPERTY:
+			return getProperty();
+		case DivaPackage.DIMENSION__UPPER:
+			return getUpper();
+		case DivaPackage.DIMENSION__LOWER:
+			return getLower();
+		case DivaPackage.DIMENSION__CONSTRAINTS:
+			return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,24 +282,24 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DivaPackage.DIMENSION__VARIANT:
-				getVariant().clear();
-				getVariant().addAll((Collection<? extends Variant>)newValue);
-				return;
-			case DivaPackage.DIMENSION__PROPERTY:
-				getProperty().clear();
-				getProperty().addAll((Collection<? extends Property>)newValue);
-				return;
-			case DivaPackage.DIMENSION__UPPER:
-				setUpper((Integer)newValue);
-				return;
-			case DivaPackage.DIMENSION__LOWER:
-				setLower((Integer)newValue);
-				return;
-			case DivaPackage.DIMENSION__CONSTRAINTS:
-				getConstraints().clear();
-				getConstraints().addAll((Collection<? extends MultiplicityConstraint>)newValue);
-				return;
+		case DivaPackage.DIMENSION__VARIANT:
+			getVariant().clear();
+			getVariant().addAll((Collection<? extends Variant>)newValue);
+			return;
+		case DivaPackage.DIMENSION__PROPERTY:
+			getProperty().clear();
+			getProperty().addAll((Collection<? extends Property>)newValue);
+			return;
+		case DivaPackage.DIMENSION__UPPER:
+			setUpper((Integer)newValue);
+			return;
+		case DivaPackage.DIMENSION__LOWER:
+			setLower((Integer)newValue);
+			return;
+		case DivaPackage.DIMENSION__CONSTRAINTS:
+			getConstraints().clear();
+			getConstraints().addAll((Collection<? extends MultiplicityConstraint>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -317,21 +312,21 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DivaPackage.DIMENSION__VARIANT:
-				getVariant().clear();
-				return;
-			case DivaPackage.DIMENSION__PROPERTY:
-				getProperty().clear();
-				return;
-			case DivaPackage.DIMENSION__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
-			case DivaPackage.DIMENSION__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case DivaPackage.DIMENSION__CONSTRAINTS:
-				getConstraints().clear();
-				return;
+		case DivaPackage.DIMENSION__VARIANT:
+			getVariant().clear();
+			return;
+		case DivaPackage.DIMENSION__PROPERTY:
+			getProperty().clear();
+			return;
+		case DivaPackage.DIMENSION__UPPER:
+			setUpper(UPPER_EDEFAULT);
+			return;
+		case DivaPackage.DIMENSION__LOWER:
+			setLower(LOWER_EDEFAULT);
+			return;
+		case DivaPackage.DIMENSION__CONSTRAINTS:
+			getConstraints().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -344,16 +339,16 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DivaPackage.DIMENSION__VARIANT:
-				return variant != null && !variant.isEmpty();
-			case DivaPackage.DIMENSION__PROPERTY:
-				return property != null && !property.isEmpty();
-			case DivaPackage.DIMENSION__UPPER:
-				return upper != UPPER_EDEFAULT;
-			case DivaPackage.DIMENSION__LOWER:
-				return lower != LOWER_EDEFAULT;
-			case DivaPackage.DIMENSION__CONSTRAINTS:
-				return constraints != null && !constraints.isEmpty();
+		case DivaPackage.DIMENSION__VARIANT:
+			return variant != null && !variant.isEmpty();
+		case DivaPackage.DIMENSION__PROPERTY:
+			return property != null && !property.isEmpty();
+		case DivaPackage.DIMENSION__UPPER:
+			return upper != UPPER_EDEFAULT;
+		case DivaPackage.DIMENSION__LOWER:
+			return lower != LOWER_EDEFAULT;
+		case DivaPackage.DIMENSION__CONSTRAINTS:
+			return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -374,6 +369,33 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 		result.append(lower);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public String alloyMult() {
+		if (getUpper() == 1) {
+			if (getLower() == 0) 
+				return "lone";
+			else 
+				return "one";
+		} else {
+			if (getLower() == 0) 
+				return "";
+			else 
+				return "some";
+		}
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append(alloyMult() + " abstract sig " + getId() + " extends Variant {}\n");
+		for(Variant v : getVariant()) {
+			v.toAlloy(builder);
+		}
 	}
 
 } //DimensionImpl

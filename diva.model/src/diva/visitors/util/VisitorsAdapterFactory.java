@@ -6,14 +6,15 @@
  */
 package diva.visitors.util;
 
-import diva.visitors.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import diva.visitors.TopDownVisitor;
+import diva.visitors.Visitable;
+import diva.visitors.Visitor;
+import diva.visitors.VisitorsPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,6 +6,8 @@
  */
 package diva.visitors;
 
+import org.eclipse.emf.ecore.EObject;
+
 import diva.AndTerm;
 import diva.Annotation;
 import diva.AspectModel;
@@ -19,7 +21,6 @@ import diva.ConfigurationModel;
 import diva.Context;
 import diva.ContextExpression;
 import diva.ContextModel;
-import diva.DiVAModelElement;
 import diva.Dimension;
 import diva.EnumLiteral;
 import diva.EnumTerm;
@@ -30,7 +31,6 @@ import diva.Invariant;
 import diva.MultiplicityConstraint;
 import diva.NotTerm;
 import diva.OrTerm;
-import diva.Priorities;
 import diva.Priority;
 import diva.PriorityRule;
 import diva.Property;
@@ -45,8 +45,6 @@ import diva.VariabilityModel;
 import diva.Variant;
 import diva.VariantExpression;
 import diva.VariantTerm;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

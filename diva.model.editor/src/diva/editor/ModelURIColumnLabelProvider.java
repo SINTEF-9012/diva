@@ -1,8 +1,5 @@
 package diva.editor;
 
-import java.io.IOException;
-
-import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -23,13 +20,10 @@ import org.eclipse.swt.widgets.Display;
 import diva.AspectModel;
 import diva.BaseModel;
 import diva.DivaPackage;
-import diva.Expression;
 import diva.Model;
-import diva.Term;
 import diva.VariabilityModel;
 import diva.Variant;
 import diva.impl.DivaFactoryImpl;
-import diva.parser.DivaExpressionParser;
 
 public class ModelURIColumnLabelProvider extends ColumnLabelProvider implements Adapter {
 

@@ -6,15 +6,16 @@
  */
 package diva_context.impl;
 
-import diva_context.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import diva_context.Context;
+import diva_context.ContextElement;
+import diva_context.Diva_contextFactory;
+import diva_context.Diva_contextPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,12 +6,12 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import diva.AndTerm;
 import diva.DivaPackage;
-
+import diva.Term;
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,6 +49,21 @@ public class AndTermImpl extends NaryTermImpl implements AndTerm {
 	 */
 	public <C, R> R accept(Visitor<C, R> visitor, C context) {
 		return visitor.visitAndTerm(this, context);
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("(");
+		int i = 0;
+		for(Term t : getTerm()) {
+			if (i > 0)
+				builder.append(" and ");
+			t.toAlloy(builder);
+			i++;
+		}
+		builder.append(")");
 	}
 
 } //AndTermImpl

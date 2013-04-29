@@ -6,12 +6,12 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import diva.DivaPackage;
 import diva.EnumLiteral;
-
+import diva.EnumVariable;
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,4 +51,10 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 		return visitor.visitEnumLiteral(this, context);
 	}
 
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("lone sig " + ((EnumVariable)eContainer()).getId() + "_" + getId() + " extends " + ((EnumVariable)eContainer()).getId() + " {}\n");
+	}
 } //EnumLiteralImpl

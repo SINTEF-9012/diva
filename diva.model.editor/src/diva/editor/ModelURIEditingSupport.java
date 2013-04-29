@@ -7,15 +7,11 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
-import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
 
 import diva.DivaPackage;
-import diva.Expression;
 import diva.Model;
-import diva.Term;
 import diva.VariabilityModel;
-import diva.parser.DivaExpressionParser;
 
 public class ModelURIEditingSupport extends EditingSupport {
 

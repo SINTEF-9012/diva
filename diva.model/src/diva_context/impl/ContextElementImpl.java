@@ -6,15 +6,13 @@
  */
 package diva_context.impl;
 
-import diva_context.ContextElement;
-import diva_context.Diva_contextPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import diva_context.ContextElement;
+import diva_context.Diva_contextPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -1,9 +1,6 @@
 package diva.reasoning.wp2;
 
-import java.net.URL;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import diva.reasoning.IReasoning;
 /*import org.kermeta.core.helper.JarHelper;
 import org.kermeta.interpreter.api.InitializationError;
 import org.kermeta.interpreter.api.Interpreter;
@@ -12,8 +9,6 @@ import org.kermeta.interpreter.api.RunCommandLine;
 import org.kermeta.interpreter.helper.KermetaLauncher;
 //import org.kermeta.io.loader.Loader;
 import org.kermeta.io.plugin.IOPlugin;*/
-
-import diva.reasoning.IReasoning;
 /*import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;

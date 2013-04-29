@@ -6,12 +6,11 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import diva.BooleanVariable;
 import diva.DivaPackage;
-
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,6 +48,13 @@ public class BooleanVariableImpl extends VariableImpl implements BooleanVariable
 	 */
 	public <C, R> R accept(Visitor<C, R> visitor, C context) {
 		return visitor.visitBooleanVariable(this, context);
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("lone sig " + getId() + " extends Context {}\n");
 	}
 
 } //BooleanVariableImpl

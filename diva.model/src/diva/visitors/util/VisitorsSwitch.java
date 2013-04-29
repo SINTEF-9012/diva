@@ -6,14 +6,14 @@
  */
 package diva.visitors.util;
 
-import diva.visitors.*;
-
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+
+import diva.visitors.TopDownVisitor;
+import diva.visitors.Visitable;
+import diva.visitors.Visitor;
+import diva.visitors.VisitorsPackage;
 
 /**
  * <!-- begin-user-doc -->

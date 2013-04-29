@@ -6,23 +6,20 @@
  */
 package diva.visitors.impl;
 
-import diva.DivaPackage;
-
-import diva.impl.DivaPackageImpl;
-
-import diva.visitors.TopDownVisitor;
-import diva.visitors.Visitable;
-import diva.visitors.Visitor;
-import diva.visitors.VisitorsFactory;
-import diva.visitors.VisitorsPackage;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypeParameter;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import diva.DivaPackage;
+import diva.impl.DivaPackageImpl;
+import diva.visitors.TopDownVisitor;
+import diva.visitors.Visitable;
+import diva.visitors.Visitor;
+import diva.visitors.VisitorsFactory;
+import diva.visitors.VisitorsPackage;
 
 /**
  * <!-- begin-user-doc -->

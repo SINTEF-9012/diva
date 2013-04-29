@@ -6,16 +6,53 @@
  */
 package diva.impl;
 
-import diva.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import diva.AndTerm;
+import diva.Annotation;
+import diva.AspectModel;
+import diva.BaseModel;
+import diva.BoolVariableValue;
+import diva.BooleanTerm;
+import diva.BooleanVariable;
+import diva.ConfigVariant;
+import diva.Configuration;
+import diva.ConfigurationModel;
+import diva.Context;
+import diva.ContextExpression;
+import diva.ContextModel;
+import diva.Dimension;
+import diva.DivaFactory;
+import diva.DivaPackage;
+import diva.EnumLiteral;
+import diva.EnumTerm;
+import diva.EnumVariable;
+import diva.EnumVariableValue;
+import diva.Expression;
+import diva.Invariant;
+import diva.MultiplicityConstraint;
+import diva.NotTerm;
+import diva.OrTerm;
+import diva.Priority;
+import diva.PriorityRule;
+import diva.Property;
+import diva.PropertyLiteral;
+import diva.PropertyPriority;
+import diva.PropertyValue;
+import diva.Scenario;
+import diva.Score;
+import diva.SimulationModel;
+import diva.SuitableConfiguration;
+import diva.VariabilityModel;
+import diva.Variant;
+import diva.VariantExpression;
+import diva.VariantTerm;
+import diva.Verdict;
 
 /**
  * <!-- begin-user-doc -->

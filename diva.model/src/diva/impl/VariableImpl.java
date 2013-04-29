@@ -6,10 +6,10 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import diva.DivaPackage;
 import diva.Variable;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

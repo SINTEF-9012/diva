@@ -6,7 +6,18 @@
  */
 package diva.impl;
 
-import diva.AspectModel;
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import diva.ContextExpression;
 import diva.Dimension;
 import diva.DivaPackage;
@@ -15,24 +26,7 @@ import diva.ModelContainer;
 import diva.PropertyValue;
 import diva.Variant;
 import diva.VariantExpression;
-
 import diva.visitors.Visitor;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -618,6 +612,30 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 		result.append(weaveLevel);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("lone sig " + getId() + " extends " + ((Dimension)eContainer()).getId() + " {}\n");
+		if (getDependency() != null && getDependency().getTerm() != null) {
+			builder.append("fact { one " + getId() + " implies ");
+			getDependency().toAlloy(builder);
+			builder.append(" }\n");
+		}
+		if (getAvailable() != null && getAvailable().getTerm() != null) {
+			builder.append("fact { not(");
+			getAvailable().toAlloy(builder);
+			builder.append(" implies no " + getId());			
+			builder.append(" }\n");
+		}
+		if (getRequired() != null && getRequired().getTerm() != null) {
+			builder.append("fact { ");
+			getRequired().toAlloy(builder);
+			builder.append(" implies one " + getId());
+			builder.append("}\n");
+		}
 	}
 
 } //VariantImpl

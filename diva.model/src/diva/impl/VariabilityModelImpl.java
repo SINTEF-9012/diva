@@ -6,7 +6,17 @@
  */
 package diva.impl;
 
-import diva.BaseModel;
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import diva.Constraint;
 import diva.Dimension;
 import diva.DivaPackage;
@@ -15,24 +25,7 @@ import diva.Rule;
 import diva.SimulationModel;
 import diva.VariabilityModel;
 import diva.Variable;
-
 import diva.visitors.Visitor;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -398,4 +391,31 @@ public class VariabilityModelImpl extends ModelContainerImpl implements Variabil
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("/* ********************\n");
+		builder.append("* Configuration description\n");
+		builder.append("**********************/\n");
+		builder.append("one sig Configuration {\n");
+		builder.append("variants : set Variant,\n");
+		builder.append("context : set Context\n");
+		builder.append("}\n\n");
+		
+		builder.append("abstract sig Variant {}\n");
+		builder.append("fact { one c: Configuration | all var: Variant | var in c.variants }\n\n");
+
+		builder.append("abstract sig Context {}\n");
+		builder.append("fact { one c: Configuration | all ctx: Context | ctx in c.context }\n\n");
+		
+		for(Variable v : getContext()) {
+			v.toAlloy(builder);
+		}
+		
+		for(Dimension d : getDimension()) {
+			d.toAlloy(builder);
+		}
+	}
+	
 } //VariabilityModelImpl

@@ -6,9 +6,9 @@
  */
 package diva;
 
-import diva.visitors.Visitor;
-
 import org.eclipse.emf.common.util.EList;
+
+import diva.visitors.Visitor;
 
 /**
  * <!-- begin-user-doc -->

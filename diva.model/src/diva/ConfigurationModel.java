@@ -6,10 +6,10 @@
  */
 package diva;
 
+import org.eclipse.emf.common.util.EList;
+
 import diva.visitors.Visitable;
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

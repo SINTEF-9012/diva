@@ -6,23 +6,19 @@
  */
 package diva.impl;
 
-import diva.DivaPackage;
-import diva.EnumLiteral;
-import diva.EnumVariable;
-
-import diva.visitors.Visitor;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import diva.DivaPackage;
+import diva.EnumLiteral;
+import diva.EnumVariable;
+import diva.visitors.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -161,5 +157,14 @@ public class EnumVariableImpl extends VariableImpl implements EnumVariable {
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("one abstract sig " + getId() + "  extends Context {}\n");
+		for(EnumLiteral l : getLiteral()) {
+			l.toAlloy(builder);
+		}
+	}
 } //EnumVariableImpl

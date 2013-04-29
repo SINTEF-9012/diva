@@ -6,16 +6,13 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import diva.BoolVariableValue;
 import diva.DivaPackage;
-
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -172,6 +169,17 @@ public class BoolVariableValueImpl extends VariableValueImpl implements BoolVari
 		result.append(bool);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		if (bool)
+			builder.append("one ");
+		else
+			builder.append("no ");
+		builder.append(getVariable().getId());
 	}
 
 } //BoolVariableValueImpl

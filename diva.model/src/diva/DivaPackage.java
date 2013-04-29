@@ -6,14 +6,14 @@
  */
 package diva;
 
-import diva.visitors.VisitorsPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
+import diva.visitors.VisitorsPackage;
 
 /**
  * <!-- begin-user-doc -->

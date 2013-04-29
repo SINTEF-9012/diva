@@ -6,7 +6,6 @@
  */
 package diva;
 
-import diva.visitors.Visitable;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,14 +6,15 @@
  */
 package diva_configuration.util;
 
-import diva_configuration.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import diva_configuration.Aspect;
+import diva_configuration.Configuration;
+import diva_configuration.Diva_configurationPackage;
+import diva_configuration.SuitableConfigurations;
 
 /**
  * <!-- begin-user-doc -->

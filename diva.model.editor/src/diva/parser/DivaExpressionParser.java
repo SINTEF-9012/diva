@@ -3,36 +3,34 @@
 
 package diva.parser; 
 
-import java.io.*;
-import java.util.*;
+import java.io.StringBufferInputStream;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
-import org.eclipse.emf.ecore.*;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import antlr.*;
-import antlr.collections.*;
-
-import diva.*;
-import diva.editor.DiVATextProvider;
-import diva.impl.*;
-
-import antlr.TokenBuffer;
-import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.ANTLRException;
-import antlr.LLkParser;
-import antlr.Token;
-import antlr.TokenStream;
-import antlr.RecognitionException;
 import antlr.NoViableAltException;
-import antlr.MismatchedTokenException;
-import antlr.SemanticException;
 import antlr.ParserSharedInputState;
+import antlr.RecognitionException;
+import antlr.Token;
+import antlr.TokenBuffer;
+import antlr.TokenStream;
+import antlr.TokenStreamException;
 import antlr.collections.impl.BitSet;
+import diva.AndTerm;
+import diva.BooleanTerm;
+import diva.BooleanVariable;
+import diva.Dimension;
+import diva.DivaFactory;
+import diva.EnumTerm;
+import diva.EnumVariable;
+import diva.NotTerm;
+import diva.OrTerm;
+import diva.Term;
+import diva.VariabilityModel;
+import diva.Variable;
+import diva.Variant;
+import diva.VariantTerm;
+import diva.editor.DiVATextProvider;
+import diva.impl.DivaPackageImpl;
 
 public class DivaExpressionParser extends antlr.LLkParser       implements DivaExpressionParserTokenTypes
  {

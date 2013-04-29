@@ -8,8 +8,6 @@ package diva;
 
 import diva.visitors.Visitor;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Property Literal</b></em>'.

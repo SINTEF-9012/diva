@@ -618,11 +618,11 @@ aspect class Expression {
 		end
 	end
 	
-	operation toAlloy() : String is do
+	/*operation toAlloy() : String is do
 		if term != void then
 			result := term.toAlloy
 		end
-	end
+	end*/
 }
 
 aspect class Invariant
@@ -667,7 +667,7 @@ aspect class AndTerm
 		end
 	end
 	
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "("
 		from var i : Integer init 0
 		until i == term.size
@@ -677,7 +677,7 @@ aspect class AndTerm
 			i := i + 1
 		end
 		result := result + ")"
-	end
+	end*/
 	
 }
 aspect class OrTerm
@@ -709,7 +709,7 @@ aspect class OrTerm
 		end
 	end
 	
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "("
 		from var i : Integer init 0
 		until i == term.size
@@ -719,7 +719,7 @@ aspect class OrTerm
 			i := i + 1
 		end
 		result := result + ")"
-	end
+	end*/
 }
 aspect class NotTerm
 {
@@ -735,9 +735,9 @@ aspect class NotTerm
 		result := "!" + term.toString
 	end
 	
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "not " + term.toAlloy
-	end
+	end*/
 }
 
 
@@ -768,9 +768,9 @@ aspect class VariantTerm
 		result := variant.name
 	end
 	
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "one " + variant.id
-	end
+	end*/
 }
 aspect abstract class VariableTerm
 {
@@ -800,9 +800,9 @@ aspect class EnumTerm
 		result := variable.id + "=" + ~value.id
 	end
 	
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "one " + variable.id + "_" + ~value.id
-	end
+	end*/
 }
 aspect class BooleanTerm
 {
@@ -824,9 +824,9 @@ aspect class BooleanTerm
 		result := variable.id
 	end
 	
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "one " + variable.id
-	end
+	end*/
 }
 
 aspect class Variant
@@ -872,11 +872,11 @@ aspect class BoolVariableValue {
 		result := res
 	end
 
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		if bool then result := "one " else result := "no " end
 		result := result + variable.id
 		
-	end
+	end*/
 	method hasSameValue(other : VariableValue) : Boolean is do
 		var o : BoolVariableValue
 		o ?= other
@@ -912,9 +912,9 @@ aspect class EnumVariableValue {
 		result := res
 	end
 
-	method toAlloy() : String is do
+	/*method toAlloy() : String is do
 		result := "one " + variable.id + "_" + literal.id
-	end
+	end*/
 	
 	method toString() : String is do
 		result := variable.id + "=" + literal.id

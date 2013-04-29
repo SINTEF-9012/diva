@@ -6,14 +6,10 @@
  */
 package diva.impl;
 
-import diva.DivaPackage;
-import diva.Term;
-
-import diva.visitors.Visitor;
-
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import diva.DivaPackage;
+import diva.Term;
 
 /**
  * <!-- begin-user-doc -->

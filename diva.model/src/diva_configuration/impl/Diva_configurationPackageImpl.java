@@ -6,18 +6,17 @@
  */
 package diva_configuration.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import diva_configuration.Aspect;
 import diva_configuration.Configuration;
 import diva_configuration.Diva_configurationFactory;
 import diva_configuration.Diva_configurationPackage;
 import diva_configuration.SuitableConfigurations;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

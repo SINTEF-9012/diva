@@ -6,12 +6,11 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import diva.DivaPackage;
 import diva.VariantExpression;
-
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

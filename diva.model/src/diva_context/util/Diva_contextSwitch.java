@@ -6,12 +6,14 @@
  */
 package diva_context.util;
 
-import diva_context.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import diva_context.Context;
+import diva_context.ContextElement;
+import diva_context.Diva_contextPackage;
 
 /**
  * <!-- begin-user-doc -->

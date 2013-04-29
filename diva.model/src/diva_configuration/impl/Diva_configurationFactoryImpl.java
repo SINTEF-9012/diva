@@ -6,15 +6,17 @@
  */
 package diva_configuration.impl;
 
-import diva_configuration.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import diva_configuration.Aspect;
+import diva_configuration.Configuration;
+import diva_configuration.Diva_configurationFactory;
+import diva_configuration.Diva_configurationPackage;
+import diva_configuration.SuitableConfigurations;
 
 /**
  * <!-- begin-user-doc -->

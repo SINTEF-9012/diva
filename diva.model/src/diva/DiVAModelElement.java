@@ -6,10 +6,9 @@
  */
 package diva;
 
-import diva.visitors.Visitable;
-import diva.visitors.Visitor;
-
 import org.eclipse.emf.common.util.EList;
+
+import diva.visitors.Visitable;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,5 +42,11 @@ public interface DiVAModelElement extends Visitable {
 	 * @generated
 	 */
 	EList<Annotation> getAnnotation();
+	
+	/**
+	 * @generated NOT
+	 * @return
+	 */
+	void toAlloy(StringBuilder builder);
 
 } // DiVAModelElement

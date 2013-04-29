@@ -6,17 +6,16 @@
  */
 package diva_context.impl;
 
-import diva_context.Context;
-import diva_context.ContextElement;
-import diva_context.Diva_contextFactory;
-import diva_context.Diva_contextPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import diva_context.Context;
+import diva_context.ContextElement;
+import diva_context.Diva_contextFactory;
+import diva_context.Diva_contextPackage;
 
 /**
  * <!-- begin-user-doc -->

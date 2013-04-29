@@ -6,17 +6,14 @@
  */
 package diva.impl;
 
-import diva.Annotation;
-import diva.DivaPackage;
-
-import diva.visitors.Visitor;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import diva.Annotation;
+import diva.DivaPackage;
+import diva.visitors.Visitor;
 
 /**
  * <!-- begin-user-doc -->

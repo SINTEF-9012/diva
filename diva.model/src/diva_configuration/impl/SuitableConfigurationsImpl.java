@@ -6,23 +6,19 @@
  */
 package diva_configuration.impl;
 
-import diva_configuration.Configuration;
-import diva_configuration.Diva_configurationPackage;
-import diva_configuration.SuitableConfigurations;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import diva_configuration.Configuration;
+import diva_configuration.Diva_configurationPackage;
+import diva_configuration.SuitableConfigurations;
 
 /**
  * <!-- begin-user-doc -->

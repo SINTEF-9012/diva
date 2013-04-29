@@ -6,7 +6,6 @@
  */
 package diva;
 
-import diva.visitors.Visitable;
 import diva.visitors.Visitor;
 
 /**

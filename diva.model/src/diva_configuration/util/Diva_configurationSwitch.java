@@ -6,12 +6,15 @@
  */
 package diva_configuration.util;
 
-import diva_configuration.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import diva_configuration.Aspect;
+import diva_configuration.Configuration;
+import diva_configuration.Diva_configurationPackage;
+import diva_configuration.SuitableConfigurations;
 
 /**
  * <!-- begin-user-doc -->

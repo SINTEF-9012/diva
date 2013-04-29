@@ -6,12 +6,11 @@
  */
 package diva.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import diva.BooleanTerm;
 import diva.DivaPackage;
-
 import diva.visitors.Visitor;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,6 +48,13 @@ public class BooleanTermImpl extends VariableTermImpl implements BooleanTerm {
 	 */
 	public <C, R> R accept(Visitor<C, R> visitor, C context) {
 		return visitor.visitBooleanTerm(this, context);
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void toAlloy(StringBuilder builder) {
+		builder.append("one " + getVariable().getId());
 	}
 
 } //BooleanTermImpl

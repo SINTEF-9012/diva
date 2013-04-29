@@ -6,14 +6,14 @@
  */
 package diva_context.util;
 
-import diva_context.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import diva_context.Context;
+import diva_context.ContextElement;
+import diva_context.Diva_contextPackage;
 
 /**
  * <!-- begin-user-doc -->
