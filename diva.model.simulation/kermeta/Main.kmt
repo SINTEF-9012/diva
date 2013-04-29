@@ -1,0 +1,343 @@
+/* $Id:$ 
+ * Creation : February 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffl
+ */
+@mainClass "diva::Main"
+@mainOperation "main"
+
+package diva;
+
+require "DiVA_Impl.kmt"
+require "DiVA2Alloy.kmt"
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::io
+
+
+class Main
+{
+	@componentType "MutantGenerator"
+	operation generateMutants(uri : String) : Void is do 
+		
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model " + uri + "...")
+        resource.load()
+        var model : VariabilityModel
+        model ?= resource.instances.one
+        
+        model.clean
+        
+        // do something
+        model.rule.remove(model.rule.one)
+        
+        var nuri : String init uri.substring(0, uri.size - 5) + "/mutant1.diva"
+        stdio.writeln(" nuri = " + nuri)
+        var resource_out : Resource init res.createResource(nuri, "http://www.diva.org/diva")
+		resource_out.add(model)
+
+        stdio.writeln("Saving model...")
+        resource_out.save
+        stdio.writeln("done.")
+		
+        
+	end
+
+	@componentType "Simulator"
+	operation populateValidConfigurations(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        if model.simulation != void then
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Processing context " + ctx.name.toString  + "...")
+	        	ctx.alloy_computeSuitableConfigurations(model)
+	        }}
+	        stdio.writeln("Saving model...")
+	        resource.save
+	        stdio.writeln("done.")
+	    else
+	    	stdio.writeln("No simulation model found.")
+        end
+        
+	end
+	
+	@componentType "Simulator"
+	operation populatePriorities(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        if model.simulation != void then
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Processing context " + ctx.name.toString  + "...")
+	        	ctx.computePriorities(model)
+	        }}
+	        stdio.writeln("Saving model...")
+	        resource.save
+	        stdio.writeln("done.")
+	    else
+	    	stdio.writeln("No simulation model found.")
+        end
+        
+	end
+	
+	@componentType "Simulator"
+	operation populateScores(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        if model.simulation != void then
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Processing context " + ctx.name.toString  + "...")
+	        	ctx.computeScores(model)
+	        }}
+	        stdio.writeln("Saving model...")
+	        resource.save
+	        stdio.writeln("done.")
+	    else
+	    	stdio.writeln("No simulation model found.")
+        end
+        
+	end
+	
+	@componentType "Validator"
+	operation populateVerdicts(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        if model.simulation != void then
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Processing context " + ctx.name.toString  + "...")
+	        	ctx.computeVerdicts
+	        }}
+	        stdio.writeln("Saving model...")
+	        resource.save
+	        stdio.writeln("done.")
+	    else
+	    	stdio.writeln("No simulation model found.")
+        end
+        
+	end
+	
+	@componentType "Simulator"
+	operation populateCompleteSimulation(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        if model.simulation != void then
+        
+        	model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Compute Configurations for Context " + ctx.name.toString  + "...")
+	        	ctx.alloy_computeSuitableConfigurations(model)
+	        }}
+	        
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Compute Priorities for Context " + ctx.name.toString  + "...")
+	        	ctx.computePriorities(model)
+	        }}
+	        
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Compute Scores for Context " + ctx.name.toString  + "...")
+	        	ctx.computeScores(model)
+	        }}
+	        
+	        model.simulation.scenario.each{ s | s.context.each { ctx |
+	        	stdio.writeln("Compute Verdict for Context " + ctx.name.toString  + "...")
+	        	ctx.computeVerdicts
+	        }}
+	        
+	        stdio.writeln("Saving model...")
+	        resource.save
+	        stdio.writeln("done.")
+	        
+	    else
+	    	stdio.writeln("No simulation model found.")
+        end
+        
+	end
+	
+	@componentType "AlloyGenerator"
+	operation printAlloySpec(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        var g : DiVA2Alloy init DiVA2Alloy.new
+        stdio.writeln("\n" + g.generate(model)) 
+        
+	end
+	
+	
+	@componentType "Simulator"
+	operation cleanModel(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        stdio.writeln("Cleaning model...")
+		model.clean
+        
+        stdio.writeln("Saving model...")
+        resource.save
+        stdio.writeln("done.")
+        
+	end
+	
+	@componentType "Simulator"
+	operation createExhaustiveSimulation(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        stdio.writeln("Creating exhaustive simulation...")
+		model.createExhaustiveSimulation
+        
+        stdio.writeln("Saving model...")
+        resource.save
+        stdio.writeln("done.")
+        
+	end
+	
+	@componentType "Simulator"
+	operation exportExhaustiveSimulation(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        stdio.writeln("Computing exhaustive simulation...")
+		model.exportSimulationStateMachine
+
+        
+	end
+	
+	@componentType "CoverageAnalysor"
+	operation printVariantCoverage(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+        stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        stdio.writeln("Simulation Coverage :")
+		model.printSimulationCoverage
+
+        stdio.writeln("done.")
+        
+	end
+	
+	@componentType "CoverageAnalysor"
+	operation printCSVCoverage(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+       // stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        ///stdio.writeln("Simulation Coverage :")
+        stdio.write(uri.split("\\\\").last)
+		model.printCSVSimulationCoverage
+        
+	end
+	
+	@componentType "CoverageAnalysor"
+	operation printCSVScenarioSizes(uri : String) : Void is do 
+		// Load the model
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.diva.org/diva")
+        
+       // stdio.writeln("Loading model...")
+        resource.load()
+        var model : VariabilityModel 
+        model ?= resource.instances.one
+        
+        ///stdio.writeln("Simulation Coverage :")
+        stdio.write(uri.split("\\\\").last)
+		model.printCSVScenarioSizes
+        
+	end
+	
+	operation test_populateValidConfigurations() : Void is do
+		stdio.writeln("Running test_populateValidConfigurations")
+		populateValidConfigurations("platform:/resource/diva.model/examples/robot/robot.diva")
+	end
+	
+	operation test_populatePriorities() : Void is do
+		stdio.writeln("Running test_populatePriorities")
+		populatePriorities("platform:/resource/diva.model/examples/robot/robot.diva")
+	end
+	
+	operation test_populateScores() : Void is do
+		stdio.writeln("Running test_populateScores")
+		populateScores("platform:/resource/diva.model/examples/robot/robot.diva")
+	end
+	
+	operation main() : Void is do 
+		test_populateValidConfigurations
+		test_populatePriorities
+		test_populateScores
+	end
+}

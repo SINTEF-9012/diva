@@ -1,0 +1,44 @@
+<%@ket
+package="diva"
+require="DiVA_Impl.kmt"
+using="kermeta kermeta::standard"
+class="DiVA2Alloy"
+parameters="model : VariabilityModel"
+%>
+
+/* ********************
+ * Configuration description
+ **********************/
+one sig Configuration {
+	variants : set Variant,
+    context : set Context
+}
+
+abstract sig Variant {}
+fact { one c: Configuration | all var: Variant | var in c.variants }
+
+abstract sig Context {}
+fact { one c: Configuration | all ctx: Context | ctx in c.context }
+
+/* ********************
+ * Context description
+ **********************/
+<%model.context.each{ v |%>
+	<%if v.isInstanceOf(BooleanVariable) then%> lone sig <%=v.id%> extends Context {}
+	<%else%> one abstract sig <%=v.id%>  extends Context {}
+		<%v.asType(EnumVariable).literal.each{ l |%> lone sig <%=v.id%>_<%=l.id%> extends <%=v.id%> {}<%}%>
+	<%end%> 
+<%}%>
+
+/* ********************
+ * Variability description
+ **********************/
+<%model.dimension.each{ d |%>
+	<%=d.alloyMult%> abstract sig <%=d.id%> extends Variant {}
+	<%d.variant.each{ v |%>
+		lone sig <%=v.id%> extends <%=d.id%> {}
+		<%if v.dependency != void then if v.dependency.term != void then%>fact { one <%=v.id%> implies <%=v.dependency.toAlloy%> }<%end%> <%end%>
+		<%if v.available != void then if v.available.term != void then%>fact { not (<%=v.available.toAlloy%>) implies no <%=v.id%> }<%end%> <%end%>
+		<%if v.required != void then if v.required.term != void then%>fact { <%=v.required.toAlloy%> implies one <%=v.id%> }<%end%> <%end%>
+	<%}%>
+<%}%>

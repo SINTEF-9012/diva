@@ -1,0 +1,84 @@
+package diva;
+
+require "DiVA_Impl.kmt"
+using kermeta::standard
+using kermeta::utils
+using kermeta
+using kermeta::standard
+class DiVA2Alloy{
+operation generate(model : VariabilityModel):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n/* ********************\n * Configuration description\n **********************/\none sig Configuration {\n\tvariants : set Variant,\n    context : set Context\n}\n\nabstract sig Variant {}\nfact { one c: Configuration | all var: Variant | var in c.variants }\n\nabstract sig Context {}\nfact { one c: Configuration | all ctx: Context | ctx in c.context }\n\n/* ********************\n * Context description\n **********************/\n")
+model.context.each{ v |
+_res.append("\t")
+if v.isInstanceOf(BooleanVariable) then
+_res.append(" lone sig ")
+_res.append(v.id)
+_res.append(" extends Context {}\n\t") 
+else
+_res.append(" one abstract sig ")
+_res.append(v.id)
+_res.append("  extends Context {}\n\t\t")
+v.asType(EnumVariable).literal.each{ l |
+_res.append(" lone sig ")
+_res.append(v.id)
+_res.append("_")
+_res.append(l.id)
+_res.append(" extends ")
+_res.append(v.id)
+_res.append(" {}")
+}
+_res.append("\n")
+end
+_res.append("")
+}
+_res.append("\n/* ********************\n * Variability description\n **********************/\n")
+model.dimension.each{ d |
+_res.append("\t")
+_res.append(d.alloyMult)
+_res.append(" abstract sig ")
+_res.append(d.id)
+_res.append(" extends Variant {}\n")
+d.variant.each{ v |
+_res.append("\t\tlone sig ")
+_res.append(v.id)
+_res.append(" extends ")
+_res.append(d.id)
+_res.append(" {}\n\t\t")
+if v.dependency != void then if v.dependency.term != void then
+_res.append("fact { one ")
+_res.append(v.id)
+_res.append(" implies ")
+_res.append(v.dependency.toAlloy)
+_res.append(" }")
+end
+_res.append(" ")
+end
+_res.append("\n\t\t")
+if v.available != void then if v.available.term != void then
+_res.append("fact { not (")
+_res.append(v.available.toAlloy)
+_res.append(") implies no ")
+_res.append(v.id)
+_res.append(" }")
+end
+_res.append(" ")
+end
+_res.append("\n\t\t")
+if v.required != void then if v.required.term != void then
+_res.append("fact { ")
+_res.append(v.required.toAlloy)
+_res.append(" implies one ")
+_res.append(v.id)
+_res.append(" }")
+end
+_res.append(" ")
+end
+_res.append("\n")
+}
+_res.append("")
+}
+_res.append("")
+result := _res.toString
+end
+}

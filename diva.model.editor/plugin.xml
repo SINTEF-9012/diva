@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="diva.presentation.DivaModelWizardID"
+            name="%_UI_DivaModelWizard_label"
+            class="diva.presentation.DivaModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DivaModelFile.gif">
+         <description>%_UI_DivaModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="diva.presentation.DivaEditorID"
+            name="%_UI_DivaEditor_label"
+            icon="icons/full/obj16/DivaModelFile.gif"
+            extensions="diva"
+            class="diva.editor.DiVATableEditor"
+            contributorClass="diva.presentation.DivaActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

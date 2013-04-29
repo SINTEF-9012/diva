@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: diva.model.edit;singleton:=true
+Bundle-Version: 2.0.0
+Bundle-ClassPath: .
+Bundle-Activator: diva.provider.DiVA_Merged_visitorEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: diva.provider,
+ diva.visitors.provider
+Require-Bundle: org.eclipse.core.runtime,
+ diva.model;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy

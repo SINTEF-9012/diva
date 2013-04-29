@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2008/05/26 22:25:43 franck Exp $
+-->
+
+<plugin>
+  
+  
+  <extension
+         point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           id="diva.ui"
+           nameFilter="*.diva"
+           objectClass="org.eclipse.core.resources.IFile">
+        <menu
+              icon="icons/DivaModelFile.gif"
+              id="diva.ui.menu"
+              label="DiVA"
+              path="additions">
+           <separator
+                 name="design">
+           </separator>
+           <separator
+                 name="arf">
+           </separator>
+           <separator
+                 name="additions">
+           </separator>
+        </menu>
+     </objectContribution>
+      
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.diva"
+            id="diva.simulator.ui">
+         <menu
+               label="Simulator"
+               path="diva.ui.menu/design"
+               id="diva.ui.menu.simulator">
+            <separator
+                  name="g1">
+            </separator>
+             <separator
+                  name="g2">
+            </separator>
+            <separator
+                  name="g3">
+            </separator>
+            <separator
+                  name="g4">
+            </separator>
+         </menu>
+         <action
+               label="Perform a Complete Simulation"
+               class="diva.ksimulator.ui.RunPopulateCompleteSimulation"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g1"
+               enablesFor="1"
+               id="diva.simulator.ui.action11">
+         </action>
+		<action
+               label="Step 1 - Infer Suitable Configurations"
+               class="diva.ksimulator.ui.RunPopulateValidConfigurations"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g2"
+               enablesFor="1"
+               id="diva.simulator.ui.action1">
+         </action>
+         <action
+               label="Step 2 - Compute Property Priorities"
+               class="diva.ksimulator.ui.RunPopulatePriorities"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g2"
+               enablesFor="1"
+               id="diva.simulator.ui.action2">
+         </action>
+         <action
+               label="Step 3 - Compute Configuration Scores"
+               class="diva.ksimulator.ui.RunPopulateScores"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g2"
+               enablesFor="1"
+               id="diva.simulator.ui.action3">
+         </action>
+         <action
+               label="Step 4 - Compute Verdicts"
+               class="diva.ksimulator.ui.RunPopulateVerdicts"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g2"
+               enablesFor="1"
+               id="diva.simulator.ui.action4">
+         </action>
+         <action
+               label="Print Simulation Coverage"
+               class="diva.ksimulator.ui.RunSimulationCoverage"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g3"
+               enablesFor="1"
+               id="diva.simulator.ui.action22">
+         </action>
+         <action
+               label="Clean Model"
+               class="diva.ksimulator.ui.RunCleanModel"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4"
+               enablesFor="1"
+               id="diva.simulator.ui.action31">
+         </action>
+         <menu
+               id="diva.ui.menu.aspects"
+               label="Aspects"
+               path="diva.ui.menu/design">
+            <separator
+                  name="g1">
+            </separator>
+            <separator
+                  name="g2">
+            </separator>
+         </menu>
+         <action
+               class="diva.weavingui.CompileAllAspects"
+               enablesFor="1"
+               id="diva.simulator.ui.action33"
+               label="Compile All Aspects"
+               menubarPath="diva.ui.menu/diva.ui.menu.aspects/g1">
+         </action>
+         <action
+               class="diva.weavingui.RunCleanGenFiles"
+               enablesFor="1"
+               id="diva.simulator.ui.action32"
+               label="Clean All (Aspects + Configurations)"
+               menubarPath="diva.ui.menu/diva.ui.menu.aspects/g2">
+         </action>
+         <menu
+               id="diva.ui.menu.experimental"
+               label="Experimental"
+               path="diva.ui.menu/design">
+            <separator
+                  name="g1">
+            </separator>
+            <separator
+                  name="g2">
+            </separator>
+            <separator
+                  name="g3">
+            </separator>
+         </menu>
+         <action
+               label="Export Alloy Specification"
+               class="diva.ksimulator.ui.RunPrintAlloySpec"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g1"
+               enablesFor="1"
+               id="diva.simulator.ui.action21">
+         </action>
+         <action
+               class="diva.ksimulator.ui.RunPopulateCompleteSimulationMultiple"
+               enablesFor="+"
+               id="diva.simulator.ui.action11"
+               label="Perform a Complete Simulation (Batch)"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
+         </action>
+         <action
+               class="diva.ksimulator.ui.RunSimulationCoverageMultiple"
+               enablesFor="+"
+               id="diva.simulator.ui.action22"
+               label="Export Simulation Coverage (Batch)"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
+         </action>
+         <action
+               class="diva.ksimulator.ui.RunSimulationStatsMultiple"
+               enablesFor="+"
+               id="diva.simulator.ui.action22"
+               label="Export Simulation Stats (Batch)"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
+         </action>
+         <action
+               label="Generate Mutants (under dev)"
+               class="diva.ksimulator.ui.RunGenerateMutants"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g3"
+               enablesFor="1"
+               id="diva.simulator.ui.action41">
+         </action>
+         <action
+               class="diva.ksimulator.ui.RunCreateExhaustiveSimulation"
+               enablesFor="1"
+               id="diva.simulator.ui.action42"
+               label="Create Exhaustive Simulation Scenario"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g4">
+         </action>
+         <action
+               class="diva.ksimulator.ui.RunExportExhaustiveSimulation"
+               enablesFor="1"
+               id="diva.simulator.ui.action43"
+               label="Export Exhaustive Simulation"
+               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g5">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="diva.model.Variant"
+            objectClass="diva.Variant">
+         <action
+               class="diva.weavingui.CompileAspect"
+               enablesFor="1"
+               id="diva.weavingui.CompileAspect"
+               label="Compile Aspect"
+               menubarPath="DiVA">
+         </action>
+         <action
+               class="diva.weavingui.WeaveVariants"
+               enablesFor="+"
+               id="diva.weavingui.WeaveVariants"
+               label="Weave Aspect(s)"
+               menubarPath="DiVA">
+         </action>
+         <action
+               class="diva.weavingui.OpenConfigurationFromVariants"
+               enablesFor="+"
+               id="diva.weavingui.OpenConfigurationFromVariants"
+               label="View Woven Configuration"
+               menubarPath="DiVA">
+         </action>
+         <action
+               class="diva.weavingui.EditAspect"
+               enablesFor="1"
+               id="diva.weavingui.EditAspect"
+               label="Edit Aspect..."
+               menubarPath="DiVA">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="diva.model.Configuration"
+            objectClass="diva.Configuration">
+         <action
+               class="diva.weavingui.WeaveConfiguration"
+               enablesFor="1"
+               id="diva.weavingui.WeaveConfiguration"
+               label="Weave Configuration Architecture"
+               menubarPath="DiVA">
+         </action>
+         <action
+               class="diva.weavingui.OpenConfiguration"
+               enablesFor="1"
+               id="diva.weavingui.OpenConfiguration"
+               label="View Configuration Architecture..."
+               menubarPath="DiVA">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="diva.model.Property"
+            objectClass="diva.Property">
+         <action
+               class="diva.popups.CreateDefaultLiterals"
+               enablesFor="1"
+               id="diva.property.createDefaults"
+               label="Create default literals"
+               menubarPath="DiVA">
+         </action>
+      </objectContribution>
+      
+   </extension>
+
+</plugin>
