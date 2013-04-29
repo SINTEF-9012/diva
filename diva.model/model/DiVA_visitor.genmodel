@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/diva.model/src" modelPluginID="diva.model" modelName="DiVA_visitor"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>DiVA_visitor.ecore</foreignModel>
+  <genPackages prefix="Diva" disposableProviderFactory="true" ecorePackage="DiVA_visitor.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DiVA_visitor.ecore#//Verdict">
+      <genEnumLiterals ecoreEnumLiteral="DiVA_visitor.ecore#//Verdict/none"/>
+      <genEnumLiterals ecoreEnumLiteral="DiVA_visitor.ecore#//Verdict/pass"/>
+      <genEnumLiterals ecoreEnumLiteral="DiVA_visitor.ecore#//Verdict/fail"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="DiVA_visitor.ecore#//String"/>
+    <genDataTypes ecoreDataType="DiVA_visitor.ecore#//Integer"/>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//VariabilityModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariabilityModel/context"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariabilityModel/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariabilityModel/dimension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariabilityModel/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariabilityModel/constraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariabilityModel/simulation"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//VariabilityModel/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//VariabilityModel/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//VariabilityModel/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//VariabilityModel/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//VariabilityModel/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Invariant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Invariant/expression"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Invariant/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Invariant/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Invariant/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Invariant/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Invariant/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Variable"/>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Model/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//BaseModel">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//BaseModel/weave"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//BaseModel/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BaseModel/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BaseModel/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BaseModel/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BaseModel/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//AspectModel">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//AspectModel/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//AspectModel/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//AspectModel/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//AspectModel/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//AspectModel/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//EnumVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//EnumVariable/literal"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//EnumVariable/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumVariable/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumVariable/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumVariable/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumVariable/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//BooleanVariable">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//BooleanVariable/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BooleanVariable/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BooleanVariable/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BooleanVariable/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BooleanVariable/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Term"/>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//AndTerm">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//AndTerm/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//AndTerm/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//AndTerm/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//AndTerm/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//AndTerm/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//OrTerm">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//OrTerm/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//OrTerm/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//OrTerm/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//OrTerm/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//OrTerm/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//NotTerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//NotTerm/term"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//NotTerm/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//NotTerm/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//NotTerm/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//NotTerm/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//NotTerm/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//NaryTerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//NaryTerm/term"/>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//VariantTerm">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariantTerm/variant"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//VariantTerm/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//VariantTerm/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//VariantTerm/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//VariantTerm/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//VariantTerm/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//VariableTerm">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariableTerm/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//EnumTerm">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//EnumTerm/value"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//EnumTerm/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumTerm/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumTerm/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumTerm/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumTerm/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//BooleanTerm">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//BooleanTerm/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BooleanTerm/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BooleanTerm/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BooleanTerm/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BooleanTerm/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Rule"/>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//EnumLiteral">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//EnumLiteral/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumLiteral/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumLiteral/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumLiteral/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumLiteral/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//NamedElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//NamedElement/id"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Constraint"/>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Variant">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/propertyValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/dependency"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/available"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Variant/weaveLevel"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Variant/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Variant/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Variant/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Variant/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Variant/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Dimension">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Dimension/variant"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Dimension/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Dimension/upper"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Dimension/lower"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Dimension/constraints"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Dimension/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Dimension/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Dimension/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Dimension/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Dimension/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Expression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Expression/term"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Expression/text"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Expression/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Expression/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Expression/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Expression/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Expression/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//ContextExpression">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//ContextExpression/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ContextExpression/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ContextExpression/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ContextExpression/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ContextExpression/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//VariantExpression">
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//VariantExpression/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//VariantExpression/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//VariantExpression/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//VariantExpression/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//VariantExpression/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//PriorityRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//PriorityRule/context"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//PriorityRule/priority"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//PriorityRule/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PriorityRule/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PriorityRule/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PriorityRule/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PriorityRule/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Property/direction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Property/literal"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Property/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Property/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Property/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Property/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Property/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//PropertyLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//PropertyLiteral/value"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//PropertyLiteral/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PropertyLiteral/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PropertyLiteral/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PropertyLiteral/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PropertyLiteral/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//PropertyValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//PropertyValue/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//PropertyValue/value"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//PropertyValue/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PropertyValue/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PropertyValue/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PropertyValue/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PropertyValue/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//PropertyPriority">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//PropertyPriority/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//PropertyPriority/priority"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//PropertyPriority/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PropertyPriority/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//PropertyPriority/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PropertyPriority/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//PropertyPriority/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//MultiplicityConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//MultiplicityConstraint/available"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//MultiplicityConstraint/upper"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//MultiplicityConstraint/lower"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//MultiplicityConstraint/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//MultiplicityConstraint/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//MultiplicityConstraint/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//MultiplicityConstraint/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//MultiplicityConstraint/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Annotation/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Annotation/value"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Annotation/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Annotation/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Annotation/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Annotation/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Annotation/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//DiVAModelElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//DiVAModelElement/annotation"/>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//SimulationModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//SimulationModel/scenario"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//SimulationModel/model"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//SimulationModel/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//SimulationModel/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//SimulationModel/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//SimulationModel/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//SimulationModel/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Context">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Context/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Context/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Context/oracle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Context/verdict"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Context/priority"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Context/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Context/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Context/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Context/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Context/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Configuration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Configuration/variant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Configuration/verdict"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Configuration/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Configuration/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Configuration/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Configuration/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Configuration/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//ConfigVariant">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//ConfigVariant/variant"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//ConfigVariant/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ConfigVariant/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ConfigVariant/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ConfigVariant/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ConfigVariant/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Scenario">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Scenario/context"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Scenario/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Scenario/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Scenario/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Scenario/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Scenario/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//ScoredElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//ScoredElement/totalScore"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//ScoredElement/score"/>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Score">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Score/score"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Score/property"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Score/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Score/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Score/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Score/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Score/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//Priority">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Priority/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Priority/priority"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//Priority/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Priority/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//Priority/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Priority/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//Priority/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//VariableValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//VariableValue/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//BoolVariableValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//BoolVariableValue/bool"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//BoolVariableValue/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BoolVariableValue/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//BoolVariableValue/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BoolVariableValue/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BoolVariableValue/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//EnumVariableValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//EnumVariableValue/literal"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//EnumVariableValue/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumVariableValue/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//EnumVariableValue/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumVariableValue/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//EnumVariableValue/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//ConfigurationModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//ConfigurationModel/configurations"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//ConfigurationModel/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ConfigurationModel/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ConfigurationModel/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ConfigurationModel/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ConfigurationModel/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//SuitableConfiguration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//SuitableConfiguration/score"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//SuitableConfiguration/variant"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//SuitableConfiguration/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//SuitableConfiguration/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//SuitableConfiguration/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//SuitableConfiguration/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//SuitableConfiguration/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="DiVA_visitor.ecore#//ContextModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//ContextModel/variable"/>
+      <genOperations ecoreOperation="DiVA_visitor.ecore#//ContextModel/accept">
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ContextModel/accept/visitor"/>
+        <genParameters ecoreParameter="DiVA_visitor.ecore#//ContextModel/accept/context"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ContextModel/accept/C"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//ContextModel/accept/R"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//ModelContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//ModelContainer/model"/>
+    </genClasses>
+    <nestedGenPackages prefix="Visitors" disposableProviderFactory="true" ecorePackage="DiVA_visitor.ecore#//visitors">
+      <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//visitors/Visitable">
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitable/accept">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitable/accept/visitor"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitable/accept/context"/>
+          <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//visitors/Visitable/accept/C"/>
+          <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//visitors/Visitable/accept/R"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//visitors/Visitor">
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//visitors/Visitor/ContextType"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//visitors/Visitor/ResultType"/>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitVariabilityModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariabilityModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariabilityModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitInvariant">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitInvariant/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitInvariant/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitBaseModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBaseModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBaseModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitAspectModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAspectModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAspectModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariable">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariable/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariable/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitBooleanVariable">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBooleanVariable/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBooleanVariable/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitAndTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAndTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAndTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitOrTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitOrTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitOrTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitNotTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitNotTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitNotTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitVariantTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariantTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariantTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitEnumTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitBooleanTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBooleanTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBooleanTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitEnumLiteral">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumLiteral/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumLiteral/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitVariant">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariant/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariant/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitDimension">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitDimension/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitDimension/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitExpression">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitExpression/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitExpression/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitContextExpression">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitContextExpression/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitContextExpression/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitVariantExpression">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariantExpression/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitVariantExpression/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitPriorityRule">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPriorityRule/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPriorityRule/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitProperty">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitProperty/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitProperty/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyLiteral">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyLiteral/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyLiteral/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyValue">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyValue/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyValue/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyPriority">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyPriority/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPropertyPriority/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitMultiplicityConstraint">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitMultiplicityConstraint/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitMultiplicityConstraint/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitAnnotation">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAnnotation/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAnnotation/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitSimulationModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitSimulationModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitSimulationModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitContext">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitContext/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitContext/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitConfiguration">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitConfiguration/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitConfiguration/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitConfigVariant">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitConfigVariant/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitConfigVariant/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitScenario">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitScenario/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitScenario/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitScore">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitScore/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitScore/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitPriority">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPriority/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitPriority/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitBoolVariableValue">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBoolVariableValue/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBoolVariableValue/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariableValue">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariableValue/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariableValue/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitConfigurationModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitConfigurationModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitConfigurationModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitSuitableConfiguration">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitSuitableConfiguration/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitSuitableConfiguration/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitContextModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitContextModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitContextModel/context"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//visitors/TopDownVisitor">
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/ContextType"/>
+        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/ResultType"/>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariabilityModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariabilityModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariabilityModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitInvariant">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitInvariant/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitInvariant/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBaseModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBaseModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBaseModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAspectModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAspectModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAspectModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariable">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariable/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariable/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBooleanVariable">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBooleanVariable/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBooleanVariable/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAndTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAndTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAndTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitOrTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitOrTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitOrTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitNotTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitNotTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitNotTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariantTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariantTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariantTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBooleanTerm">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBooleanTerm/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBooleanTerm/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumLiteral">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumLiteral/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumLiteral/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariant">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariant/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariant/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitDimension">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitDimension/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitDimension/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitExpression">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitExpression/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitExpression/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContextExpression">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContextExpression/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContextExpression/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariantExpression">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariantExpression/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitVariantExpression/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPriorityRule">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPriorityRule/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPriorityRule/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitProperty">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitProperty/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitProperty/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyLiteral">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyLiteral/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyLiteral/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyValue">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyValue/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyValue/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyPriority">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyPriority/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPropertyPriority/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitMultiplicityConstraint">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitMultiplicityConstraint/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitMultiplicityConstraint/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAnnotation">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAnnotation/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAnnotation/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitSimulationModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitSimulationModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitSimulationModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContext">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContext/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContext/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfiguration">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfiguration/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfiguration/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfigVariant">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfigVariant/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfigVariant/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitScenario">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitScenario/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitScenario/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitScore">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitScore/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitScore/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPriority">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPriority/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitPriority/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBoolVariableValue">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBoolVariableValue/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBoolVariableValue/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariableValue">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariableValue/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariableValue/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfigurationModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfigurationModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitConfigurationModel/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitSuitableConfiguration">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitSuitableConfiguration/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitSuitableConfiguration/context"/>
+        </genOperations>
+        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContextModel">
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContextModel/node"/>
+          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitContextModel/context"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
