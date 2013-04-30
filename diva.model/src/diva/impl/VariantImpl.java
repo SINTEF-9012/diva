@@ -627,8 +627,8 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 		if (getAvailable() != null && getAvailable().getTerm() != null) {
 			builder.append("fact { not(");
 			getAvailable().toAlloy(builder);
-			builder.append(" implies no " + getId());			
-			builder.append(" }\n");
+			builder.append(") implies no " + getId());			
+			builder.append("}\n");
 		}
 		if (getRequired() != null && getRequired().getTerm() != null) {
 			builder.append("fact { ");

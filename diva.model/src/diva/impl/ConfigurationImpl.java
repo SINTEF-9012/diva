@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import diva.ConfigVariant;
 import diva.Configuration;
+import diva.DivaFactory;
 import diva.DivaPackage;
+import diva.Variant;
 import diva.Verdict;
 import diva.visitors.Visitor;
 
@@ -226,6 +228,15 @@ public class ConfigurationImpl extends ScoredElementImpl implements Configuratio
 		result.append(verdict);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void addVariant(Variant v) {
+		ConfigVariant cv = DivaFactory.eINSTANCE.createConfigVariant();
+		cv.setVariant(v);
+		getVariant().add(cv);
 	}
 
 } //ConfigurationImpl

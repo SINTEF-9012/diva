@@ -14,7 +14,4 @@ Export-Package: diva,
  diva.util,
  diva.visitors,
  diva.visitors.impl,
- diva.visitors.util,
- diva_context,
- diva_context.impl,
- diva_context.util
+ diva.visitors.util

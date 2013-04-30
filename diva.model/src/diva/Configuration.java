@@ -81,5 +81,11 @@ public interface Configuration extends ScoredElement {
 	 * @generated
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
+	
+	/**
+	 * @generated NOT
+	 * @param v
+	 */
+	void addVariant(Variant v);
 
 } // Configuration
