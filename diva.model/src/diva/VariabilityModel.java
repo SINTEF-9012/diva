@@ -149,6 +149,14 @@ public interface VariabilityModel extends ModelContainer {
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
 	
+	/**
+	 * @generated NOT
+	 * @param builder
+	 */
 	void toAlloy(StringBuilder builder);
-
+	
+	/**
+	 * @generated NOT
+	 */
+	void clean();
 } // VariabilityModel

@@ -1,5 +1,6 @@
 package diva.ksimulator.ui;
 
+import java.io.File;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -10,14 +11,8 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-/*import diva.ksimulator.KExecMain;
-
-import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
-import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
-import fr.irisa.triskell.eclipse.console.messages.OKMessage;
-import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;*/
+import diva.VariabilityModel;
+import diva.helpers.DivaHelper;
 
 public class RunCleanModel implements IObjectActionDelegate, Runnable {
 
@@ -30,25 +25,15 @@ public class RunCleanModel implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		
-		/*IOConsole console = new EclipseConsole("DiVA Simulator");
-		console.println(new InfoMessage("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "..."));*/
-		
 		System.out.println("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "...");
 		
-		try {			
-				
-			String file_uri = "file:/" + file.getLocation().toOSString();
-		    
-			//TODO: call cleanModel
-			/*KExecMain.run("cleanModel", file_uri, console);
+		try {				
+			String file_uri = file.getLocation().toOSString();
+			VariabilityModel model = DivaHelper.load(new File(file_uri));
+			model.clean();
 			
-			console.println(new OKMessage("Execution terminated successfully."));*/
-			System.out.println("Execution terminated successfully.");
-			
-			
+			System.out.println("Execution terminated successfully.");			
 		} catch (Throwable e) {
-			/*console.println(new ErrorMessage("Runtime error : "));
-			console.println(new ThrowableMessage(e));*/
 			e.printStackTrace();
 		}
 	}

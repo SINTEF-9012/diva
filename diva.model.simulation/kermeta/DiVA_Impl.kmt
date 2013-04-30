@@ -105,7 +105,7 @@ class Transition inherits NamedElement {
 
 aspect class VariabilityModel {
 
-	operation clean() is do
+	/*operation clean() is do
 		if simulation != void then
 			
 			// remove simulation data
@@ -144,7 +144,7 @@ aspect class VariabilityModel {
 			toRemove.each{ pp | pr.priority.remove(pp) }
 		}
 			
-	end
+	end*/
 	
 	operation printSimulationCoverage() is do
 		if simulation != void then

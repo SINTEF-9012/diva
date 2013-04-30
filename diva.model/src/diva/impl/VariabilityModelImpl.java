@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -18,13 +19,20 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import diva.Constraint;
+import diva.Context;
 import diva.Dimension;
 import diva.DivaPackage;
+import diva.PriorityRule;
 import diva.Property;
+import diva.PropertyPriority;
+import diva.PropertyValue;
 import diva.Rule;
+import diva.Scenario;
 import diva.SimulationModel;
 import diva.VariabilityModel;
 import diva.Variable;
+import diva.VariableValue;
+import diva.Variant;
 import diva.visitors.Visitor;
 
 /**
@@ -426,6 +434,54 @@ public class VariabilityModelImpl extends ModelContainerImpl implements Variabil
 		for(Dimension d : getDimension()) {
 			d.toAlloy(builder);
 		}
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void clean() {
+		
+		if (getSimulation() != null) {
+			// remove simulation data
+			for(Scenario scn : getSimulation().getScenario()) {
+				for(Context ctx : scn.getContext()) {
+					ctx.getPriority().clear();
+					ctx.getConfiguration().clear();
+					EList<VariableValue> vars = new BasicEList<VariableValue>();
+					for(VariableValue vv : ctx.getVariable()) {
+						if (vv.getVariable() == null)
+							vars.add(vv);
+					}
+					ctx.getVariable().removeAll(vars);
+				}
+			}
+		}
+				
+		// remove unused property values on variants
+		for(Dimension dim : getDimension()) {
+			for(Variant v : dim.getVariant()) {
+				EList<PropertyValue> toRemove = new BasicEList<PropertyValue>();
+				for(PropertyValue pv : v.getPropertyValue()) {
+					if (pv.getProperty() == null)
+						toRemove.add(pv);
+				}
+				v.getPropertyValue().removeAll(toRemove);
+			}
+		}
+		
+		// remove unused PropertyPriority on rules
+		for(Rule r : getRule()) {
+			if (r instanceof PriorityRule) {
+				PriorityRule pr = (PriorityRule) r;
+				EList<PropertyPriority> toRemove = new BasicEList<PropertyPriority>();
+				for(PropertyPriority pp : pr.getPriority()) {
+					if (pp.getProperty() == null)
+						toRemove.add(pp);
+				}
+				pr.getPriority().removeAll(toRemove);
+			}
+		}
+			
 	}
 	
 } //VariabilityModelImpl
