@@ -19,8 +19,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import diva.ConfigVariant;
 import diva.Configuration;
+import diva.Context;
 import diva.DivaFactory;
 import diva.DivaPackage;
+import diva.Priority;
+import diva.Score;
 import diva.Variant;
 import diva.Verdict;
 import diva.visitors.Visitor;
@@ -237,6 +240,39 @@ public class ConfigurationImpl extends ScoredElementImpl implements Configuratio
 		ConfigVariant cv = DivaFactory.eINSTANCE.createConfigVariant();
 		cv.setVariant(v);
 		getVariant().add(cv);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void computeScore(Context ctx) {
+		final int k = 2;
+		int totalScore = 0;
+		getScore().clear();
+		for(ConfigVariant variant : getVariant()){
+			variant.getScore().clear();
+		}
+		for(Priority priority : ctx.getPriority()) {
+			Score cfgScore = DivaFactory.eINSTANCE.createScore();
+			cfgScore.setProperty(priority.getProperty());
+			cfgScore.setScore(0);
+			for(ConfigVariant variant : getVariant()){
+				Score varScore = DivaFactory.eINSTANCE.createScore();
+				varScore.setProperty(priority.getProperty());
+				varScore.setScore(new Double(Math.pow(priority.getPriority(), k) * variant.getContribution(priority.getProperty())).intValue());
+				if(priority.getProperty().getDirection() == 0) {
+					varScore.setScore(-varScore.getScore());
+				}
+				variant.getScore().add(varScore);
+				variant.setTotalScore(variant.getTotalScore() + varScore.getScore());
+				cfgScore.setScore(cfgScore.getScore() + varScore.getScore());
+			}
+			totalScore += cfgScore.getScore();
+		}
+		setTotalScore(totalScore);
+		/*for(ConfigVariant variant : getVariant()){
+			variant.computeTotalScore();
+		}*/
 	}
 
 } //ConfigurationImpl

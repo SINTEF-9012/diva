@@ -28,7 +28,7 @@ import diva.PriorityRule;
 import diva.Property;
 import diva.PropertyPriority;
 import diva.Rule;
-import diva.VariabilityModel;
+import diva.SimulationModel;
 import diva.VariableValue;
 import diva.VariantExpression;
 import diva.Verdict;
@@ -382,9 +382,9 @@ public class ContextImpl extends NamedElementImpl implements Context {
 	 * @generated NOT
 	 * @param variabilityModelImpl
 	 */
-	public void computePriorities(VariabilityModel model) {
+	public void computePriorities(SimulationModel model) {
 		Map<Property, Priority> table = new HashMap<Property, Priority>();
-		for(Property prop : model.getProperty()) {
+		for(Property prop : model.getModel().getProperty()) {
 			Priority p = DivaFactory.eINSTANCE.createPriority();
 			p.setProperty(prop);
 			p.setPriority(0);// this is the minimum
@@ -392,7 +392,7 @@ public class ContextImpl extends NamedElementImpl implements Context {
 			table.put(prop, p);
 		}
 		
-		for(Rule r : model.getRule()) {
+		for(Rule r : model.getModel().getRule()) {
 			if (r instanceof PriorityRule) {
 				PriorityRule pr = (PriorityRule) r;
 				if (pr.getContext().eval(this, null)) {
@@ -404,6 +404,15 @@ public class ContextImpl extends NamedElementImpl implements Context {
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void computeScores(SimulationModel simuModel) {
+		for(Configuration cfg : getConfiguration()) {
+			cfg.computeScore(this);
 		}
 	}
 

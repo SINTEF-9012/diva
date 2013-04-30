@@ -88,4 +88,10 @@ public interface Configuration extends ScoredElement {
 	 */
 	void addVariant(Variant v);
 
+	/**
+	 * @generated NOT
+	 * @param ctx
+	 */
+	void computeScore(Context ctx);
+
 } // Configuration

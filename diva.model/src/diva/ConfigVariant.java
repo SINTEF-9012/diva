@@ -60,4 +60,11 @@ public interface ConfigVariant extends ScoredElement {
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
 
+	/**
+	 * @generated NOT
+	 * @param property
+	 * @return
+	 */
+	int getContribution(Property property);
+
 } // ConfigVariant

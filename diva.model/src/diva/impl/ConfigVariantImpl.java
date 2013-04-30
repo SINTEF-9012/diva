@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import diva.ConfigVariant;
 import diva.DivaPackage;
+import diva.Property;
+import diva.PropertyValue;
 import diva.Variant;
 import diva.visitors.Visitor;
 
@@ -163,6 +165,17 @@ public class ConfigVariantImpl extends ScoredElementImpl implements ConfigVarian
 				return variant != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public int getContribution(Property property) {
+		for(PropertyValue pv : getVariant().getPropertyValue()) {
+			if (pv.getProperty() == property)
+				return pv.getValue();
+		}
+		return 0;
 	}
 
 } //ConfigVariantImpl

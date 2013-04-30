@@ -33,7 +33,8 @@ public class RunPopulatePriorities implements IObjectActionDelegate, Runnable {
 			String file_uri = file.getLocation().toOSString();
 			VariabilityModel model = DivaHelper.load(new File(file_uri));
 			
-			model.populatePriorities();
+			if (model.getSimulation() != null)
+				model.getSimulation().populatePriorities();
 			
 			DivaHelper.save(model, file_uri);
 			

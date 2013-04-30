@@ -80,5 +80,15 @@ public interface SimulationModel extends DiVAModelElement {
 	 * @generated
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
+	
+	/**
+	 * @generated NOT
+	 */
+	void populatePriorities();
+	
+	/**
+	 * @generated NOT
+	 */	
+	public void populateScores();
 
 } // SimulationModel
