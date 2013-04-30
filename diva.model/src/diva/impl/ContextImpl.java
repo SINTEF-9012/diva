@@ -7,6 +7,8 @@
 package diva.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -19,8 +21,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import diva.Configuration;
 import diva.Context;
+import diva.DivaFactory;
 import diva.DivaPackage;
 import diva.Priority;
+import diva.PriorityRule;
+import diva.Property;
+import diva.PropertyPriority;
+import diva.Rule;
+import diva.VariabilityModel;
 import diva.VariableValue;
 import diva.VariantExpression;
 import diva.Verdict;
@@ -368,6 +376,35 @@ public class ContextImpl extends NamedElementImpl implements Context {
 		result.append(verdict);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * @generated NOT
+	 * @param variabilityModelImpl
+	 */
+	public void computePriorities(VariabilityModel model) {
+		Map<Property, Priority> table = new HashMap<Property, Priority>();
+		for(Property prop : model.getProperty()) {
+			Priority p = DivaFactory.eINSTANCE.createPriority();
+			p.setProperty(prop);
+			p.setPriority(0);// this is the minimum
+			getPriority().add(p);
+			table.put(prop, p);
+		}
+		
+		for(Rule r : model.getRule()) {
+			if (r instanceof PriorityRule) {
+				PriorityRule pr = (PriorityRule) r;
+				if (pr.getContext().eval(this, null)) {
+					for(PropertyPriority pp : pr.getPriority()) {
+						Priority p = table.get(pp.getProperty());
+						if (p.getPriority() < pp.getPriority()) {
+							p.setPriority(pp.getPriority());
+						}
+					}
+				}
+			}
+		}
 	}
 
 } //ContextImpl

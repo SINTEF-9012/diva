@@ -9,6 +9,8 @@ package diva.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import diva.AndTerm;
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
 import diva.Term;
 import diva.visitors.Visitor;
@@ -64,6 +66,17 @@ public class AndTermImpl extends NaryTermImpl implements AndTerm {
 			i++;
 		}
 		builder.append(")");
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		boolean result = true;
+		for(Term t : getTerm()){
+			result &= t.eval(ctx, cfg);
+		}
+		return result;
 	}
 
 } //AndTermImpl

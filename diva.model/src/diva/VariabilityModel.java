@@ -159,4 +159,9 @@ public interface VariabilityModel extends ModelContainer {
 	 * @generated NOT
 	 */
 	void clean();
+	
+	/**
+	 * @generated NOT
+	 */
+	void populatePriorities();
 } // VariabilityModel

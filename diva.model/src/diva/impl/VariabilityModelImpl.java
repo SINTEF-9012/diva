@@ -484,4 +484,21 @@ public class VariabilityModelImpl extends ModelContainerImpl implements Variabil
 			
 	}
 	
+	/**
+	 * @generated NOT
+	 */
+	public void populatePriorities() { 
+	    if (getSimulation() != null) {
+	    	for(Scenario s : getSimulation().getScenario()) {
+	    		for(Context ctx : s.getContext()) {
+	    			System.out.println("Processing context " + ctx.getName()  + "...");
+	    			ctx.computePriorities(this);
+	    		}
+	    	}
+	    } else {
+	    	System.out.println("No simulation model found.");
+	    }
+        
+	}
+	
 } //VariabilityModelImpl

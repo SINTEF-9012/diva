@@ -11,6 +11,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import diva.ConfigVariant;
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
 import diva.Variant;
 import diva.VariantTerm;
@@ -170,5 +173,20 @@ public class VariantTermImpl extends TermImpl implements VariantTerm {
 	 */
 	public void toAlloy(StringBuilder builder) {
 		builder.append("one " + getVariant().getId());
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		if (cfg != null) {
+			for(ConfigVariant v : cfg.getVariant()) {
+				if (v.getVariant() == getVariant())
+					return true;
+			}
+		} else {
+			System.out.println("WARNING: VariantTerm.eval for an expression which should prabably have no VariantTerm (cfg is void)");
+		}
+		return false;
 	}
 } //VariantTermImpl

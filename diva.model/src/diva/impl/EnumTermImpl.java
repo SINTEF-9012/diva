@@ -11,9 +11,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
 import diva.EnumLiteral;
 import diva.EnumTerm;
+import diva.EnumVariableValue;
+import diva.VariableValue;
 import diva.visitors.Visitor;
 
 /**
@@ -170,6 +174,19 @@ public class EnumTermImpl extends VariableTermImpl implements EnumTerm {
 	 */
 	public void toAlloy(StringBuilder builder) {
 		builder.append("one " + getVariable().getId() + "_" + getValue().getId());
+	}
+
+	
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		for(VariableValue vv : ctx.getVariable()) {
+			if (vv.getVariable() == getVariable()) {
+				return ((EnumVariableValue)vv).getLiteral() == getValue();
+			}
+		}
+		return false;
 	}
 
 } //EnumTermImpl

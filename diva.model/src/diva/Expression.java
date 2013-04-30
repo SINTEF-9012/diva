@@ -86,5 +86,10 @@ public interface Expression extends DiVAModelElement {
 	 * @generated
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
+	
+	/**
+	 * @generated NOT
+	 */
+	boolean eval(Context ctx, Configuration cfg);
 
 } // Expression

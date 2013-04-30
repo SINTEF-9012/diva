@@ -31,7 +31,8 @@ public class RunCleanModel implements IObjectActionDelegate, Runnable {
 			String file_uri = file.getLocation().toOSString();
 			VariabilityModel model = DivaHelper.load(new File(file_uri));
 			model.clean();
-			
+			DivaHelper.save(model, file_uri);
+
 			System.out.println("Execution terminated successfully.");			
 		} catch (Throwable e) {
 			e.printStackTrace();

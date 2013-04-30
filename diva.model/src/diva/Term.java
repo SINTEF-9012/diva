@@ -18,4 +18,10 @@ package diva;
  * @generated
  */
 public interface Term extends DiVAModelElement {
+	
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg);
+	
 } // Term

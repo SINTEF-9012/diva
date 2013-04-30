@@ -8,6 +8,8 @@ package diva.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
 import diva.OrTerm;
 import diva.Term;
@@ -64,6 +66,17 @@ public class OrTermImpl extends NaryTermImpl implements OrTerm {
 			i++;
 		}
 		builder.append(")");
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		boolean result = true;
+		for(Term t : getTerm()){
+			result |= t.eval(ctx, cfg);
+		}
+		return result;
 	}
 	
 } //OrTermImpl

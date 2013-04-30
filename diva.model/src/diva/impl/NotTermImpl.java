@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
 import diva.NotTerm;
 import diva.Term;
@@ -190,6 +192,13 @@ public class NotTermImpl extends TermImpl implements NotTerm {
 	public void toAlloy(StringBuilder builder) {
 		builder.append("not ");
 		getTerm().toAlloy(builder);
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		return !getTerm().eval(ctx, cfg);
 	}
 
 } //NotTermImpl

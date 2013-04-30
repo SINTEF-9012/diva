@@ -143,4 +143,10 @@ public interface Context extends NamedElement {
 	 */
 	<C, R> R accept(Visitor<C, R> visitor, C context);
 
+	/**
+	 * @generated NOT
+	 * @param variabilityModelImpl
+	 */
+	void computePriorities(VariabilityModel variabilityModelImpl);
+
 } // Context

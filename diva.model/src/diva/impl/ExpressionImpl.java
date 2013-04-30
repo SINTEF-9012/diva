@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
 import diva.Expression;
 import diva.Term;
@@ -258,6 +260,17 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	public void toAlloy(StringBuilder builder) {
 		if (getTerm() != null)
 			getTerm().toAlloy(builder);
+
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		if (getTerm() == null) 
+			return true;
+		else
+			return getTerm().eval(ctx, cfg);
 
 	}
 

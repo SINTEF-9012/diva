@@ -8,8 +8,12 @@ package diva.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import diva.BoolVariableValue;
 import diva.BooleanTerm;
+import diva.Configuration;
+import diva.Context;
 import diva.DivaPackage;
+import diva.VariableValue;
 import diva.visitors.Visitor;
 
 /**
@@ -55,6 +59,18 @@ public class BooleanTermImpl extends VariableTermImpl implements BooleanTerm {
 	 */
 	public void toAlloy(StringBuilder builder) {
 		builder.append("one " + getVariable().getId());
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public boolean eval(Context ctx, Configuration cfg) {
+		for(VariableValue vv : ctx.getVariable()) {
+			if (vv.getVariable() == getVariable()) {
+				return ((BoolVariableValue)vv).isBool();
+			}
+		}
+		return false;
 	}
 
 } //BooleanTermImpl
