@@ -1,5 +1,6 @@
 package diva.ksimulator.ui;
 
+import java.io.File;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -10,14 +11,9 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-/*import diva.ksimulator.KExecMain;
+import diva.VariabilityModel;
+import diva.helpers.DivaHelper;
 
-import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
-import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
-import fr.irisa.triskell.eclipse.console.messages.OKMessage;
-import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;*/
 
 public class RunPrintAlloySpec implements IObjectActionDelegate, Runnable {
 
@@ -30,26 +26,21 @@ public class RunPrintAlloySpec implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		
-		/*IOConsole console = new EclipseConsole("DiVA Simulator");
-		console.println(new InfoMessage("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "..."));*/
-		
-		System.out.println("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "...");
+		System.out.println("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "...\n\n");
 		
 		try {			
 				
-			String file_uri = "file:/" + file.getLocation().toOSString();
-		    
-			//TODO: call printAlloySpec
-			/*KExecMain.run("printAlloySpec", file_uri, console);
+			String file_uri = file.getLocation().toOSString();
+			VariabilityModel model = DivaHelper.load(new File(file_uri));
+		    			
+			StringBuilder builder = new StringBuilder();
+			model.toAlloy(builder);
+			System.out.println(builder.toString());
 			
-			console.println(new OKMessage("Execution terminated successfully."));*/
-			
-			System.out.println("Execution terminated successfully.");
+			System.out.println("\n\nExecution terminated successfully.");
 			
 			
 		} catch (Throwable e) {
-			/*console.println(new ErrorMessage("Runtime error : "));
-			console.println(new ThrowableMessage(e));*/
 			e.printStackTrace();
 		}
 	}
@@ -75,7 +66,7 @@ public class RunPrintAlloySpec implements IObjectActionDelegate, Runnable {
 		if (selection instanceof StructuredSelection)
 		{
 			currentSelection = (StructuredSelection)selection;
-			Iterator it = currentSelection.iterator();
+			Iterator<StructuredSelection> it = currentSelection.iterator();
 
 			while(it.hasNext()) {
 				file = (IFile)it.next();

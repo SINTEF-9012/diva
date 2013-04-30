@@ -105,31 +105,6 @@
                id="diva.simulator.ui.action31">
          </action>
          <menu
-               id="diva.ui.menu.aspects"
-               label="Aspects"
-               path="diva.ui.menu/design">
-            <separator
-                  name="g1">
-            </separator>
-            <separator
-                  name="g2">
-            </separator>
-         </menu>
-         <action
-               class="diva.weavingui.CompileAllAspects"
-               enablesFor="1"
-               id="diva.simulator.ui.action33"
-               label="Compile All Aspects"
-               menubarPath="diva.ui.menu/diva.ui.menu.aspects/g1">
-         </action>
-         <action
-               class="diva.weavingui.RunCleanGenFiles"
-               enablesFor="1"
-               id="diva.simulator.ui.action32"
-               label="Clean All (Aspects + Configurations)"
-               menubarPath="diva.ui.menu/diva.ui.menu.aspects/g2">
-         </action>
-         <menu
                id="diva.ui.menu.experimental"
                label="Experimental"
                path="diva.ui.menu/design">
@@ -191,58 +166,6 @@
                id="diva.simulator.ui.action43"
                label="Export Exhaustive Simulation"
                menubarPath="diva.ui.menu/diva.ui.menu.experimental/g5">
-         </action>
-      </objectContribution>
-      <objectContribution
-            adaptable="false"
-            id="diva.model.Variant"
-            objectClass="diva.Variant">
-         <action
-               class="diva.weavingui.CompileAspect"
-               enablesFor="1"
-               id="diva.weavingui.CompileAspect"
-               label="Compile Aspect"
-               menubarPath="DiVA">
-         </action>
-         <action
-               class="diva.weavingui.WeaveVariants"
-               enablesFor="+"
-               id="diva.weavingui.WeaveVariants"
-               label="Weave Aspect(s)"
-               menubarPath="DiVA">
-         </action>
-         <action
-               class="diva.weavingui.OpenConfigurationFromVariants"
-               enablesFor="+"
-               id="diva.weavingui.OpenConfigurationFromVariants"
-               label="View Woven Configuration"
-               menubarPath="DiVA">
-         </action>
-         <action
-               class="diva.weavingui.EditAspect"
-               enablesFor="1"
-               id="diva.weavingui.EditAspect"
-               label="Edit Aspect..."
-               menubarPath="DiVA">
-         </action>
-      </objectContribution>
-      <objectContribution
-            adaptable="false"
-            id="diva.model.Configuration"
-            objectClass="diva.Configuration">
-         <action
-               class="diva.weavingui.WeaveConfiguration"
-               enablesFor="1"
-               id="diva.weavingui.WeaveConfiguration"
-               label="Weave Configuration Architecture"
-               menubarPath="DiVA">
-         </action>
-         <action
-               class="diva.weavingui.OpenConfiguration"
-               enablesFor="1"
-               id="diva.weavingui.OpenConfiguration"
-               label="View Configuration Architecture..."
-               menubarPath="DiVA">
          </action>
       </objectContribution>
       <objectContribution

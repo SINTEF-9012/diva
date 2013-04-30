@@ -409,9 +409,19 @@ public class VariabilityModelImpl extends ModelContainerImpl implements Variabil
 		builder.append("abstract sig Context {}\n");
 		builder.append("fact { one c: Configuration | all ctx: Context | ctx in c.context }\n\n");
 		
+		
+		builder.append("/* ********************\n");
+		builder.append("* Context description\n");
+		builder.append("**********************/\n");
+		
 		for(Variable v : getContext()) {
 			v.toAlloy(builder);
 		}
+		
+		
+		builder.append("/* ********************\n");
+		builder.append("* Variability description\n");
+		builder.append("**********************/\n");
 		
 		for(Dimension d : getDimension()) {
 			d.toAlloy(builder);
