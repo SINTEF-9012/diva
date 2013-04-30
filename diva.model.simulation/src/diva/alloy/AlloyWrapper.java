@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.concurrent.Callable;
 
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4compiler.ast.ExprVar;
@@ -15,10 +16,17 @@ import edu.mit.csail.sdg.alloy4compiler.translator.A4Options;
 import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution;
 import edu.mit.csail.sdg.alloy4compiler.translator.TranslateAlloyToKodkod;
 
-public class AlloyWrapper {
+public class AlloyWrapper implements Callable<String> {
 	
-	public static String computeConfigurations(String system, String context) throws Err, IOException {
-		String result = ""; 
+	String system, context;
+	
+	public AlloyWrapper(String system, String context) {
+		this.system = system;
+		this.context = context;
+	}
+	
+	private String computeConfigurations() throws Err, IOException {
+		String result = "";
 		
 		// Chooses the Alloy4 options
         A4Options opt = new A4Options();
@@ -52,6 +60,10 @@ public class AlloyWrapper {
         	i++;
         }
         return result;
+	}
+
+	public String call() throws Exception {
+		return computeConfigurations();
 	}
 	
 }

@@ -3,8 +3,14 @@ package diva.helpers;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,11 +22,11 @@ import diva.Configuration;
 import diva.Context;
 import diva.Dimension;
 import diva.DivaFactory;
+import diva.Scenario;
 import diva.VariabilityModel;
 import diva.VariableValue;
 import diva.Variant;
 import diva.alloy.AlloyWrapper;
-import edu.mit.csail.sdg.alloy4.Err;
 
 public class DivaHelper {
 
@@ -66,56 +72,80 @@ public class DivaHelper {
 		}
 	}
 
-	public static Set<Configuration> computeSuitableConfigurations(Context ctx, VariabilityModel model) {
-		Set<Configuration> result = new HashSet<Configuration>();
-		ctx.getConfiguration().clear();
+	public static void computeSuitableConfigurations(VariabilityModel model) {
 
 		StringBuilder builder = new StringBuilder();
 		model.toAlloy(builder);
 		final String model2Alloy = builder.toString();
 
-		String context = "";
-		int i = 0;
-		for(VariableValue v : ctx.getVariable()) {
-			if (i > 0)
-				context += " and ";
-			StringBuilder b = new StringBuilder();
-			v.toAlloy(b);
-			context += b.toString();
-			i++;
+		int size = 0;
+		for(Scenario scn : model.getSimulation().getScenario()) {
+			size += scn.getContext().size();
+		}
+		//System.out.println("#cpu: " + Runtime.getRuntime().availableProcessors());
+		ExecutorService executor = Executors.newFixedThreadPool(Math.min(Runtime.getRuntime().availableProcessors(), size));
+		Map<Context, Future<String>> results = Collections.synchronizedMap(new HashMap<Context, Future<String>>());
+
+		for(Scenario scn : model.getSimulation().getScenario()) {
+			for(Context ctx : scn.getContext()) {
+				ctx.getConfiguration().clear();
+				String context = "";
+				int i = 0;
+				for(VariableValue v : ctx.getVariable()) {
+					if (i > 0)
+						context += " and ";
+					StringBuilder b = new StringBuilder();
+					v.toAlloy(b);
+					context += b.toString();
+					i++;
+				}
+				Callable<String> worker = new AlloyWrapper(model2Alloy, context);
+				results.put(ctx, executor.submit(worker));
+			}
+		}
+		executor.shutdown();
+		while(!executor.isTerminated()) {
+			//wait
 		}
 
-		try {
-			String alloyResult = AlloyWrapper.computeConfigurations(model2Alloy, context);
-			
-			System.out.println(alloyResult);
-			
-			for(String solution : alloyResult.split("\n")) {
-				
-				System.out.println("Solution: " + solution);
-				
-				Configuration nc = DivaFactory.eINSTANCE.createConfiguration();
-				for(String atom : solution.split(" ")) {
-					for(Dimension d : model.getDimension()) {
-						for(Variant v : d.getVariant()) {
-							if(atom.equals(v.getId())) {
-								nc.addVariant(v);
+		for(Entry<Context, Future<String>> entry : results.entrySet()) {
+			Context ctx = entry.getKey();
+
+			try {
+				String alloyResult = entry.getValue().get();
+				System.out.println(alloyResult);
+
+				for(String solution : alloyResult.split("\n")) {
+
+					System.out.println("Solution: " + solution);
+
+					Configuration nc = DivaFactory.eINSTANCE.createConfiguration();
+					for(String atom : solution.split(" ")) {
+						for(Dimension d : model.getDimension()) {
+							for(Variant v : d.getVariant()) {
+								if(atom.equals(v.getId())) {
+									nc.addVariant(v);
+								}
 							}
 						}
 					}
-				}
-				if (nc.getVariant().size() > 0) {
-					ctx.getConfiguration().add(nc);
-					result.add(nc);//TODO: check if that is really useful to return a result since we modify the current model...
-				}
-			}
-		} catch (Err e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+					if (nc.getVariant().size() > 0) {
+						ctx.getConfiguration().add(nc);
+						//result.add(nc);//TODO: check if that is really useful to return a result since we modify the current model...
+					}
 
-		return result;
+				}
+
+
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
+
+
+		} 
+
 	}
 
 }
