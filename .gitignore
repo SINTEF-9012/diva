@@ -3,7 +3,6 @@
 **.classpath
 **target/
 **bin/
-**.jar
 **.war
 **.class
 **.ear
