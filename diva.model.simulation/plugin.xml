@@ -99,13 +99,6 @@
                id="diva.simulator.ui.action21">
          </action>
          <action
-               class="diva.ksimulator.ui.RunPopulateCompleteSimulationMultiple"
-               enablesFor="+"
-               id="diva.simulator.ui.action11"
-               label="Perform a Complete Simulation (Batch)"
-               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4">
-         </action>
-         <action
                class="diva.ksimulator.ui.RunCreateExhaustiveSimulation"
                enablesFor="1"
                id="diva.simulator.ui.action42"

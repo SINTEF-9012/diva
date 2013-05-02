@@ -6,7 +6,7 @@
       provider-name="SINTEF">
 
    <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+      DivaML: Modeling Language for Dynamic Variability
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -25,14 +25,9 @@
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.antlr.antlr2" version="2.7.6"/>
-      <import plugin="diva.model.edit" version="1.0.2" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
       <import plugin="org.apache.commons.logging"/>
-      <import plugin="diva.model.editor" version="1.0.2" match="greaterOrEqual"/>
-      <import plugin="org.kermeta.smartadapters.diva.toDrools.ui"/>
-      <import plugin="org.kermeta.smartadapters.drools5.diva.standalone"/>
+      <import plugin="org.antlr" version="2.7.6" match="greaterOrEqual"/>
    </requires>
 
    <plugin
