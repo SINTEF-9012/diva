@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<diva_context:Context xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diva_context="http://diva_context/1.0">
-  <element currentValue="true" name="LBW"/>
-  <element currentValue="DRIV" name="MODE"/>
-  <element currentValue="MOB" name="DEVTYPE"/>
-  <element currentValue="HI" name="POW"/>
-  <element currentValue="true" name="GMAPA"/>
-  <element currentValue="false" name="SKYPEA"/>
-</diva_context:Context>
