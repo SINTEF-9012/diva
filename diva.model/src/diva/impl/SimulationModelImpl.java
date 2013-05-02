@@ -270,5 +270,16 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 			}
 		}
 	}
-
+	
+	/**
+	 * @generated NOT
+	 */
+	public void populateVerdicts() {
+		for(Scenario s : getScenario()) {
+			for(Context ctx : s.getContext()) {
+				System.out.println("Processing context " + ctx.getName()  + "...");
+				ctx.computeVerdicts();
+			}
+		}
+	}
 } //SimulationModelImpl

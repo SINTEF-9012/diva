@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: diva.provider.DiVA_Merged_visitorEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: diva.provider,
  diva.visitors.provider
 Require-Bundle: org.eclipse.core.runtime,

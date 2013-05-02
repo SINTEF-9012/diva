@@ -94,4 +94,10 @@ public interface Configuration extends ScoredElement {
 	 */
 	void computeScore(Context ctx);
 
+	/**
+	 * @generated NOT
+	 * @param oracle
+	 */
+	void computeVerdicts(VariantExpression oracle);
+
 } // Configuration

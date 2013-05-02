@@ -15,6 +15,7 @@ import diva.ConfigVariant;
 import diva.DivaPackage;
 import diva.Property;
 import diva.PropertyValue;
+import diva.Score;
 import diva.Variant;
 import diva.visitors.Visitor;
 
@@ -176,6 +177,15 @@ public class ConfigVariantImpl extends ScoredElementImpl implements ConfigVarian
 				return pv.getValue();
 		}
 		return 0;
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void computeTotalScore() {
+		setTotalScore(0);
+		for(Score s : getScore())
+			setTotalScore(getTotalScore() + s.getScore());		
 	}
 
 } //ConfigVariantImpl

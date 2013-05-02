@@ -1,5 +1,6 @@
 package diva.ksimulator.ui;
 
+import java.io.File;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -10,14 +11,9 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-/*import diva.ksimulator.KExecMain;
+import diva.VariabilityModel;
+import diva.helpers.DivaHelper;
 
-import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
-import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
-import fr.irisa.triskell.eclipse.console.messages.OKMessage;
-import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;*/
 
 public class RunPopulateVerdicts implements IObjectActionDelegate, Runnable {
 
@@ -30,26 +26,23 @@ public class RunPopulateVerdicts implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		
-		/*IOConsole console = new EclipseConsole("DiVA Simulator");
-		console.println(new InfoMessage("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "..."));*/
-		
 		System.out.println("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "...");
 		
 		try {			
 				
-			String file_uri = "file:/" + file.getLocation().toOSString();
+			String file_uri = file.getLocation().toOSString();
 		    
-			//TODO: call populateVerdicts
-			/*KExecMain.run("populateVerdicts", file_uri, console);
+			VariabilityModel model = DivaHelper.load(new File(file_uri));
 			
-			console.println(new OKMessage("Execution terminated successfully."));*/
+			if (model.getSimulation() != null)
+				model.getSimulation().populateVerdicts();
+			
+			DivaHelper.save(model, file_uri);
 			
 			System.out.println("Execution terminated successfully.");
 			
 			
 		} catch (Throwable e) {
-			/*console.println(new ErrorMessage("Runtime error : "));
-			console.println(new ThrowableMessage(e));*/
 			e.printStackTrace();
 		}
 	}

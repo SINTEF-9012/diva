@@ -8,7 +8,6 @@ package diva;
 
 import org.eclipse.emf.common.util.EList;
 
-import diva.impl.SimulationModelImpl;
 import diva.visitors.Visitor;
 
 /**
@@ -155,5 +154,10 @@ public interface Context extends NamedElement {
 	 * @param simuModel
 	 */
 	void computeScores(SimulationModel simuModel);
+
+	/**
+	 * @generated NOT
+	 */
+	void computeVerdicts();
 
 } // Context

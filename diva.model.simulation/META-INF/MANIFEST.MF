@@ -5,7 +5,7 @@ Bundle-SymbolicName: diva.model.simulation;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: diva.model.simulation.Activator
 Bundle-Vendor: SINTEF
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

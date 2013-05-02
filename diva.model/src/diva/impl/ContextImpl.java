@@ -8,6 +8,7 @@ package diva.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -413,6 +414,39 @@ public class ContextImpl extends NamedElementImpl implements Context {
 	public void computeScores(SimulationModel simuModel) {
 		for(Configuration cfg : getConfiguration()) {
 			cfg.computeScore(this);
+		}
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void computeVerdicts() {
+		for(Configuration c : getConfiguration()) {
+			c.computeVerdicts(getOracle());
+		}
+		Configuration cfg = bestConfiguration();
+		if (cfg == null)
+			setVerdict(Verdict.FAIL);
+		else
+			setVerdict(cfg.getVerdict());		
+	}
+
+	/**
+	 * @generated NOT
+	 * @return
+	 */
+	private Configuration bestConfiguration() {
+		if (getConfiguration().size() == 0)
+			return null;
+		else {
+			Iterator<Configuration> iter = getConfiguration().iterator();
+			Configuration max = iter.next();
+			while(iter.hasNext()) {
+				Configuration current = iter.next();
+				if (current.getTotalScore() > max.getTotalScore())
+					max = current;
+			}
+			return max;
 		}
 	}
 

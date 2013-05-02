@@ -67,4 +67,9 @@ public interface ConfigVariant extends ScoredElement {
 	 */
 	int getContribution(Property property);
 
+	/**
+	 * @generated NOT
+	 */
+	void computeTotalScore();
+
 } // ConfigVariant

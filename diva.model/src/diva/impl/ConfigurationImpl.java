@@ -25,6 +25,7 @@ import diva.DivaPackage;
 import diva.Priority;
 import diva.Score;
 import diva.Variant;
+import diva.VariantExpression;
 import diva.Verdict;
 import diva.visitors.Visitor;
 
@@ -270,9 +271,20 @@ public class ConfigurationImpl extends ScoredElementImpl implements Configuratio
 			totalScore += cfgScore.getScore();
 		}
 		setTotalScore(totalScore);
-		/*for(ConfigVariant variant : getVariant()){
+		for(ConfigVariant variant : getVariant()){
 			variant.computeTotalScore();
-		}*/
+		}
+	}
+
+	/**
+	 * @generated NOT;
+	 */
+	public void computeVerdicts(VariantExpression oracle) {
+		if (oracle != null)
+			if (oracle.eval(null, this))
+				setVerdict(Verdict.PASS);
+			else
+				setVerdict(Verdict.FAIL);
 	}
 
 } //ConfigurationImpl
