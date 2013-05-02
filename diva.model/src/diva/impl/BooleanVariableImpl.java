@@ -6,10 +6,16 @@
  */
 package diva.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
+import diva.BoolVariableValue;
 import diva.BooleanVariable;
+import diva.DivaFactory;
 import diva.DivaPackage;
+import diva.VariableValue;
 import diva.visitors.Visitor;
 
 /**
@@ -55,6 +61,27 @@ public class BooleanVariableImpl extends VariableImpl implements BooleanVariable
 	 */
 	public void toAlloy(StringBuilder builder) {
 		builder.append("lone sig " + getId() + " extends Context {}\n");
+	}
+	
+	/**
+	 * @generaed NOT 
+	 */
+	@Override
+	public List<VariableValue> allValue() {
+		List<VariableValue> vals = new ArrayList<VariableValue>();
+		
+		BoolVariableValue bvv = DivaFactory.eINSTANCE.createBoolVariableValue();
+		bvv.setBool(true);
+		bvv.setVariable(this);
+		
+		BoolVariableValue bvv2 = DivaFactory.eINSTANCE.createBoolVariableValue();
+		bvv2.setBool(false);
+		bvv2.setVariable(this);
+		
+		vals.add(bvv);
+		vals.add(bvv2);
+		
+		return vals;
 	}
 
 } //BooleanVariableImpl

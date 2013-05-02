@@ -6,7 +6,9 @@
  */
 package diva.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -15,9 +17,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import diva.DivaFactory;
 import diva.DivaPackage;
 import diva.EnumLiteral;
 import diva.EnumVariable;
+import diva.EnumVariableValue;
+import diva.VariableValue;
 import diva.visitors.Visitor;
 
 /**
@@ -166,5 +171,22 @@ public class EnumVariableImpl extends VariableImpl implements EnumVariable {
 		for(EnumLiteral l : getLiteral()) {
 			l.toAlloy(builder);
 		}
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public List<VariableValue> allValue() {
+		List<VariableValue> vals = new ArrayList<VariableValue>();
+		
+		for(EnumLiteral l : getLiteral()) {
+			EnumVariableValue evv = DivaFactory.eINSTANCE.createEnumVariableValue();
+			evv.setLiteral(l);
+			evv.setVariable(this);
+			vals.add(evv);
+		}
+		
+		return vals;
 	}
 } //EnumVariableImpl

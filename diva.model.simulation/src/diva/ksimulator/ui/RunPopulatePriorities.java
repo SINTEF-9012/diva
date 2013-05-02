@@ -26,11 +26,13 @@ public class RunPopulatePriorities implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		
-		System.out.println("Launching DiVA Simulator on file : " + file.getLocation().toOSString() + "...");
+		String file_uri = file.getLocation().toOSString();
+		
+		System.out.println("Launching DiVA Simulator on file : " + file_uri + "...");
+		long start = System.currentTimeMillis();
 		
 		try {			
 				
-			String file_uri = file.getLocation().toOSString();
 			VariabilityModel model = DivaHelper.load(new File(file_uri));
 			
 			if (model.getSimulation() != null)
@@ -38,7 +40,7 @@ public class RunPopulatePriorities implements IObjectActionDelegate, Runnable {
 			
 			DivaHelper.save(model, file_uri);
 			
-			System.out.println("Execution terminated successfully.");
+			System.out.println("Execution terminated successfully. Took: " + (System.currentTimeMillis() - start) + " ms");	
 			
 		} catch (Throwable e) {
 			e.printStackTrace();

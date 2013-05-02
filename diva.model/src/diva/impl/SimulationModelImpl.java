@@ -6,7 +6,9 @@
  */
 package diva.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -19,10 +21,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import diva.Context;
+import diva.DivaFactory;
 import diva.DivaPackage;
 import diva.Scenario;
 import diva.SimulationModel;
 import diva.VariabilityModel;
+import diva.Variable;
+import diva.VariableValue;
+import diva.helpers.ListCombinationGenerator;
 import diva.visitors.Visitor;
 
 /**
@@ -282,4 +288,59 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 			}
 		}
 	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public void createExhaustiveSimulation() {
+		Scenario s = null;
+		for(Scenario scn : getScenario())
+			if(scn.getName().equals("EXHAUSTIVE"))
+				s = scn;
+		
+		if (s == null) {	
+			s = DivaFactory.eINSTANCE.createScenario();
+			s.setName("EXHAUSTIVE");
+			getScenario().add(s);
+		}
+		else {
+			s.getContext().clear();
+		}
+			
+		for(List<VariableValue> vvs : allCombinations(getModel().getContext())) {
+			Context c = DivaFactory.eINSTANCE.createContext();
+			for(VariableValue vv : vvs) {
+				c.getVariable().add(EcoreUtil.copy(vv));
+			}
+			s.getContext().add(c);
+		}
+	}
+	
+	
+	/**
+	 * @generated NOT
+	 */
+	private List<List<VariableValue>> allCombinations(List<Variable> vars) {
+		
+		
+		List<List<VariableValue>> result = new ArrayList<List<VariableValue>>();
+		List<List<VariableValue>> ll = new ArrayList<List<VariableValue>>();
+		for(Variable v : vars) {
+			ll.add(v.allValue());
+		}
+		
+		ListCombinationGenerator<VariableValue> lcg = new ListCombinationGenerator<VariableValue>(ll);
+		//long before = System.nanoTime();
+		while(lcg.hasMoreCombinations()){  
+			List<VariableValue> currentTupel = lcg.getNextCombination();
+			//System.out.println("currentTupel: " + currentTupel+ "hasMoreCombinations: "  + lcg.hasMoreCombinations());
+			result.add(currentTupel);
+		}
+		//long after = System.nanoTime();
+		//System.out.println("Nanosconds: " + (after-before) );
+		
+		return result;
+	}
+	
 } //SimulationModelImpl

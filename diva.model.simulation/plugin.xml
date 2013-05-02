@@ -147,13 +147,6 @@
                menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
          </action>
          <action
-               label="Generate Mutants (under dev)"
-               class="diva.ksimulator.ui.RunGenerateMutants"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g3"
-               enablesFor="1"
-               id="diva.simulator.ui.action41">
-         </action>
-         <action
                class="diva.ksimulator.ui.RunCreateExhaustiveSimulation"
                enablesFor="1"
                id="diva.simulator.ui.action42"

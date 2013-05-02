@@ -6,6 +6,8 @@
  */
 package diva;
 
+import java.util.List;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -18,4 +20,10 @@ package diva;
  * @generated
  */
 public interface Variable extends NamedElement {
+
+	/**
+	 * @generated NOT
+	 * @return
+	 */
+	List<VariableValue> allValue();
 } // Variable

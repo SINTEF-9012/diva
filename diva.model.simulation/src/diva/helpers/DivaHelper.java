@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Callable;
@@ -21,7 +22,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import diva.Configuration;
 import diva.Context;
 import diva.Dimension;
-import diva.DivaFactory;
 import diva.Scenario;
 import diva.VariabilityModel;
 import diva.VariableValue;
@@ -74,6 +74,13 @@ public class DivaHelper {
 
 	public static void computeSuitableConfigurations(VariabilityModel model) {
 
+		Map<String, Variant> variants = new HashMap<String, Variant>();
+		for(Dimension d : model.getDimension()) {
+			for(Variant v : d.getVariant()) {
+				variants.put(v.getId(), v);
+			}
+		}
+		
 		StringBuilder builder = new StringBuilder();
 		model.toAlloy(builder);
 		final String model2Alloy = builder.toString();
@@ -84,7 +91,7 @@ public class DivaHelper {
 		}
 		//System.out.println("#cpu: " + Runtime.getRuntime().availableProcessors());
 		ExecutorService executor = Executors.newFixedThreadPool(Math.min(Runtime.getRuntime().availableProcessors(), size));
-		Map<Context, Future<String>> results = Collections.synchronizedMap(new HashMap<Context, Future<String>>());
+		Map<Context, Future<List<Configuration>>> results = Collections.synchronizedMap(new HashMap<Context, Future<List<Configuration>>>());
 
 		for(Scenario scn : model.getSimulation().getScenario()) {
 			for(Context ctx : scn.getContext()) {
@@ -99,7 +106,7 @@ public class DivaHelper {
 					context += b.toString();
 					i++;
 				}
-				Callable<String> worker = new AlloyWrapper(model2Alloy, context);
+				Callable<List<Configuration>> worker = new AlloyWrapper(model2Alloy, context, new  HashMap<>(variants));
 				results.put(ctx, executor.submit(worker));
 			}
 		}
@@ -108,42 +115,13 @@ public class DivaHelper {
 			//wait
 		}
 
-		for(Entry<Context, Future<String>> entry : results.entrySet()) {
+		for(Entry<Context, Future<List<Configuration>>> entry : results.entrySet()) {
 			Context ctx = entry.getKey();
-
 			try {
-				String alloyResult = entry.getValue().get();
-				System.out.println(alloyResult);
-
-				for(String solution : alloyResult.split("\n")) {
-
-					System.out.println("Solution: " + solution);
-
-					Configuration nc = DivaFactory.eINSTANCE.createConfiguration();
-					for(String atom : solution.split(" ")) {
-						for(Dimension d : model.getDimension()) {
-							for(Variant v : d.getVariant()) {
-								if(atom.equals(v.getId())) {
-									nc.addVariant(v);
-								}
-							}
-						}
-					}
-					if (nc.getVariant().size() > 0) {
-						ctx.getConfiguration().add(nc);
-						//result.add(nc);//TODO: check if that is really useful to return a result since we modify the current model...
-					}
-
-				}
-
-
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
+				ctx.getConfiguration().addAll(entry.getValue().get());
+			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
-
-
 		} 
 
 	}

@@ -96,4 +96,9 @@ public interface SimulationModel extends DiVAModelElement {
 	 */
 	public void populateVerdicts();
 
+	/**
+	 * @generated NOT
+	 */
+	void createExhaustiveSimulation();
+
 } // SimulationModel
