@@ -308,8 +308,11 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 			s.getContext().clear();
 		}
 			
+		int i = 0;
 		for(List<VariableValue> vvs : allCombinations(getModel().getContext())) {
 			Context c = DivaFactory.eINSTANCE.createContext();
+			c.setName("Context " + i);
+			c.setId("CTX_"+ (i++));
 			for(VariableValue vv : vvs) {
 				c.getVariable().add(EcoreUtil.copy(vv));
 			}
