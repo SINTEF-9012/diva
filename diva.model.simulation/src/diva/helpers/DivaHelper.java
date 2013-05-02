@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -24,7 +25,6 @@ import diva.Context;
 import diva.Dimension;
 import diva.Scenario;
 import diva.VariabilityModel;
-import diva.VariableValue;
 import diva.Variant;
 import diva.alloy.AlloyWrapper;
 
@@ -80,7 +80,7 @@ public class DivaHelper {
 				variants.put(v.getId(), v);
 			}
 		}
-		
+
 		StringBuilder builder = new StringBuilder();
 		model.toAlloy(builder);
 		final String model2Alloy = builder.toString();
@@ -91,38 +91,51 @@ public class DivaHelper {
 		}
 		//System.out.println("#cpu: " + Runtime.getRuntime().availableProcessors());
 		ExecutorService executor = Executors.newFixedThreadPool(Math.min(Runtime.getRuntime().availableProcessors(), size));
-		Map<Context, Future<List<Configuration>>> results = Collections.synchronizedMap(new HashMap<Context, Future<List<Configuration>>>());
-
+		ExecutorCompletionService<Entry<Context, List<Configuration>>> ecs = new ExecutorCompletionService<Entry<Context, List<Configuration>>>(executor);
+		//List<Future<Entry<Context, List<Configuration>>>> results = new ArrayList<Future<Entry<Context, List<Configuration>>>>();
+		
 		for(Scenario scn : model.getSimulation().getScenario()) {
-			for(Context ctx : scn.getContext()) {
-				ctx.getConfiguration().clear();
-				String context = "";
-				int i = 0;
-				for(VariableValue v : ctx.getVariable()) {
-					if (i > 0)
-						context += " and ";
-					StringBuilder b = new StringBuilder();
-					v.toAlloy(b);
-					context += b.toString();
-					i++;
+			for(Context ctx : scn.getContext()) {	
+				if(ctx.getConfiguration().size() == 0) {//to enable incremental checking
+					Callable<Entry<Context, List<Configuration>>> worker = new AlloyWrapper(model2Alloy, ctx, new  HashMap<>(variants));
+					/*results.add(*/ecs.submit(worker)/*)*/;
 				}
-				Callable<List<Configuration>> worker = new AlloyWrapper(model2Alloy, context, new  HashMap<>(variants));
-				results.put(ctx, executor.submit(worker));
 			}
 		}
 		executor.shutdown();
-		while(!executor.isTerminated()) {
-			//wait
-		}
 
-		for(Entry<Context, Future<List<Configuration>>> entry : results.entrySet()) {
-			Context ctx = entry.getKey();
-			try {
-				ctx.getConfiguration().addAll(entry.getValue().get());
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
+		/*try {
+			while(!executor.isTerminated()) {
+				Thread.currentThread().sleep(250);
 			}
-		} 
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+		try {
+			int i = 0;
+			while (i < size) {
+				Future<Entry<Context, List<Configuration>>> entry = ecs.poll();
+				while(entry != null) {
+					Context ctx = entry.get().getKey();
+					try {
+						ctx.getConfiguration().addAll(entry.get().getValue());
+					} catch (InterruptedException | ExecutionException e) {
+						e.printStackTrace();
+					}
+					entry = ecs.poll();
+					i++;
+				}
+				String tempPath = File.createTempFile("PartialSimulation", ".diva").getAbsolutePath();
+				DivaHelper.save(model, tempPath);
+				System.out.println("Partial Simulation stored: " + tempPath);
+				Thread.currentThread().sleep(250);
+			}
+		} catch (InterruptedException | IOException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
