@@ -25,12 +25,6 @@
            <separator
                  name="design">
            </separator>
-           <separator
-                 name="arf">
-           </separator>
-           <separator
-                 name="additions">
-           </separator>
         </menu>
      </objectContribution>
       
@@ -91,37 +85,16 @@
                id="diva.simulator.ui.action4">
          </action>
          <action
-               label="Print Simulation Coverage"
-               class="diva.ksimulator.ui.RunSimulationCoverage"
-               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g3"
-               enablesFor="1"
-               id="diva.simulator.ui.action22">
-         </action>
-         <action
                label="Clean Model"
                class="diva.ksimulator.ui.RunCleanModel"
                menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4"
                enablesFor="1"
                id="diva.simulator.ui.action31">
          </action>
-         <menu
-               id="diva.ui.menu.experimental"
-               label="Experimental"
-               path="diva.ui.menu/design">
-            <separator
-                  name="g1">
-            </separator>
-            <separator
-                  name="g2">
-            </separator>
-            <separator
-                  name="g3">
-            </separator>
-         </menu>
          <action
                label="Export Alloy Specification"
                class="diva.ksimulator.ui.RunPrintAlloySpec"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g1"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4"
                enablesFor="1"
                id="diva.simulator.ui.action21">
          </action>
@@ -130,35 +103,14 @@
                enablesFor="+"
                id="diva.simulator.ui.action11"
                label="Perform a Complete Simulation (Batch)"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
-         </action>
-         <action
-               class="diva.ksimulator.ui.RunSimulationCoverageMultiple"
-               enablesFor="+"
-               id="diva.simulator.ui.action22"
-               label="Export Simulation Coverage (Batch)"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
-         </action>
-         <action
-               class="diva.ksimulator.ui.RunSimulationStatsMultiple"
-               enablesFor="+"
-               id="diva.simulator.ui.action22"
-               label="Export Simulation Stats (Batch)"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g2">
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4">
          </action>
          <action
                class="diva.ksimulator.ui.RunCreateExhaustiveSimulation"
                enablesFor="1"
                id="diva.simulator.ui.action42"
                label="Create Exhaustive Simulation Scenario"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g4">
-         </action>
-         <action
-               class="diva.ksimulator.ui.RunExportExhaustiveSimulation"
-               enablesFor="1"
-               id="diva.simulator.ui.action43"
-               label="Export Exhaustive Simulation"
-               menubarPath="diva.ui.menu/diva.ui.menu.experimental/g5">
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4">
          </action>
       </objectContribution>
       <objectContribution

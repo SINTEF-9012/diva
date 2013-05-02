@@ -259,7 +259,7 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	public void populatePriorities() { 
 		for(Scenario s : getScenario()) {
 			for(Context ctx : s.getContext()) {
-				System.out.println("Processing context " + ctx.getName()  + "...");
+				//System.out.println("Processing context " + ctx.getName()  + "...");
 				ctx.computePriorities(this);
 			}
 		}
@@ -271,7 +271,7 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	public void populateScores() {
 		for(Scenario s : getScenario()) {
 			for(Context ctx : s.getContext()) {
-				System.out.println("Processing context " + ctx.getName()  + "...");
+				//System.out.println("Processing context " + ctx.getName()  + "...");
 				ctx.computeScores(this);
 			}
 		}
@@ -283,7 +283,7 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	public void populateVerdicts() {
 		for(Scenario s : getScenario()) {
 			for(Context ctx : s.getContext()) {
-				System.out.println("Processing context " + ctx.getName()  + "...");
+				//System.out.println("Processing context " + ctx.getName()  + "...");
 				ctx.computeVerdicts();
 			}
 		}

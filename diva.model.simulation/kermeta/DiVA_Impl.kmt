@@ -105,103 +105,6 @@ class Transition inherits NamedElement {
 
 aspect class VariabilityModel {
 
-	/*operation clean() is do
-		if simulation != void then
-			
-			// remove simulation data
-			simulation.scenario.each{ 
-					scn | scn.context.each{ ctx |
-						ctx.priority.clear
-						ctx.configuration.clear
-						ctx.variable.select{ vv | vv.variable == void }.each { vv |
-							ctx.variable.remove(vv)
-						}
-					}
-			}
-		end
-		// remove unused property values on variants
-		dimension.each{ dim | dim.variant.each { v |
-			var toRemove : Set<PropertyValue> init Set<PropertyValue>.new
-			v.propertyValue.each { pv |
-				
-				if pv.~property == void then
-					toRemove.add(pv)
-				end
-			}
-			toRemove.each{ pv | v.propertyValue.remove(pv) }
-		}}
-		
-		// remove unused PropertyPriority on rules
-		var pr : PriorityRule
-		rule.select{r | r.isInstanceOf(PriorityRule)}.each{ rule |
-			pr ?= rule
-			var toRemove : Set<PropertyPriority> init Set<PropertyPriority>.new
-			pr.priority.each { pp |
-				if pp.~property == void then
-					toRemove.add(pp)
-				end
-			}
-			toRemove.each{ pp | pr.priority.remove(pp) }
-		}
-			
-	end*/
-	
-	operation printSimulationCoverage() is do
-		if simulation != void then
-			var data : Hashtable<Scenario, CoverageData> init simulation.getCoverageData
-			simulation.scenario.each{ scn | 
-				stdio.writeln("Coverage for scenario " + scn.name)
-				data.getValue(scn).print	
-			}
-		end
-	end
-	
-	operation printCSVSimulationCoverage() is do
-		if simulation != void then
-			var data : Hashtable<Scenario, CoverageData> init simulation.getCoverageData
-			simulation.scenario.each{ scn | 
-				stdio.write(", " + scn.context.size.toString + ", " + data.getValue(scn).coverage_corr.toString)
-			}
-			stdio.writeln("")
-		end
-	end
-	
-	operation printCSVScenarioSizes() is do
-		if simulation != void then
-			var data : Hashtable<Scenario, CoverageData> init simulation.getCoverageData
-			simulation.scenario.each{ scn | 
-				stdio.write(", " + scn.context.size.toString)
-			}
-			stdio.writeln("")
-		end
-	end
-	
-	
-	operation createExhaustiveSimulation() is do
-		
-		if simulation == void then
-			simulation := SimulationModel.new
-		end 
-		
-		var s : Scenario init simulation.scenario.detect{ s | s.name == "EXHAUSTIVE" }
-		
-		if s != void then
-			s.context.clear
-		else
-			s := Scenario.new
-			s.name := "EXHAUSTIVE"
-			simulation.scenario.add(s)
-		end
-		
-		var c : Context
-		
-		AllCombinations(context).each{ svv |
-			c := Context.new
-			svv.each{ vv | c.variable.add(vv.clone) }
-			s.context.add(c)
-		}
-	
-	end
 	
 	operation exportSimulationStateMachine() is do
 		if simulation != void then
@@ -288,84 +191,9 @@ aspect class VariabilityModel {
 		end
 	end
 	
-	operation AllCombinations(vars : OrderedSet<Variable>) : Set<Set<VariableValue>> is do
-		
-		stdio.write("vars = ")
-		vars.each{ v | stdio.write(v.name + " ") }
-		stdio.writeln("")
-		
-		result := Set<Set<VariableValue>>.new
-		var res : Set<VariableValue>
-		if vars.size > 1 then
-			var others : Set<Set<VariableValue>> init AllCombinations(vars.subSet(1, vars.size-1))
-			vars.first.allValue.each{ vv |
-				others.each{ ovs |
-					res := Set<VariableValue>.new
-					res.addAll(ovs)
-					res.add(vv)
-					result.add(res)
-					stdio.writeln("vv = " + vv.toAlloy())
-				}
-			}
-		else if vars.size == 1 then
-			var s : Set<VariableValue>
-			vars.first.allValue.each{ vv |
-				s := Set<VariableValue>.new
-				s.add(vv)
-				result.add(s)
-			}
-		end 
-		end
-		
-		stdio.writeln("")
-		
-		result.each{ c |
-			stdio.writeln("")
-			c.each { v | stdio.write(v.toAlloy + ", ")
-			}
-		}
-		
-		stdio.writeln("")
-		
-	end
 	
 }
 
-aspect class Variable {
-
-	operation allValue() : Set<VariableValue> is abstract
-	
-}
-
-aspect class BooleanVariable {
-
-	method allValue() : Set<VariableValue> is do
-		result := Set<VariableValue>.new
-		var bvv : BoolVariableValue init BoolVariableValue.new
-		bvv.variable := self
-		bvv.bool := true
-		result.add(bvv)
-		bvv := BoolVariableValue.new
-		bvv.variable := self
-		bvv.bool := false
-		result.add(bvv)
-	end
-
-}
-
-aspect class EnumVariable {
-
-	method allValue() : Set<VariableValue> is do
-		result := Set<VariableValue>.new
-		var evv : EnumVariableValue
-		literal.each{ l | 
-			evv := EnumVariableValue.new
-			evv.variable := self
-			evv.literal := l
-			result.add(evv)
-		}
-	end
-}
 
 aspect class SimulationModel {
 
@@ -373,32 +201,6 @@ aspect class SimulationModel {
 		scenario.each{ s | s.computeVerdicts }
 	end
 
-	operation printVariantCoverage() is do
-		var all : Set<Variant> init Set<Variant>.new
-		var cov : Set<Variant> init Set<Variant>.new
-		var scov : Set<Variant>
-		model.dimension.each{ d | all.addAll(d.variant) }
-		scenario.each{ scn |
-			scov := scn.coveredVariants
-			stdio.write("  " + scn.name + "\t")
-			if scn.name.size < 4 then stdio.write("\t") end
-			stdio.writeln(" : " + strVariantCoverage(scov, all))
-			cov.addAll(scov)
-		}
-		stdio.writeln("Total Coverage\t : " + strVariantCoverage(cov, all))
-	end
-
-	operation strVariantCoverage(cov : Set<Variant>, all : Set<Variant>) : String is do
-		result := cov.size.toString + "/" + all.size.toString 
-				+ " \t(" + (cov.size*100 / all.size).toString + "%)"
-		
-		if cov.size < all.size then
-			result := result + " - Missing: "
-			all.select{ v | not cov.contains(v) }.each { v |
-				result := result + v.id + " "
-			}
-		end
-	end
 	
 	operation allPriorities() : Hashtable<Property, Set<Integer>> is do
 		result := Hashtable<Property, Set<Integer>>.new
@@ -433,171 +235,11 @@ aspect class SimulationModel {
 		}
 	end
 	
-	operation getCoverageData() : Hashtable<Scenario, CoverageData> is do
-		result := Hashtable<Scenario, CoverageData>.new
-		var cd : CoverageData
-		var _allPriorities : Hashtable<Property, Set<Integer>> init allPriorities
-		var _allVariants : Set<Variant> init Set<Variant>.new
-		model.dimension.each{ d | _allVariants.addAll(d.variant) }
-		var _allRules : Set<Rule> init model.rule
-		var totalPriorities : Integer init 0
-		_allPriorities.values.each{ s | totalPriorities := totalPriorities + s.size }
-		var totalVariants : Integer init _allVariants.size
-		var totalRules : Integer init model.rule.size
-		var coveredPriorities : Hashtable<Property, Set<Integer>>
-		var coveredVariants : Set<Variant>
-		var coveredRules : Set<Rule>
-		scenario.each{ scn |
-			cd := CoverageData.new
-			cd.totalPriorities := totalPriorities
-			cd.totalVariants := totalVariants
-			cd.totalRules := totalRules
-			coveredPriorities := scn.coveredPriorities
-			coveredVariants := scn.coveredVariants
-			coveredRules := scn.coveredRules
-			cd.coveredPriorities := 0
-			coveredPriorities.values.each{ s | cd.coveredPriorities := cd.coveredPriorities + s.size }
-			cd.coveredVariants := coveredVariants.size
-			cd.coveredRules := coveredRules.size
-			cd.uncoveredPriorities := uncoveredPriorities(coveredPriorities, _allPriorities)
-			cd.uncoveredVariants := _allVariants.minus(coveredVariants)
-			cd.uncoveredRules := _allRules.minus(coveredRules)
-			result.put(scn, cd)
-		}
-	end
 	
 }
 
-class CoverageData {
-
-	attribute totalPriorities : Integer
-	attribute coveredPriorities : Integer
-	attribute uncoveredPriorities : Hashtable<Property, Set<Integer>>
-	property readonly priorityCoverage : Integer
-		getter is do
-			result := (coveredPriorities * 100) / totalPriorities
-		end
-	
-	attribute totalVariants : Integer
-	attribute coveredVariants : Integer
-	attribute uncoveredVariants : Set<Variant>
-	property readonly variantCoverage : Integer
-		getter is do
-			result := (coveredVariants * 100) / totalVariants
-		end
-	
-	attribute totalRules : Integer
-	attribute coveredRules : Integer
-	attribute uncoveredRules : Set<Rule>
-	property readonly ruleCoverage : Integer
-		getter is do
-			result := (coveredRules * 100) / totalRules
-		end
-	
-	property readonly total : Integer
-		getter is do
-			result := totalPriorities + totalVariants + totalRules
-		end
-	property readonly covered : Integer
-		getter is do
-			result := coveredPriorities + coveredVariants + coveredRules
-		end
-	property readonly coverage : Integer
-		getter is do
-			result := (covered * 100) / total
-		end
-		
-		
-	property readonly total_corr : Integer
-		getter is do
-			result := totalPriorities + totalVariants * 3 + totalRules
-		end
-	property readonly covered_corr : Integer
-		getter is do
-			result := coveredPriorities + coveredVariants * 3 + coveredRules
-		end
-	property readonly coverage_corr : Integer
-		getter is do
-			result := (covered_corr * 100) / total_corr
-		end
-	
-	operation print() is do
-		stdio.writeln("  *    Overall : " + coverage.toString + "% (" + covered.toString + "/" + total.toString + ")")
-		
-		stdio.write(  "  *   Variants : " + variantCoverage.toString + "% (" + coveredVariants.toString + "/" + totalVariants.toString + ")")
-		if uncoveredVariants.size > 0 then
-			stdio.write( " - Missing: " )
-			uncoveredVariants.each { v |
-				stdio.write( v.id + " " )
-			}
-		end
-		stdio.writeln("")
-		
-		stdio.write("  *      Rules : " + ruleCoverage.toString + "% (" + coveredRules.toString + "/" + totalRules.toString + ")")
-		if uncoveredRules.size > 0 then
-			stdio.write( " - Missing: " )
-			uncoveredRules.each { r |
-				stdio.write( "\"" + r.name + "\" " )
-			}
-		end
-		stdio.writeln("")
-		
-		stdio.write("  *   Priority : " + priorityCoverage.toString + "% (" + coveredPriorities.toString + "/" + totalPriorities.toString + ")")
-		if uncoveredPriorities.size > 0 then
-			stdio.write( " - Missing: " )
-			uncoveredPriorities.keys.each { p |
-				stdio.write( p.id + "." +  toPiorityList(uncoveredPriorities.getValue(p)) + " ")
-			}
-		end
-		stdio.writeln("")
-	end	
-	
-	operation toPiorityList(values : Set<Integer>) : String is do
-		var table : Hashtable<Integer, String> init Hashtable<Integer, String>.new
-		table.put(0, "N/A")
-		table.put(1, "Very Low")
-		table.put(2, "Low")
-		table.put(3, "Medium")
-		table.put(4, "High")
-		table.put(5, "Very High")
-		result := ""
-		values.each{ v |
-			result := result + table.getValue(v) + " "
-		}
-	end
-	
-}
 
 aspect class Scenario {
-
-	operation coveredVariants() : Set<Variant> is do
-		result := Set<Variant>.new
-		context.each{ ctx |
-			result.addAll(ctx.coveredVariants)
-		}
-	end
-	
-	operation coveredRules() : Set<Rule> is do
-		result := Set<Rule>.new
-		context.each{ ctx |
-			result.addAll(ctx.coveredRules)
-		}
-	end
-	
-	operation coveredPriorities() : Hashtable<Property, Set<Integer>> is do
-		result := Hashtable<Property, Set<Integer>>.new
-		var s : Set<Integer>
-		context.each{ ctx |
-			ctx.priority.select{p | p.priority > 0}.each{ p |
-				s := result.getValue(p.~property)
-				if s == void then 
-					s := Set<Integer>.new 
-					result.put(p.~property, s)
-				end
-				s.add(p.priority)
-			}
-		}
-	end
 	
 	operation computeVerdicts() is do
 		context.each{ c | c.computeVerdicts }
@@ -605,25 +247,6 @@ aspect class Scenario {
 
 }
 
-aspect class Rule {
-	
-}
-
-aspect class Expression {
-	operation eval(ctx : Context, cfg : Configuration) : Boolean is do
-		if term == void then 
-			result := true
-		else
-			result := term.eval(ctx, cfg)
-		end
-	end
-	
-	/*operation toAlloy() : String is do
-		if term != void then
-			result := term.toAlloy
-		end
-	end*/
-}
 
 aspect class Invariant
 {
@@ -634,21 +257,10 @@ aspect class Invariant
 
 aspect abstract class Term
 {
-	operation eval(ctx : Context, cfg : Configuration) : Boolean is abstract
 	operation computeVariantEffect(v : Hashtable<Variant, Boolean>, b : Boolean) : Void is abstract
-	operation toAlloy() : String is abstract
 }
 aspect class AndTerm
 {
-	method eval(ctx : Context, cfg : Configuration) : Boolean is do
-		result := true
-		from var i : Integer init 0
-		until i == term.size or not result
-		loop
-			result := result and term.elementAt(i).eval(ctx, cfg)
-			i := i + 1
-		end
-	end
 	
 	method computeVariantEffect(v : Hashtable<Variant, Boolean>, b : Boolean) : Void is do
 		if b then term.each{t | t.computeVariantEffect(v,b)}
@@ -656,88 +268,22 @@ aspect class AndTerm
 		end
 	end
 	
-	method toString() : String is do
-		result := ""
-		from var i : Integer init 0
-		until i == term.size
-		loop
-			result := result + term.elementAt(i).toString 
-			if i != term.size-1 then result := result + " & " end
-			i := i + 1
-		end
-	end
-	
-	/*method toAlloy() : String is do
-		result := "("
-		from var i : Integer init 0
-		until i == term.size
-		loop
-			result := result + term.elementAt(i).toAlloy 
-			if i != term.size-1 then result := result + " and " end
-			i := i + 1
-		end
-		result := result + ")"
-	end*/
-	
 }
 aspect class OrTerm
 {
-	method eval(ctx : Context, cfg : Configuration) : Boolean is do
-		result := false
-		from var i : Integer init 0
-		until i == term.size or result
-		loop
-			result := result or term.elementAt(i).eval(ctx, cfg)
-			i := i + 1
-		end
-	end
-	
 	method computeVariantEffect(v : Hashtable<Variant, Boolean>, b : Boolean) : Void is do
 		if not b then term.each{t | t.computeVariantEffect(v,b)}
 		else raise "non determinism in effect of basic rule (OR)"
 		end
 	end
 	
-	method toString() : String is do
-		result := ""
-		from var i : Integer init 0
-		until i == term.size
-		loop
-			result := result + term.elementAt(i).toString 
-			if i != term.size-1 then result := result + " | " end
-			i := i + 1
-		end
-	end
-	
-	/*method toAlloy() : String is do
-		result := "("
-		from var i : Integer init 0
-		until i == term.size
-		loop
-			result := result + term.elementAt(i).toAlloy 
-			if i != term.size-1 then result := result + " or " end
-			i := i + 1
-		end
-		result := result + ")"
-	end*/
 }
 aspect class NotTerm
 {
-	method eval(ctx : Context, cfg : Configuration) : Boolean is do
-		result := not term.eval(ctx, cfg)
-	end
-	
 	method computeVariantEffect(v : Hashtable<Variant, Boolean>, b : Boolean) : Void is do
 		term.computeVariantEffect(v, not b)
 	end
 	
-	method toString() : String is do
-		result := "!" + term.toString
-	end
-	
-	/*method toAlloy() : String is do
-		result := "not " + term.toAlloy
-	end*/
 }
 
 
@@ -750,15 +296,6 @@ aspect class VariantTerm
 			result := false
 		end
 	end
-
-	method eval(ctx : Context, cfg : Configuration) : Boolean is do
-		if cfg != void then
-			result := cfg.variant.detect{ v | v.variant == self.variant } != void
-		else
-			stdio.writeln("WARNING: VariantTerm.eval for an expression which should prabably have no VariantTerm (cfg is void)")
-			result := false
-		end
-	end
 	
 	method computeVariantEffect(v : Hashtable<Variant, Boolean>, b : Boolean) : Void is do
 		v.put(variant, b)
@@ -768,9 +305,6 @@ aspect class VariantTerm
 		result := variant.name
 	end
 	
-	/*method toAlloy() : String is do
-		result := "one " + variant.id
-	end*/
 }
 aspect abstract class VariableTerm
 {
@@ -790,19 +324,6 @@ aspect class EnumTerm
 		end
 	end
 
-	method eval(ctx : Context, cfg : Configuration) : Boolean is do
-		result := false
-		var vv : EnumVariableValue init ctx.variable.detect{ v | v.variable == self.variable }.asType(EnumVariableValue)
-		if vv != void then result := vv.literal == self.~value end
-	end
-	
-	method toString() : String is do
-		result := variable.id + "=" + ~value.id
-	end
-	
-	/*method toAlloy() : String is do
-		result := "one " + variable.id + "_" + ~value.id
-	end*/
 }
 aspect class BooleanTerm
 {
@@ -812,44 +333,11 @@ aspect class BooleanTerm
 		else
 			result := false
 		end
-	end
-	
-	method eval(ctx : Context, cfg : Configuration) : Boolean is do
-		result := false
-		var vv : BoolVariableValue init ctx.variable.detect{ v | v.variable == self.variable }.asType(BoolVariableValue)
-		if vv != void then result := vv.bool end
-	end
-	
-	method toString() : String is do
-		result := variable.id
-	end
-	
-	/*method toAlloy() : String is do
-		result := "one " + variable.id
-	end*/
+	end	
 }
 
-aspect class Variant
-{
-}
-
-aspect class Dimension 
-{
-	operation alloyMult() : String is do
-		if (upper == 1) then
-			if (lower == 0) then result := "lone"
-			else result := "one"
-			end 
-		else
-			if (lower == 0) then result := ""
-			else result := "some"
-			end 
-		end
-	end
-}
 	
 aspect abstract class VariableValue {
-	operation toAlloy() : String is abstract
 	operation hasSameValue(other : VariableValue) : Boolean is abstract
 	operation clone() : VariableValue is abstract
 }
@@ -872,11 +360,6 @@ aspect class BoolVariableValue {
 		result := res
 	end
 
-	/*method toAlloy() : String is do
-		if bool then result := "one " else result := "no " end
-		result := result + variable.id
-		
-	end*/
 	method hasSameValue(other : VariableValue) : Boolean is do
 		var o : BoolVariableValue
 		o ?= other
@@ -911,14 +394,6 @@ aspect class EnumVariableValue {
 		res.literal := self.literal
 		result := res
 	end
-
-	/*method toAlloy() : String is do
-		result := "one " + variable.id + "_" + literal.id
-	end*/
-	
-	method toString() : String is do
-		result := variable.id + "=" + literal.id
-	end
 	
 	method hasSameValue(other : VariableValue) : Boolean is do
 		var o : EnumVariableValue
@@ -945,100 +420,6 @@ aspect class Context {
 		}
 	end
 
-	operation coveredVariants() : Set<Variant> is do
-		result := Set<Variant>.new
-		var cfg : Configuration init bestConfiguration
-		if cfg != void then
-			result.addAll(cfg.variant.collect{v | v.variant})
-		end
-	end
-
-	operation bestConfiguration() : Configuration is do
-		if configuration.isEmpty then
-			result := void
-		else 
-			result := configuration.one
-			configuration.each{ c |
-				if c.totalScore > result.totalScore then result := c end
-			}
-		end
-	end
-
-
-	operation computeScores(model : VariabilityModel) is do
-		configuration.each{ cfg | cfg.computeScore(self) }
-	end
-
-	operation computePriorities(model : VariabilityModel) is do
-		var table : Hashtable<Property, Priority> init Hashtable<Property, Priority>.new
-		var p : Priority
-		
-		model.~property.each{ prop | 
-			p := Priority.new
-			p.~property := prop
-			p.priority := 0 // this is the minimum
-			priority.add(p)
-			table.put(prop, p)
-		}
-		
-		model.rule.select{ r | r.isInstanceOf(PriorityRule) }.collect{ r | r.asType(PriorityRule) }.each { r |
-			if r.context.eval(self, void) then
-				r.priority.each{ pp |
-					p := table.getValue(pp.~property)
-					if p.priority < pp.priority then
-						p.priority := pp.priority
-					end
-				}
-			end
-		}
-	end
-
-	operation alloy_contextExpression(model : VariabilityModel) : String is do
-		result := ""
-		variable.each{ v | result := result + v.toAlloy + " and " }
-		// chop the last "and" ....
-		if result.size > 5 then result := result.substring(0, result.size - 5) end
-	end
-	
-	operation alloy_contextExpressionXXX() : String is do
-		result := ""
-		variable.each{ v | result := result + v.toAlloy + " and " }
-		// chop the last "and" ....
-		if result.size > 5 then result := result.substring(0, result.size - 5) end
-	end
-	
-	operation alloy_computeSuitableConfigurations(model : VariabilityModel) : Set<Configuration> is do
-		self.configuration.clear
-		result := Set<Configuration>.new
-		var alloy_system : String init DiVA2Alloy.new.generate(model)
-		var alloy_context : String init alloy_contextExpression(model)
-		//stdio.writeln(alloy_context)
-		var alloy_result : String
-    	alloy_result ?= extern diva::alloy::AlloyWrapper.KComputeConfigurations(alloy_system, alloy_context)
-    	var nc : Configuration
-    	alloy_result.split("\n").each { solution | 
-    		nc := Configuration.new
-    		solution.split(" ").each{ atom |
-    			model.dimension.each{d | d.variant.select{ v | v.id == atom }.each{ v |
-    				nc.addVariant(v)
-    			}}
-    		}
-    		if not nc.variant.isEmpty() then
-    			self.configuration.add(nc)
-    			result.add(nc)
-    		end
-   		}
-	end
-	
-	operation coveredRules() : Set<Rule> is do
-		result := Set<Rule>.new
-		container.container.asType(SimulationModel).model.rule.each{ r |
-			if r.asType(PriorityRule).context.eval(self, void) then
-				result.add(r)
-			end
-		}
-	end
-	
 	operation computeVerdicts() is do
 		configuration.each{ c | c.computeVerdicts(oracle) }
 		var cfg : Configuration init bestConfiguration
@@ -1061,45 +442,7 @@ aspect class Configuration {
 				end
 			}}
 	end
-
-	operation addVariant(v : Variant) is do
-		var cv : ConfigVariant init ConfigVariant.new
-		cv.variant := v
-		variant.add(cv)
-	end
-	
-	operation computeScore(ctx : Context) is do
-		var K : Integer init 2
-		score.clear
-		totalScore := 0
-		var cfgScore : Score
-		var varScore : Score
-		variant.each { variant | variant.score.clear }
-		ctx.priority.each { priority |
-			cfgScore := Score.new
-			cfgScore.~property := priority.~property
-			cfgScore.score := 0
-			score.add(cfgScore)
-			variant.each { variant |
-				varScore := Score.new
-				varScore.~property := priority.~property
-				varScore.score := pow(K, priority.priority) * variant.getContribution(priority.~property)
-				if priority.~property.direction == 0 then
-					varScore.score := -varScore.score
-				end
-				variant.score.add(varScore)
-				cfgScore.score := cfgScore.score + varScore.score
-			}
-			totalScore := totalScore + cfgScore.score
-		}
-		variant.each { variant | variant.computeTotalScore }
-	end
-	
-	operation pow(x : Integer, y : Integer) : Integer is do
-		result := 1
-		y.times{ i | result := result * x }
-	end
-	
+		
 	operation computeVerdicts(oracle : VariantExpression) is do
 		if oracle != void then
 			if oracle.eval(void, self) then
@@ -1110,19 +453,3 @@ aspect class Configuration {
 		end
 	end
 }
-
-aspect class ConfigVariant {
-
-	operation getContribution(p : Property) : Integer is do
-		result := 0
-		var pv : PropertyValue init variant.propertyValue.detect{ pval | pval.~property == p }
-		if pv != void then result := pv.~value end
-	end
-	
-	operation computeTotalScore() is do
-		totalScore := 0
-		score.each{ s | totalScore := totalScore + s.score }
-	end
-}
-
-
