@@ -35,7 +35,7 @@ public class RunPopulateCompleteSimulation implements IObjectActionDelegate, Run
 			VariabilityModel model = DivaHelper.load(new File(file_uri));
 			
 			if (model.getSimulation() != null) {
-				DivaHelper.computeSuitableConfigurations(model);
+				DivaHelper.computeSuitableConfigurations(model, 0);
 				model.getSimulation().populatePriorities();
 				model.getSimulation().populateScores();
 				model.getSimulation().populateVerdicts();

@@ -35,7 +35,7 @@ public class RunPopulateValidConfigurations implements IObjectActionDelegate, Ru
 			VariabilityModel model = DivaHelper.load(new File(file_uri));
 
 
-			DivaHelper.computeSuitableConfigurations(model);
+			DivaHelper.computeSuitableConfigurations(model, 0);
 
 			DivaHelper.save(model, file_uri);
 

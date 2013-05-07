@@ -31,47 +31,92 @@ public class AlloyWrapper implements Callable<Entry<Context, List<Configuration>
 	String system;
 	Context ctx;
 	Map<String, Variant> variants;
-	
+
 	File input;
 	List<Configuration> results;
+	
+	Thread t;
+
+	static volatile A4Options opt = new A4Options();
+	static {
+		// Chooses the Alloy4 options
+		opt.solver = A4Options.SatSolver.SAT4J;
+	}
+
+	boolean done = false;
 
 	public AlloyWrapper(String system, Context ctx, Map<String, Variant> variants) {
 		this.system = system;
 		this.ctx = ctx;
 		this.variants = variants;
-		
+
+	}
+	
+	public void kill() {
+		if (t!=null) {
+			t.interrupt();
+			t.stop();
+		}
+		Thread.currentThread().interrupt();
 	}
 
-	private String computeConfigurations() throws Err, IOException {
-		String result = "";
+	private class RunAlloy implements Runnable {
 
-		// Chooses the Alloy4 options
-		A4Options opt = new A4Options();
-		opt.solver = A4Options.SatSolver.SAT4J;
+		A4Solution solution;
 
-		Module world = CompUtil.parseEverything_fromFile(null, null, input.getAbsolutePath());
-
-		A4Solution solution = TranslateAlloyToKodkod.execute_command(NOP, world.getAllReachableSigs(), world.getAllCommands().get(0), opt);
-		A4Solution s = solution;
-		int i = 0;
-		while(s.satisfiable() && i <= 100) {
-
-			Iterator<ExprVar> atoms = s.getAllAtoms().iterator();
-			while(atoms.hasNext()) {
-				ExprVar v = atoms.next();
-				result += v.label.replaceAll("\\$0", "") + " ";
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try {
+				Module world = CompUtil.parseEverything_fromFile(null, null, input.getAbsolutePath());
+				solution = TranslateAlloyToKodkod.execute_command(NOP, world.getAllReachableSigs(), world.getAllCommands().get(0), opt);
+			} catch (Err e) {
+				System.err.println("Alloy ERROR:\n" + e.msg);
+				Thread.currentThread().interrupt();
+			} finally {
+				input.delete();
 			}
-			result += "\n";
 
-			s = s.next();
-			i++;
 		}
-		return result;
+
+	}
+
+	private String computeConfigurations() throws Err, InterruptedException {
+		RunAlloy r = new RunAlloy();
+		t = new Thread(r);
+		t.start();
+		t.join(5000);
+		
+		if (r.solution != null) {
+			StringBuilder result = new StringBuilder();
+			result.append("");
+			A4Solution s = r.solution;
+			int i = 0;
+			while(s.satisfiable() && i <= 100) {
+				Iterator<ExprVar> atoms = s.getAllAtoms().iterator();
+				while(atoms.hasNext()) {
+					ExprVar v = atoms.next();
+					result.append(v.label.replaceAll("\\$0", "") + " ");
+				}
+				result.append("\n");
+				s = s.next();
+				i++;
+			}
+			t.interrupt();
+			t.stop();
+			return result.toString(); 
+		} else {
+			System.err.println("Alloy freezes on " + ctx.getName());
+			t.interrupt();
+			t.stop();
+			Thread.currentThread().interrupt();
+			return null;
+		}
 	}
 
 	public Entry<Context, List<Configuration>> call() throws Exception {
-		if (results == null) {		
-			results = new ArrayList<Configuration>();
+		if (!done) {		
+			done = true;
 			ctx.getConfiguration().clear();
 			String context = "";
 			int i = 0;
@@ -83,7 +128,7 @@ public class AlloyWrapper implements Callable<Entry<Context, List<Configuration>
 				context += b.toString();
 				i++;
 			}
-			
+
 			// create a temp file
 			FileWriter fw = null;
 			try {
@@ -104,23 +149,29 @@ public class AlloyWrapper implements Callable<Entry<Context, List<Configuration>
 						e.printStackTrace();
 					}
 			}
-			
+
 			String alloyResult = computeConfigurations();
-			for(String solution : alloyResult.split("\n")) {
-				//System.out.println("Solution: " + solution);
-				Configuration nc = DivaFactory.eINSTANCE.createConfiguration();
-				for(String atom : solution.split(" ")) {
-					for(Entry<String, Variant> v : variants.entrySet()) {
-						if(atom.equals(v.getKey())) {
-							nc.addVariant(v.getValue());
+			if (alloyResult != null) {
+				results = new ArrayList<Configuration>();
+				for(String solution : alloyResult.split("\n")) {
+					//System.out.println("Solution: " + solution);
+					Configuration nc = DivaFactory.eINSTANCE.createConfiguration();
+					for(String atom : solution.split(" ")) {
+						for(Entry<String, Variant> v : variants.entrySet()) {
+							if(atom.equals(v.getKey())) {
+								nc.addVariant(v.getValue());
+							}
 						}
 					}
-				}
-				if (nc.getVariant().size() > 0) {
-					results.add(nc);
+					if (nc.getVariant().size() > 0) {
+						results.add(nc);
+					}
 				}
 			}
 		}
-		return new AbstractMap.SimpleEntry<Context, List<Configuration>>(ctx, results);
+		if (results != null)
+			return new AbstractMap.SimpleEntry<Context, List<Configuration>>(ctx, results);
+		else
+			return null;
 	}
 }
