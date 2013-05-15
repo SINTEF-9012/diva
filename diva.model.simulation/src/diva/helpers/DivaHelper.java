@@ -24,8 +24,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import diva.Configuration;
 import diva.Context;
 import diva.Dimension;
+import diva.EnumLiteral;
+import diva.EnumVariable;
 import diva.Scenario;
 import diva.VariabilityModel;
+import diva.Variable;
 import diva.Variant;
 import diva.alloy.AlloyWrapper;
 
@@ -185,6 +188,51 @@ public class DivaHelper {
 			}
 		}
 
+	}
+
+	public static void toThingML(VariabilityModel model) {
+		if (model.getSimulation() != null) {
+			boolean ex = false;
+			for(Scenario s : model.getSimulation().getScenario()) {
+				if ("EXHAUSTIVE".equals(s.getName())) {
+					ex = true;
+					break;
+				}
+			}
+			if (ex) {
+				StringBuilder builder = new StringBuilder();
+				builder.append("datatype Boolean\n");	
+				builder.append("@c_type \"uint8_t\"\n");
+				builder.append("@java_type \"Boolean\";\n\n");
+    
+				for(Variable v : model.getContext()) {
+					if (v instanceof EnumVariable) {
+						builder.append("enumeration " + v.getNameNoSpace() + "\n"); 
+						builder.append("@java_type \"Byte\"\n");
+						builder.append("@c_type \"uint8_t\"\n");
+						builder.append("{\n");
+						int i = 0;
+						for(EnumLiteral l : ((EnumVariable)v).getLiteral()) {
+							builder.append(l.getNameNoSpace() + " @enum_val \""+ (i++) +"\"\n");
+						}
+						builder.append("}\n\n");
+					}
+				}
+				
+				builder.append("thing fragment contextMsgs {\n");
+				for(Variable v : model.getContext()) {
+					builder.append("message " + v.getNameNoSpace() + "(");
+					if (v instanceof EnumVariable) {
+						builder.append("value : " + v.getNameNoSpace());
+					} else {
+						builder.append("status : Boolean");
+					}
+					builder.append(");\n");
+				}
+				builder.append("}\n\n");
+				System.out.println(builder.toString());
+			}
+		}
 	}
 
 }

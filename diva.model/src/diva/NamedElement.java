@@ -40,7 +40,13 @@ public interface NamedElement extends DiVAModelElement {
 	 * @generated
 	 */
 	String getName();
-
+	
+	/**
+	 * @generated NOT
+	 * @return
+	 */
+	String getNameNoSpace();
+	
 	/**
 	 * Sets the value of the '{@link diva.NamedElement#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

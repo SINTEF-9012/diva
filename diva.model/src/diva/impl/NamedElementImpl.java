@@ -97,6 +97,13 @@ public abstract class NamedElementImpl extends DiVAModelElementImpl implements N
 	}
 
 	/**
+	 * @generated NOT
+	 */
+	public String getNameNoSpace() {
+		return getName().replace(" ", "_");
+	}
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

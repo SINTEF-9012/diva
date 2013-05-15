@@ -105,6 +105,13 @@
                label="Create Exhaustive Simulation Scenario"
                menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4">
          </action>
+         <action
+               class="diva.ksimulator.ui.RunExportAdaptationStateMachine"
+               enablesFor="1"
+               id="diva.simulator.ui.action43"
+               label="Export Adaptation State Machine"
+               menubarPath="diva.ui.menu/diva.ui.menu.simulator/g4">
+         </action>
       </objectContribution>
       <objectContribution
             adaptable="false"
