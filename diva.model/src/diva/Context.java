@@ -6,6 +6,8 @@
  */
 package diva;
 
+import java.util.Set;
+
 import org.eclipse.emf.common.util.EList;
 
 import diva.visitors.Visitor;
@@ -159,5 +161,15 @@ public interface Context extends NamedElement {
 	 * @generated NOT
 	 */
 	void computeVerdicts();
+	
+	/**
+	 * @generated NOT
+	 */
+	Configuration bestConfiguration();
 
+	/**
+	 * @generated NOT
+	 */
+	Set<VariableValue> changes_from(Context other);
+	
 } // Context

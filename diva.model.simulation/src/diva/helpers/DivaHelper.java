@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
@@ -21,14 +22,17 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import diva.BoolVariableValue;
 import diva.Configuration;
 import diva.Context;
 import diva.Dimension;
 import diva.EnumLiteral;
 import diva.EnumVariable;
+import diva.EnumVariableValue;
 import diva.Scenario;
 import diva.VariabilityModel;
 import diva.Variable;
+import diva.VariableValue;
 import diva.Variant;
 import diva.alloy.AlloyWrapper;
 
@@ -191,20 +195,22 @@ public class DivaHelper {
 	}
 
 	public static void toThingML(VariabilityModel model) {
+		Map<String, StringBuilder> states = new HashMap<String, StringBuilder>();
+		Scenario scn = null;
+
 		if (model.getSimulation() != null) {
-			boolean ex = false;
 			for(Scenario s : model.getSimulation().getScenario()) {
 				if ("EXHAUSTIVE".equals(s.getName())) {
-					ex = true;
+					scn = s;
 					break;
 				}
 			}
-			if (ex) {
+			if (scn != null) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("datatype Boolean\n");	
 				builder.append("@c_type \"uint8_t\"\n");
 				builder.append("@java_type \"Boolean\";\n\n");
-    
+
 				for(Variable v : model.getContext()) {
 					if (v instanceof EnumVariable) {
 						builder.append("enumeration " + v.getNameNoSpace() + "\n"); 
@@ -218,7 +224,7 @@ public class DivaHelper {
 						builder.append("}\n\n");
 					}
 				}
-				
+
 				builder.append("thing fragment contextMsgs {\n");
 				for(Variable v : model.getContext()) {
 					builder.append("message " + v.getNameNoSpace() + "(");
@@ -229,6 +235,57 @@ public class DivaHelper {
 					}
 					builder.append(");\n");
 				}
+				builder.append("}\n\n");
+
+				builder.append("thing adaptation includes contextMsgs {\n");
+				for(Variable v : model.getContext()) {
+					builder.append("receives " + v.getNameNoSpace() + "\n");
+				}				
+				builder.append("provided port contextEvents {\n");
+				
+				builder.append("}\n\n");
+				
+				builder.append("statechart logic init XXX {//TODO: choose initial configuration\n");
+
+				for(Context ctx : scn.getContext()) {
+					Configuration cfg = ctx.bestConfiguration();
+					if (cfg != null && !states.containsKey(cfg.id(model))) {
+						StringBuilder b = new StringBuilder();
+						states.put(cfg.id(model), b);
+
+					}
+				}
+
+				for(Context ctx : scn.getContext()) {
+					for(Context ctx2 : scn.getContext()) {
+						Set<VariableValue> diff = ctx.changes_from(ctx2);
+						if (diff.size() == 1) {
+							VariableValue vv = diff.iterator().next();
+							Configuration cfg = ctx.bestConfiguration();
+							Configuration cfg2 = ctx2.bestConfiguration();
+							StringBuilder b = states.get(cfg.id(model));
+							if (vv instanceof BoolVariableValue) {
+								if (((BoolVariableValue) vv).isBool()) {
+									b.append("transition -> " + cfg2.id(model) + "\n");
+									b.append("event contextEvent?" + vv.getVariable().getNameNoSpace() + "\n\n");//TODO
+								}
+							} else if (vv instanceof EnumVariableValue) {
+								b.append("transition -> " + cfg2.id(model) + "\n");
+								b.append("event contextEvent?" + vv.getVariable().getNameNoSpace() + "\n\n");//TODO
+							}
+						}
+					}
+				}
+
+
+
+				for(Entry<String, StringBuilder> e : states.entrySet()) {
+					builder.append("state " + e.getKey() + "{\n");
+					builder.append(e.getValue().toString());
+					builder.append("}\n\n");
+				}
+
+				builder.append("}\n\n");
 				builder.append("}\n\n");
 				System.out.println(builder.toString());
 			}

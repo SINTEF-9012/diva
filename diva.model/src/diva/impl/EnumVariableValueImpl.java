@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import diva.DivaPackage;
 import diva.EnumLiteral;
 import diva.EnumVariableValue;
+import diva.VariableValue;
 import diva.visitors.Visitor;
 
 /**
@@ -170,6 +171,17 @@ public class EnumVariableValueImpl extends VariableValueImpl implements EnumVari
 	 */
 	public void toAlloy(StringBuilder builder) {
 		builder.append("one " + getVariable().getId() + "_" + getLiteral().getId());
+	}
+
+	@Override
+	/**
+	 * @generated NOT
+	 */
+	public boolean hasSameValue(VariableValue vv) {
+		if (vv instanceof EnumVariableValue) {
+			return ((EnumVariableValue)vv).getLiteral().equals(getLiteral());
+		}
+		return false;
 	}
 
 } //EnumVariableValueImpl

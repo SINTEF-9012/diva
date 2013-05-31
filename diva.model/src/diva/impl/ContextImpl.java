@@ -8,8 +8,10 @@ package diva.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -435,7 +437,7 @@ public class ContextImpl extends NamedElementImpl implements Context {
 	 * @generated NOT
 	 * @return
 	 */
-	private Configuration bestConfiguration() {
+	public Configuration bestConfiguration() {
 		if (getConfiguration().size() == 0)
 			return null;
 		else {
@@ -448,6 +450,24 @@ public class ContextImpl extends NamedElementImpl implements Context {
 			}
 			return max;
 		}
+	}
+
+	@Override
+	/**
+	 * @generated NOT
+	 */
+	public Set<VariableValue> changes_from(Context other) {
+		Set<VariableValue> result = new HashSet<VariableValue>();
+		for(VariableValue vv : getVariable()) {
+			for(VariableValue ovv : other.getVariable()) {
+				if (ovv.getVariable().equals(vv.getVariable())) {
+					if(! ovv.hasSameValue(vv)) {
+						result.add(vv);
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 } //ContextImpl

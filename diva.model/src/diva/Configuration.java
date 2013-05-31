@@ -99,5 +99,10 @@ public interface Configuration extends ScoredElement {
 	 * @param oracle
 	 */
 	void computeVerdicts(VariantExpression oracle);
+	
+	/**
+	 * @generated NOT
+	 */
+	String id(VariabilityModel m);
 
 } // Configuration

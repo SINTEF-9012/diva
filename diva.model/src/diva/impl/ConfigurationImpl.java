@@ -20,10 +20,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import diva.ConfigVariant;
 import diva.Configuration;
 import diva.Context;
+import diva.Dimension;
 import diva.DivaFactory;
 import diva.DivaPackage;
 import diva.Priority;
 import diva.Score;
+import diva.VariabilityModel;
 import diva.Variant;
 import diva.VariantExpression;
 import diva.Verdict;
@@ -285,6 +287,25 @@ public class ConfigurationImpl extends ScoredElementImpl implements Configuratio
 				setVerdict(Verdict.PASS);
 			else
 				setVerdict(Verdict.FAIL);
+	}
+
+	@Override
+	/**
+	 * @generated NOT
+	 */
+	public String id(VariabilityModel m) {
+		String result = "CFG";
+		for(Dimension d : m.getDimension()) {
+			for(Variant v : d.getVariant()) {
+				for(ConfigVariant cv : getVariant()) {
+					if (cv.getVariant().equals(v)) {
+						result += "_" + v.getId();
+						break;
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 } //ConfigurationImpl

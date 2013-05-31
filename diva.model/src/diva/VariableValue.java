@@ -50,4 +50,11 @@ public interface VariableValue extends DiVAModelElement {
 	 */
 	void setVariable(Variable value);
 
+	/**
+	 * @generated NOT
+	 * @param vv
+	 * @return
+	 */
+	boolean hasSameValue(VariableValue vv);
+
 } // VariableValue

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import diva.BoolVariableValue;
 import diva.DivaPackage;
+import diva.VariableValue;
 import diva.visitors.Visitor;
 
 /**
@@ -180,6 +181,17 @@ public class BoolVariableValueImpl extends VariableValueImpl implements BoolVari
 		else
 			builder.append("no ");
 		builder.append(getVariable().getId());
+	}
+
+	@Override
+	/**
+	 * @generated NOT
+	 */
+	public boolean hasSameValue(VariableValue vv) {
+		if (vv instanceof BoolVariableValue) {
+			return ((BoolVariableValue)vv).isBool() == isBool();
+		}
+		return false;
 	}
 
 } //BoolVariableValueImpl
