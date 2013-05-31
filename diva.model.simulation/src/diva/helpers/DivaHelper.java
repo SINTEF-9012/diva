@@ -265,13 +265,15 @@ public class DivaHelper {
 							Configuration cfg2 = ctx2.bestConfiguration();
 							StringBuilder b = states.get(cfg.id(model));
 							if (vv instanceof BoolVariableValue) {
-								if (((BoolVariableValue) vv).isBool()) {
+								//if (((BoolVariableValue) vv).isBool()) {
 									b.append("transition -> " + cfg2.id(model) + "\n");
-									b.append("event contextEvent?" + vv.getVariable().getNameNoSpace() + "\n\n");//TODO
-								}
+									b.append("event ce : contextEvent?" + vv.getVariable().getNameNoSpace() + "\n");
+									b.append("guard ce.status == " + ((BoolVariableValue) vv).isBool()  + "\n\n");
+								//}
 							} else if (vv instanceof EnumVariableValue) {
 								b.append("transition -> " + cfg2.id(model) + "\n");
-								b.append("event contextEvent?" + vv.getVariable().getNameNoSpace() + "\n\n");//TODO
+								b.append("event ce : contextEvent?" + vv.getVariable().getNameNoSpace() + "\n");
+								b.append("guard ce.value == " + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() + "\n\n");
 							}
 						}
 					}
