@@ -1,7 +1,9 @@
 package diva.helpers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -194,7 +196,7 @@ public class DivaHelper {
 
 	}
 
-	public static void toThingML(VariabilityModel model) {
+	public static void toThingML(VariabilityModel model, String fileURI) {
 		Map<String, StringBuilder> states = new HashMap<String, StringBuilder>();
 		Scenario scn = null;
 
@@ -213,7 +215,7 @@ public class DivaHelper {
 
 				for(Variable v : model.getContext()) {
 					if (v instanceof EnumVariable) {
-						builder.append("enumeration " + v.getNameNoSpace() + "\n"); 
+						builder.append("enumeration Enum" + v.getNameNoSpace() + "\n"); 
 						builder.append("@java_type \"Byte\"\n");
 						builder.append("@c_type \"uint8_t\"\n");
 						builder.append("{\n");
@@ -229,7 +231,7 @@ public class DivaHelper {
 				for(Variable v : model.getContext()) {
 					builder.append("message " + v.getNameNoSpace() + "(");
 					if (v instanceof EnumVariable) {
-						builder.append("value : " + v.getNameNoSpace());
+						builder.append("value : Enum" + v.getNameNoSpace());
 					} else {
 						builder.append("status : Boolean");
 					}
@@ -237,14 +239,13 @@ public class DivaHelper {
 				}
 				builder.append("}\n\n");
 
-				builder.append("thing adaptation includes contextMsgs {\n");
+				builder.append("thing adaptation includes contextMsgs {\n\n");
+				builder.append("provided port contextEvents {\n");
 				for(Variable v : model.getContext()) {
 					builder.append("receives " + v.getNameNoSpace() + "\n");
 				}				
-				builder.append("provided port contextEvents {\n");
-				
 				builder.append("}\n\n");
-				
+
 				builder.append("statechart logic init XXX {//TODO: choose initial configuration\n");
 
 				for(Context ctx : scn.getContext()) {
@@ -266,14 +267,14 @@ public class DivaHelper {
 							StringBuilder b = states.get(cfg.id(model));
 							if (vv instanceof BoolVariableValue) {
 								//if (((BoolVariableValue) vv).isBool()) {
-									b.append("transition -> " + cfg2.id(model) + "\n");
-									b.append("event ce : contextEvent?" + vv.getVariable().getNameNoSpace() + "\n");
-									b.append("guard ce.status == " + ((BoolVariableValue) vv).isBool()  + "\n\n");
+								b.append("transition -> " + cfg2.id(model) + "\n");
+								b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
+								b.append("guard ce.status == " + ((BoolVariableValue) vv).isBool()  + "\n\n");
 								//}
 							} else if (vv instanceof EnumVariableValue) {
 								b.append("transition -> " + cfg2.id(model) + "\n");
-								b.append("event ce : contextEvent?" + vv.getVariable().getNameNoSpace() + "\n");
-								b.append("guard ce.value == " + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() + "\n\n");
+								b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
+								b.append("guard ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() + "\n\n");
 							}
 						}
 					}
@@ -289,7 +290,37 @@ public class DivaHelper {
 
 				builder.append("}\n\n");
 				builder.append("}\n\n");
+				
+				builder.append("thing adaptationGUI includes contextMsgs\n");
+				builder.append("@mock \"true\"\n{\n\n");
+				builder.append("required port contextEvents {\n");
+				for(Variable v : model.getContext()) {
+					builder.append("sends " + v.getNameNoSpace() + "\n");
+				}				
+				builder.append("}\n\n");
+				builder.append("}\n\n");
+				
+				builder.append("configuration interactiveMode {\n\n");
+				builder.append("instance gui : adaptationGUI\n");
+				builder.append("instance adapt : adaptation\n\n");
+				
+				builder.append("connector gui.contextEvents => adapt.contextEvents\n");
+				builder.append("}\n");
+				
 				System.out.println(builder.toString());
+
+				PrintWriter writer = null;
+				try {
+					writer = new PrintWriter(fileURI);
+					writer.write(builder.toString());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				finally {
+					if (writer != null)
+						writer.close();
+				}
 			}
 		}
 	}

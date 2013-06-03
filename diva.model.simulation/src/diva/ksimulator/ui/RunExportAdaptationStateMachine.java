@@ -33,7 +33,7 @@ public class RunExportAdaptationStateMachine implements IObjectActionDelegate, R
 			String file_uri = file.getLocation().toOSString();
 			VariabilityModel model = DivaHelper.load(new File(file_uri));
 		    			
-			DivaHelper.toThingML(model);
+			DivaHelper.toThingML(model, file_uri + ".thingml");
 			
 			System.out.println("\n\nExecution terminated successfully.");			
 		} catch (Throwable e) {
