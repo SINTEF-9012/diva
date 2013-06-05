@@ -195,9 +195,9 @@ public class DivaHelper {
 		}
 
 	}
-
+	
 	public static void toThingML(VariabilityModel model, String fileURI) {
-		Map<String, StringBuilder> states = new HashMap<String, StringBuilder>();
+		Map<String, State> states = new HashMap<String, State>();
 		Scenario scn = null;
 
 		if (model.getSimulation() != null) {
@@ -246,45 +246,45 @@ public class DivaHelper {
 				}				
 				builder.append("}\n\n");
 
-				builder.append("statechart logic init XXX {//TODO: choose initial configuration\n");
-
 				for(Context ctx : scn.getContext()) {
 					Configuration cfg = ctx.bestConfiguration();
-					if (cfg != null && !states.containsKey(cfg.id(model))) {
-						StringBuilder b = new StringBuilder();
-						states.put(cfg.id(model), b);
-
+					if (cfg != null) {
+						State s = new State(cfg.id(model));
+						states.put(cfg.id(model), s);
 					}
 				}
+				
+				builder.append("statechart logic init " + ((states.size()>0) ? ((State) states.values().toArray()[0]).name : "XXX") + " {//TODO: change initial state\n");
 
 				for(Context ctx : scn.getContext()) {
+					final Configuration cfg = ctx.bestConfiguration();
+					final State source = states.get(cfg.id(model));
 					for(Context ctx2 : scn.getContext()) {
-						Set<VariableValue> diff = ctx.changes_from(ctx2);
+						final Set<VariableValue> diff = ctx.changes_from(ctx2);
 						if (diff.size() == 1) {
-							VariableValue vv = diff.iterator().next();
-							Configuration cfg = ctx.bestConfiguration();
-							Configuration cfg2 = ctx2.bestConfiguration();
-							if (!cfg.id(model).equals(cfg2.id(model))) { //We exclude self transitions
-								StringBuilder b = states.get(cfg.id(model));
+							final Configuration cfg2 = ctx2.bestConfiguration();
+							final State target = states.get(cfg2.id(model));
+							
+							final VariableValue vv = diff.iterator().next();
+							
+							final String event = vv.getVariable().getNameNoSpace();
+							final String guard = (vv instanceof EnumVariableValue) ? "ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() : null;
+							final Transition t = new Transition(target, event, guard);
+							
+							if (!source.equals(target)) { //We exclude self transitions
 								if (vv instanceof BoolVariableValue) {
 									if (((BoolVariableValue) vv).isBool()) {
-										b.append("transition -> " + cfg2.id(model) + "\n");
-										b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
-										//b.append("guard ce.status == " + ((BoolVariableValue) vv).isBool()  + "\n\n");
+										System.out.println("DEBUG = " + source.targets.add(t));
 									}
 								} else if (vv instanceof EnumVariableValue) {
-									b.append("transition -> " + cfg2.id(model) + "\n");
-									b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
-									b.append("guard ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() + "\n\n");
+									System.out.println("DEBUG = " + source.targets.add(t));
 								}
 							}
 						}
 					}
 				}
 
-
-
-				for(Entry<String, StringBuilder> e : states.entrySet()) {
+				for(Entry<String, State> e : states.entrySet()) {
 					builder.append("state " + e.getKey() + "{\n");
 					builder.append(e.getValue().toString());
 					builder.append("}\n\n");
@@ -326,5 +326,4 @@ public class DivaHelper {
 			}
 		}
 	}
-
 }
