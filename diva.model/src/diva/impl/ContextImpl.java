@@ -462,7 +462,7 @@ public class ContextImpl extends NamedElementImpl implements Context {
 			for(VariableValue ovv : other.getVariable()) {
 				if (ovv.getVariable().equals(vv.getVariable())) {
 					if(! ovv.hasSameValue(vv)) {
-						result.add(vv);
+						result.add(ovv);
 					}
 				}
 			}

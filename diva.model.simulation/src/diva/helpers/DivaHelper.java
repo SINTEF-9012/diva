@@ -268,17 +268,11 @@ public class DivaHelper {
 							final VariableValue vv = diff.iterator().next();
 							
 							final String event = vv.getVariable().getNameNoSpace();
-							final String guard = (vv instanceof EnumVariableValue) ? "ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() : null;
+							final String guard = (vv instanceof EnumVariableValue) ? "ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() : "ce.status == " + ((((BoolVariableValue) vv).isBool()) ? "true" : "false");
 							final Transition t = new Transition(target, event, guard);
 							
 							if (!source.equals(target)) { //We exclude self transitions
-								if (vv instanceof BoolVariableValue) {
-									if (((BoolVariableValue) vv).isBool()) {
-										System.out.println("DEBUG = " + source.targets.add(t));
-									}
-								} else if (vv instanceof EnumVariableValue) {
-									System.out.println("DEBUG = " + source.targets.add(t));
-								}
+								source.targets.add(t);
 							}
 						}
 					}
