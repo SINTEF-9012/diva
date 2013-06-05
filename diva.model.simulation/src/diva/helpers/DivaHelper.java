@@ -227,7 +227,7 @@ public class DivaHelper {
 					}
 				}
 
-				builder.append("thing fragment contextMsgs {\n");
+				builder.append("thing fragment ContextMsgs {\n");
 				for(Variable v : model.getContext()) {
 					builder.append("message " + v.getNameNoSpace() + "(");
 					if (v instanceof EnumVariable) {
@@ -239,7 +239,7 @@ public class DivaHelper {
 				}
 				builder.append("}\n\n");
 
-				builder.append("thing adaptation includes contextMsgs {\n\n");
+				builder.append("thing Adaptation includes ContextMsgs {\n\n");
 				builder.append("provided port contextEvents {\n");
 				for(Variable v : model.getContext()) {
 					builder.append("receives " + v.getNameNoSpace() + "\n");
@@ -264,17 +264,19 @@ public class DivaHelper {
 							VariableValue vv = diff.iterator().next();
 							Configuration cfg = ctx.bestConfiguration();
 							Configuration cfg2 = ctx2.bestConfiguration();
-							StringBuilder b = states.get(cfg.id(model));
-							if (vv instanceof BoolVariableValue) {
-								//if (((BoolVariableValue) vv).isBool()) {
-								b.append("transition -> " + cfg2.id(model) + "\n");
-								b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
-								b.append("guard ce.status == " + ((BoolVariableValue) vv).isBool()  + "\n\n");
-								//}
-							} else if (vv instanceof EnumVariableValue) {
-								b.append("transition -> " + cfg2.id(model) + "\n");
-								b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
-								b.append("guard ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() + "\n\n");
+							if (!cfg.id(model).equals(cfg2.id(model))) { //We exclude self transitions
+								StringBuilder b = states.get(cfg.id(model));
+								if (vv instanceof BoolVariableValue) {
+									if (((BoolVariableValue) vv).isBool()) {
+										b.append("transition -> " + cfg2.id(model) + "\n");
+										b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
+										//b.append("guard ce.status == " + ((BoolVariableValue) vv).isBool()  + "\n\n");
+									}
+								} else if (vv instanceof EnumVariableValue) {
+									b.append("transition -> " + cfg2.id(model) + "\n");
+									b.append("event ce : contextEvents?" + vv.getVariable().getNameNoSpace() + "\n");
+									b.append("guard ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() + "\n\n");
+								}
 							}
 						}
 					}
@@ -290,8 +292,8 @@ public class DivaHelper {
 
 				builder.append("}\n\n");
 				builder.append("}\n\n");
-				
-				builder.append("thing adaptationGUI includes contextMsgs\n");
+
+				builder.append("thing AdaptationGUI includes ContextMsgs\n");
 				builder.append("@mock \"true\"\n{\n\n");
 				builder.append("required port contextEvents {\n");
 				for(Variable v : model.getContext()) {
@@ -299,14 +301,14 @@ public class DivaHelper {
 				}				
 				builder.append("}\n\n");
 				builder.append("}\n\n");
-				
-				builder.append("configuration interactiveMode {\n\n");
-				builder.append("instance gui : adaptationGUI\n");
-				builder.append("instance adapt : adaptation\n\n");
-				
+
+				builder.append("configuration InteractiveMode {\n\n");
+				builder.append("instance gui : AdaptationGUI\n");
+				builder.append("instance adapt : Adaptation\n\n");
+
 				builder.append("connector gui.contextEvents => adapt.contextEvents\n");
 				builder.append("}\n");
-				
+
 				System.out.println(builder.toString());
 
 				PrintWriter writer = null;
