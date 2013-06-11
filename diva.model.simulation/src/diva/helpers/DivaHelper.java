@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import diva.BoolVariableValue;
+import diva.ConfigVariant;
 import diva.Configuration;
 import diva.Context;
 import diva.Dimension;
@@ -195,7 +196,7 @@ public class DivaHelper {
 		}
 
 	}
-	
+
 	public static void toThingML(VariabilityModel model, String fileURI) {
 		Map<String, State> states = new HashMap<String, State>();
 		Scenario scn = null;
@@ -249,30 +250,39 @@ public class DivaHelper {
 				for(Context ctx : scn.getContext()) {
 					Configuration cfg = ctx.bestConfiguration();
 					if (cfg != null) {
-						State s = new State(cfg.id(model));
+						final StringBuilder descB = new StringBuilder();
+						for(ConfigVariant cv : cfg.getVariant()) {
+							descB.append(cv.getVariant().getName());
+							descB.append(" ");
+						}
+						State s = new State(cfg.id(model), descB.toString());
 						states.put(cfg.id(model), s);
 					}
 				}
-				
+
 				builder.append("statechart logic init " + ((states.size()>0) ? ((State) states.values().toArray()[0]).name : "XXX") + " {//TODO: change initial state\n");
 
 				for(Context ctx : scn.getContext()) {
 					final Configuration cfg = ctx.bestConfiguration();
-					final State source = states.get(cfg.id(model));
-					for(Context ctx2 : scn.getContext()) {
-						final Set<VariableValue> diff = ctx.changes_from(ctx2);
-						if (diff.size() == 1) {
-							final Configuration cfg2 = ctx2.bestConfiguration();
-							final State target = states.get(cfg2.id(model));
-							
-							final VariableValue vv = diff.iterator().next();
-							
-							final String event = vv.getVariable().getNameNoSpace();
-							final String guard = (vv instanceof EnumVariableValue) ? "ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() : "ce.status == " + ((((BoolVariableValue) vv).isBool()) ? "true" : "false");
-							final Transition t = new Transition(target, event, guard);
-							
-							if (!source.equals(target)) { //We exclude self transitions
-								source.targets.add(t);
+					if (cfg != null) {
+						final State source = states.get(cfg.id(model));
+						for(Context ctx2 : scn.getContext()) {
+							final Set<VariableValue> diff = ctx.changes_from(ctx2);
+							if (diff.size() == 1) {
+								final Configuration cfg2 = ctx2.bestConfiguration();
+								if (cfg2 != null) {
+									final State target = states.get(cfg2.id(model));
+
+									final VariableValue vv = diff.iterator().next();
+
+									final String event = vv.getVariable().getNameNoSpace();
+									final String guard = (vv instanceof EnumVariableValue) ? "ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() : "ce.status == " + ((((BoolVariableValue) vv).isBool()) ? "true" : "false");
+									final Transition t = new Transition(target, event, guard);
+
+									//if (!source.equals(target)) { //We exclude self transitions
+										source.targets.add(t);
+									//}
+								}
 							}
 						}
 					}

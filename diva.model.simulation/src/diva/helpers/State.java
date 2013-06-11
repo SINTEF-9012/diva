@@ -4,21 +4,40 @@ import java.util.HashSet;
 import java.util.Set;
 
 class State {
-	String name;
-	Set<Transition> targets = new HashSet<Transition>();
+	final String name;
+	final String description;
+	final Set<Transition> targets = new HashSet<Transition>();
 
-	public State(String name) {
+	public State(String name, String description) {
 		this.name = name;
+		this.description = description;
 	}
 	
 	@Override
 	public String toString() {
-		StringBuilder b = new StringBuilder();
+		final StringBuilder b = new StringBuilder();
+		
+		b.append("on entry do\n");
+		b.append("print(\"" + description + "\")\n");
+		b.append("end\n\n");
+		
 		for(Transition t : targets) {
-			b.append("transition -> " + t.target.name + "\n");
-			b.append("event ce : contextEvents?" + t.event + "\n");
-			String guard = (t.guard == null) ? "" : "guard " + t.guard + "\n";
-			b.append(guard + "\n");
+			if (t.target == this) {
+				b.append("internal event ce : contextEvents?" + t.event + "\n");
+				final String guard = (t.guard == null) ? "" : "guard " + t.guard;
+				b.append(guard + "\n");
+				b.append("action do\n");
+				b.append("print(\"" + t.event + " (" + guard.split(" == ")[1] + ") does NOT imply a reconfiguration\")\n");
+				b.append("end\n\n");
+			} else {
+				b.append("transition -> " + t.target.name + "\n");
+				b.append("event ce : contextEvents?" + t.event + "\n");
+				final String guard = (t.guard == null) ? "" : "guard " + t.guard;
+				b.append(guard + "\n");
+				b.append("action do\n");
+				b.append("print(\"" + t.event + " (" + guard.split(" == ")[1] + ") implies a reconfiguration\")\n");
+				b.append("end\n\n");
+			}
 		}
 		return b.toString();
 	}
