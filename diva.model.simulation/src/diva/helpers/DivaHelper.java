@@ -279,9 +279,7 @@ public class DivaHelper {
 									final String guard = (vv instanceof EnumVariableValue) ? "ce.value == Enum" + ((EnumVariableValue) vv).getVariable().getNameNoSpace() + ":" + ((EnumVariableValue) vv).getLiteral().getNameNoSpace() : "ce.status == " + ((((BoolVariableValue) vv).isBool()) ? "true" : "false");
 									final Transition t = new Transition(target, event, guard);
 
-									//if (!source.equals(target)) { //We exclude self transitions
-										source.targets.add(t);
-									//}
+									source.targets.add(t);
 								}
 							}
 						}
@@ -313,7 +311,7 @@ public class DivaHelper {
 				builder.append("connector gui.contextEvents => adapt.contextEvents\n");
 				builder.append("}\n");
 
-				System.out.println(builder.toString());
+				//System.out.println(builder.toString());
 
 				PrintWriter writer = null;
 				try {
