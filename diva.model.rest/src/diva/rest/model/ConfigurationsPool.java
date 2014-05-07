@@ -26,6 +26,7 @@ public class ConfigurationsPool {
 	List<Configuration> original = new ArrayList<Configuration>();
 	
 	Map<String, List<String>> idPool = new HashMap<String, List<String>>();
+	Map<String, Boolean> responsePool = new HashMap<String, Boolean>();
 	
 
 	public ConfigurationsPool(Context context){
@@ -67,6 +68,25 @@ public class ConfigurationsPool {
 	}
 	
 	/**
+	 * @TODO Need to do something besides merely recording the decision
+	 * @param id
+	 * @param decision
+	 */
+	public void setResponse(String id, boolean decision){
+		
+		responsePool.put(id, decision);
+	}
+	
+	/**
+	 * Could be "false" (rejected), "true" (accepted), or "null" (no response on this recomm yet)
+	 * @param id
+	 * @return
+	 */
+	public Boolean getResponse(String id){
+		return responsePool.get(id);
+	}
+	
+	/**
 	 * Not implemented yet
 	 * @param sc
 	 * @param profile
@@ -76,5 +96,6 @@ public class ConfigurationsPool {
 		return true;
 	}
 
+	
 	
 }

@@ -19,6 +19,7 @@ import diva.rest.Demo;
 import diva.rest.model.ConfigurationsPool;
 import diva.rest.model.DivaRoot;
 import diva.rest.model.Repository;
+import diva.rest.resources.DependencyChecking;
 import diva.rest.resources.Recommendation;
 
 /**
@@ -58,7 +59,8 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 		URI uri = UriBuilder.fromUri("http://0.0.0.0/").port(8089).build();
 		ResourceConfig resourceConfig = new ResourceConfig(Demo.class);
 		resourceConfig.register(Recommendation.class);
-		resourceConfig.register(JacksonJsonProvider.class);
+		resourceConfig.register(DependencyChecking.class);
+		resourceConfig.register(JacksonJsonProvider.class);  //Using Jackson for JSON wrapping
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri,resourceConfig);
 		try {
 			server.start();
