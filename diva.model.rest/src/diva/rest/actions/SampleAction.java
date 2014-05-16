@@ -49,7 +49,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 		//load a diva model
 		Repository.divaRoot = new DivaRoot(
 					org.eclipse.emf.common.util.URI
-						.createPlatformResourceURI("org.diva.samples/model/flood/flood.diva")
+						.createPlatformResourceURI("org.diva.samples/model/broker/Broker.diva")
 				);
 		Repository.configPool = new ConfigurationsPool(
 					Repository.divaRoot.getScenarios().iterator().next().getContext().get(0)
@@ -68,6 +68,26 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 			
 			e.printStackTrace();
 		}
+		
+		
+		new Thread(){
+			@Override
+			public void run(){
+				while(true){
+					Repository.divaRoot.updateProperty();
+					Repository.divaRoot.runSimulation();
+					Repository.configPool = new ConfigurationsPool(
+							Repository.divaRoot.getScenarios().iterator().next().getContext().get(0)
+						);
+					try {
+						sleep(60000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
 	}
 
 	/**

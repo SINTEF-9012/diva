@@ -6,7 +6,8 @@ Bundle-Version: 2.0.0
 Bundle-Activator: diva.rest.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- diva.model;bundle-version="2.0.0"
+ diva.model;bundle-version="2.0.0",
+ diva.model.simulation;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/aopalliance-repackaged-2.2.0.jar,

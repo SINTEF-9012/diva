@@ -8,8 +8,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import diva.Dimension;
 import diva.Scenario;
 import diva.VariabilityModel;
+import diva.Variant;
+import diva.helpers.DivaHelper;
+import diva.rest.input.ServiceAttribute;
 
 public class DivaRoot {
 	
@@ -32,4 +36,21 @@ public class DivaRoot {
 		return root.getSimulation().getScenario();
 	}
 	
+	public void runSimulation(){
+		if(root.getSimulation()==null)
+			return;
+		DivaHelper.computeSuitableConfigurations(root, 0);
+		root.getSimulation().populatePriorities();
+		root.getSimulation().populateScores();
+		root.getSimulation().populateVerdicts();
+	}
+	
+	public void updateProperty(){
+		for(Dimension dim : root.getDimension()){
+			for(Variant var : dim.getVariant()){
+				Object res = ServiceAttribute.INSTANCE.get(var.getId(), "avail");
+				var.getPropertyValue().get(0).setValue((Integer)res);
+			}
+		}
+	}
 }

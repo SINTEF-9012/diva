@@ -1,5 +1,6 @@
 package diva.rest.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -11,6 +12,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import diva.ConfigVariant;
 import diva.Configuration;
 import diva.rest.model.Repository;
 
@@ -58,7 +60,11 @@ public class Recommendation {
 			@PathParam("recommId") String recommId
 	){
 		try{
-			return Repository.configPool.getConf(recommId).getTotalScore();
+			List<String> res = new ArrayList<String>();
+			for(ConfigVariant cv : Repository.configPool.getConf(recommId).getVariant()){
+				res.add(cv.getVariant().getName());
+			}
+			return res;
 		}
 		catch(Exception e){
 			e.printStackTrace();
