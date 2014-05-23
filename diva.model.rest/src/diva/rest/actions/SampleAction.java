@@ -47,13 +47,13 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 		
 		//load a diva model
-		Repository.divaRoot = new DivaRoot(
+		Repository.mainRoot = new DivaRoot(
 					org.eclipse.emf.common.util.URI
 						.createPlatformResourceURI("org.diva.samples/model/broker/Broker.diva")
 				);
-		Repository.configPool = new ConfigurationsPool(
-					Repository.divaRoot.getScenarios().iterator().next().getContext().get(0)
-				);
+//		Repository.configPool = new ConfigurationsPool(
+//					Repository.mainRoot.getScenarios().iterator().next().getContext().get(0)
+//				);
 		
 		
 		URI uri = UriBuilder.fromUri("http://0.0.0.0/").port(8089).build();
@@ -74,11 +74,11 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 			@Override
 			public void run(){
 				while(true){
-					Repository.divaRoot.updateProperty();
-					Repository.divaRoot.runSimulation();
-					Repository.configPool = new ConfigurationsPool(
-							Repository.divaRoot.getScenarios().iterator().next().getContext().get(0)
-						);
+					Repository.mainRoot.updateModel();
+//					Repository.mainRoot.runSimulation();
+//					Repository.configPool = new ConfigurationsPool(
+//							Repository.mainRoot.getScenarios().iterator().next().getContext().get(0)
+//						);
 					try {
 						sleep(60000);
 					} catch (InterruptedException e) {

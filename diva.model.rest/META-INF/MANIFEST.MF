@@ -7,7 +7,9 @@ Bundle-Activator: diva.rest.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  diva.model;bundle-version="2.0.0",
- diva.model.simulation;bundle-version="2.0.0"
+ diva.model.simulation;bundle-version="2.0.0",
+ diva.model.editor;bundle-version="2.0.0",
+ org.antlr;bundle-version="2.7.6"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/aopalliance-repackaged-2.2.0.jar,
@@ -39,3 +41,4 @@ Bundle-ClassPath: lib/aopalliance-repackaged-2.2.0.jar,
  lib/jackson-core-asl-1.9.13.jar,
  lib/jackson-jaxrs-1.9.13.jar,
  lib/jackson-mapper-asl-1.9.13.jar
+Import-Package: diva.parser

@@ -1,7 +1,10 @@
 package diva.rest.resources;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -14,6 +17,9 @@ import javax.ws.rs.core.Response;
 
 import diva.ConfigVariant;
 import diva.Configuration;
+import diva.Score;
+import diva.rest.model.ConfigurationsPool;
+import diva.rest.model.DivaRoot;
 import diva.rest.model.Repository;
 
 /**
@@ -25,8 +31,8 @@ import diva.rest.model.Repository;
 @Produces(MediaType.APPLICATION_JSON)
 public class Recommendation {
 	@GET
-	public String getRoot(){
-		return "hello";
+	public Object getRoot(){
+		return Arrays.asList("hello", "world");
 	}
 	
 	/**
@@ -42,9 +48,34 @@ public class Recommendation {
 			@PathParam("scId") String scId, 
 			@PathParam("profileId") String profileId
 	){
-		List<String> res = Repository.configPool.queryScProfile(scId, profileId);
-		//GenericEntity<List<String>> entity = new GenericEntity<List<String>>(res){};
-		//return Response.ok(entity).build();
+
+			String combinedId = scId+"-"+profileId;
+			DivaRoot root = Repository.mainRoot.fork();
+			root.updateCustomerProfile(scId, profileId);
+			Repository.divaRoots.put(combinedId, root);
+			root.runSimulation();
+			try{
+				//This is odd: without this sleep, curl gets a "empty result", even if res is not null
+				Thread.sleep(10);
+			}catch(Exception e){
+				//This sleep seems to be interrupted every time (by whom I don't know).
+			}
+			List<String> res = root.getConfigurationPool().queryScProfile(scId, profileId);
+		
+			return res;
+	}
+	
+	@Path("sc/{scId}/profile/{profileId}/full")
+	@GET
+	public Map getRecommListFull(
+			@PathParam("scId") String scId, 
+			@PathParam("profileId") String profileId
+	){
+		Map<String, Object> res = new HashMap<String, Object>();
+		List<String> lst = this.getRecommList(scId, profileId);
+		for(String s : lst){
+			res.put(s, getRecommConfig(s));
+		}
 		return res;
 	}
 	
@@ -61,9 +92,12 @@ public class Recommendation {
 	){
 		try{
 			List<String> res = new ArrayList<String>();
-			for(ConfigVariant cv : Repository.configPool.getConf(recommId).getVariant()){
+			
+			Configuration config = this.getConfigPool(recommId).getConf(recommId);
+			for(ConfigVariant cv : config.getVariant()){
 				res.add(cv.getVariant().getName());
 			}
+			res.add("Total Score" + config.getTotalScore());
 			return res;
 		}
 		catch(Exception e){
@@ -80,9 +114,21 @@ public class Recommendation {
 	@Path("{recommID}/reason")
 	@GET
 	public Object getRecommReason(
-			@PathParam("recommId") String recommId
+			@PathParam("recommID") String recommId
 	){
-		return "I don't know how to express the rationale yet";
+		try{
+			List<String> res = new ArrayList<String>();
+			Configuration config = this.getConfigPool(recommId).getConf(recommId);
+			res.add("Total: " + String.valueOf(config.getTotalScore()));
+			for(Score score : config.getScore()){
+				res.add(score.toString());
+			}
+			return res;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	/**
@@ -97,7 +143,7 @@ public class Recommendation {
 			@PathParam("recommID") String recommId
 	){
 		System.out.println("here " + "recommID");
-		return Repository.configPool.getResponse(recommId);
+		return this.getConfigPool(recommId).getResponse(recommId);
 	}
 	
 	/**
@@ -112,6 +158,14 @@ public class Recommendation {
 			String accepted
 	){
 		System.out.println("here "+recommId+accepted);
-		Repository.configPool.setResponse(recommId, "yes".equals(accepted));	
+		this.getConfigPool(recommId).setResponse(recommId, "yes".equals(accepted));	
 	}
+	
+
+	private ConfigurationsPool getConfigPool(String recommId){
+		String prefix = recommId.split("--")[0];
+		ConfigurationsPool pool = Repository.divaRoots.get(prefix).getConfigurationPool();
+		return pool;
+	}
+	
 }

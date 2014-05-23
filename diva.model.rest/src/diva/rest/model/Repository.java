@@ -1,8 +1,12 @@
 package diva.rest.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Repository {
 
-	public static DivaRoot divaRoot = null;
-	public static ConfigurationsPool configPool = null;
+	public static DivaRoot mainRoot = null;
+	
+	public static Map<String, DivaRoot> divaRoots = new HashMap<String, DivaRoot>();
 	
 }

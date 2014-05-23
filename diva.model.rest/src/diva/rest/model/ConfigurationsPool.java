@@ -30,11 +30,11 @@ public class ConfigurationsPool {
 	
 
 	public ConfigurationsPool(Context context){
-		int i = 0;
+		int i = context.getConfiguration().size();
 		for(Configuration conf : context.getConfiguration()){
-			pool.put(String.valueOf(i), conf);
+			pool.put(String.format("%2d", i), conf);
 			original.add(conf);
-			i += 1;
+			i -= 1;
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class ConfigurationsPool {
 		int i = 0;
 		for(Configuration conf : original){
 			if(filterConfig(sc, profile)){
-				String configId = combinedId + "-" + String.valueOf(i);
+				String configId = combinedId + "--" + String.valueOf(i);
 				pool.put(configId, conf);
 				newIds.add(configId);
 				i = i + 1;

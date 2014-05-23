@@ -9,6 +9,7 @@ public class ServiceAttribute {
 
 	public static ServiceAttribute INSTANCE = new ServiceAttribute();
 	
+	Random random = new Random();
 	
 	public List<String> listAttributes(String service){
 		return Collections.EMPTY_LIST;
@@ -19,7 +20,6 @@ public class ServiceAttribute {
 	}
 	
 	public Object get(String service, String attribute){
-		Random random = new Random();
 		return random.nextInt(10);
 	}
 	
