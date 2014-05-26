@@ -51,7 +51,7 @@ public class Recommendation {
 
 			String combinedId = scId+"-"+profileId;
 			DivaRoot root = Repository.mainRoot.fork();
-			root.updateCustomerProfile(scId, profileId);
+			root.updateOnRequest(scId, profileId);
 			Repository.divaRoots.put(combinedId, root);
 			root.runSimulation();
 			try{
@@ -65,6 +65,12 @@ public class Recommendation {
 			return res;
 	}
 	
+	/**
+	 * curl http://127.0.0.1:8089/fpr/recommendations/sc/hui/profile/001/full
+	 * @param scId
+	 * @param profileId
+	 * @return
+	 */
 	@Path("sc/{scId}/profile/{profileId}/full")
 	@GET
 	public Map getRecommListFull(

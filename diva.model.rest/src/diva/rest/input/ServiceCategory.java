@@ -13,6 +13,10 @@ public class ServiceCategory {
 	
 	public Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
 	
+	public ServiceCategory(){
+		initFake();
+	}
+	
 	private void initFake(){
 		fakeRepo.put("Map", 
 				Arrays.asList("GoogleMap", "BingMap", "AppleMap")
