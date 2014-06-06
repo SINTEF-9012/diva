@@ -24,7 +24,9 @@ public class ConsumerProfile {
 		prf = new HashMap<String, Object>();
 		prf.put("Bicycle", false);
 		prf.put("LiveTraffic", true);
+		prf.put("RoutePlan", true);
 		fakedRequired.put("hui-002", prf);
+		
 	}
 	
 	public ConsumerProfile(){

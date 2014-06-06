@@ -156,6 +156,9 @@ public class DivaRoot {
 		Context context = root.getSimulation().getScenario().get(0).getContext().get(0);
 		context.getVariable().clear();
 		Map<String, Object> prf = (Map<String, Object>) ConsumerProfile.INSTANCE.getRequired(consumer, profile);
+		
+		
+		
 		if(prf != null){
 			for(Map.Entry<String, Object> entry : prf.entrySet()){
 				Object value = entry.getValue();
@@ -170,6 +173,15 @@ public class DivaRoot {
 					bvv.setBool(((Boolean)value).booleanValue());
 					context.getVariable().add(bvv);
 				}
+				
+				//Check if a user want a service from any dimension
+				for(Dimension d : root.getDimension()){
+					if(Boolean.valueOf(true).equals(entry.getValue()) && 
+							d.getName().equals(entry.getKey())){
+						d.setLower(1);
+					}
+				}
+				
 			}
 		}
 	}
