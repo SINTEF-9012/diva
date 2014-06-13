@@ -3,10 +3,13 @@ package diva.rest.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import diva.ConfigVariant;
 import diva.Configuration;
 import diva.Context;
 
@@ -28,6 +31,17 @@ public class ConfigurationsPool {
 	Map<String, List<String>> idPool = new HashMap<String, List<String>>();
 	Map<String, Boolean> responsePool = new HashMap<String, Boolean>();
 	
+	
+	Collection<String> queried = new HashSet<String>();
+	
+	public void addQueriedString(String s){
+		queried.add(s);
+	}
+	
+	public Collection<String> listAllQueried(){
+		return queried;
+	}
+	
 
 	public ConfigurationsPool(Context context){
 		int i = context.getConfiguration().size();
@@ -47,6 +61,18 @@ public class ConfigurationsPool {
 		return pool.get(id);
 	}
 	
+	public Collection<String> getConfNames(String id){
+		Configuration config = pool.get(id);
+		
+		List<String> res = new ArrayList<String>();
+		for(ConfigVariant cv : config.getVariant()){
+			res.add(cv.getVariant().getName());
+		}
+		
+		return res;
+		
+	}
+	
 	public List<String> queryScProfile(String sc, String profile){
 		String combinedId = sc + "-" + profile;
 		if(idPool.containsKey(combinedId))
@@ -54,7 +80,8 @@ public class ConfigurationsPool {
 		
 		List<String> newIds = new LinkedList<String>();
 		int i = 0;
-		for(Configuration conf : original){
+		for(int j = original.size()-1; j>=0; j--){
+			Configuration conf = original.get(j);
 			if(filterConfig(sc, profile)){
 				String configId = combinedId + "--" + String.valueOf(i);
 				pool.put(configId, conf);
@@ -96,6 +123,8 @@ public class ConfigurationsPool {
 		return true;
 	}
 
-	
+	public String getFullResponseRepr(){
+		return responsePool.toString();
+	}
 	
 }

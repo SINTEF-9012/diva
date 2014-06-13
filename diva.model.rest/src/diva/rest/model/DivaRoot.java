@@ -1,7 +1,11 @@
 package diva.rest.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,6 +41,28 @@ public class DivaRoot {
 	
 	private DivaFactory factory = DivaFactory.eINSTANCE;
 	
+	private String combinedId = null;
+	private Date timeQueried = null;
+
+	
+	public Date getTimeQueried() {
+		return timeQueried;
+	}
+
+	public void setTimeQueried(Date timeQueried) {
+		this.timeQueried = timeQueried;
+	}
+
+	public String getCombinedId() {
+		return combinedId;
+	}
+
+	public void setCombinedId(String combinedId) {
+		this.combinedId = combinedId;
+	}
+	
+	
+
 	ConfigurationsPool configPool = null;
 	protected VariabilityModel root = null;
 	
@@ -64,6 +90,9 @@ public class DivaRoot {
 		if(root.getSimulation()==null)
 			return;
 		DivaHelper.computeSuitableConfigurations(root, 0);
+		
+		setTimeQueried(Calendar.getInstance().getTime());
+		
 		root.getSimulation().populatePriorities();
 		root.getSimulation().populateScores();
 		root.getSimulation().populateVerdicts();

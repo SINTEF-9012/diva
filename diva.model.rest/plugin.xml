@@ -9,19 +9,19 @@
             visible="true"
             id="diva.model.rest.actionSet">
          <menu
-               label="Sample &amp;Menu"
-               id="sampleMenu">
+               label="Di&amp;va Rest"
+               id="divaRest">
             <separator
-                  name="sampleGroup">
+                  name="divaRestGroup">
             </separator>
          </menu>
          <action
-               label="&amp;Sample Action"
-               icon="icons/sample.gif"
+               label="&amp;Start"
+               icon="icons/DivaModelFile.gif"
                class="diva.rest.actions.SampleAction"
-               tooltip="Hello, Eclipse world"
-               menubarPath="sampleMenu/sampleGroup"
-               toolbarPath="sampleGroup"
+               tooltip="Start DiVA Daemon with Rest API"
+               menubarPath="divaRest/divaRestGroup"
+               toolbarPath="divaRestToolBar"
                id="diva.rest.actions.SampleAction">
          </action>
       </actionSet>

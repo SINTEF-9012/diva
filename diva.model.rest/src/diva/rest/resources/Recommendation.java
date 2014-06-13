@@ -2,9 +2,14 @@ package diva.rest.resources;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -18,6 +23,7 @@ import javax.ws.rs.core.Response;
 import diva.ConfigVariant;
 import diva.Configuration;
 import diva.Score;
+import diva.rest.input.ConsumerProfile;
 import diva.rest.model.ConfigurationsPool;
 import diva.rest.model.DivaRoot;
 import diva.rest.model.Repository;
@@ -36,7 +42,7 @@ public class Recommendation {
 	}
 	
 	/**
-	 * curl http://127.0.0.1:8089/fpr/recommendations/sc/hui/profile/001
+	 * curl http://127.0.0.1:8089/fpr/recommendations/sc/abc/profile/001
 	 * 
 	 * @param scId
 	 * @param profileId
@@ -52,7 +58,7 @@ public class Recommendation {
 			String combinedId = scId+"-"+profileId;
 			DivaRoot root = Repository.mainRoot.fork();
 			root.updateOnRequest(scId, profileId);
-			Repository.divaRoots.put(combinedId, root);
+			Repository.registerRoot(combinedId, root);
 			root.runSimulation();
 			try{
 				//This is odd: without this sleep, curl gets a "empty result", even if res is not null
@@ -66,7 +72,7 @@ public class Recommendation {
 	}
 	
 	/**
-	 * curl http://127.0.0.1:8089/fpr/recommendations/sc/hui/profile/001/full
+	 * curl http://127.0.0.1:8089/fpr/recommendations/sc/abc/profile/001/full
 	 * @param scId
 	 * @param profileId
 	 * @return
@@ -86,9 +92,9 @@ public class Recommendation {
 	}
 	
 	/*
-	 * curl http://127.0.0.1:8089/fpr/recommendations/hui-001-0/config
+	 * curl http://127.0.0.1:8089/fpr/recommendations/abc-001--0/config
 	 * This query should be invoked after one {@link #getRecommList} invocation, otherwise
-	 * there is no "hui-001-0" id.
+	 * there is no "abc-001--0" id.
 	 * 
 	 */
 	@Path("{recommId}/config")
@@ -99,11 +105,29 @@ public class Recommendation {
 		try{
 			List<String> res = new ArrayList<String>();
 			
-			Configuration config = this.getConfigPool(recommId).getConf(recommId);
-			for(ConfigVariant cv : config.getVariant()){
-				res.add(cv.getVariant().getName());
+			ConfigurationsPool pool = this.getConfigPool(recommId);
+			
+			Collection<String> configured = pool.getConfNames(recommId);
+			Collection<String> used = ConsumerProfile.INSTANCE.getCurrentServices(this.getUserProfileId(recommId));
+			
+			Set<String> toAdd = new HashSet<String>(configured);
+			Set<String> toRemove = new HashSet<String>(used);
+			
+			toAdd.removeAll(used);
+			toRemove.removeAll(configured);
+			
+			for(String s : toAdd){
+				res.add("+" + s);
 			}
-			res.add("Total Score" + config.getTotalScore());
+			
+			for(String s : toRemove){
+				res.add("-" + s);
+			}
+			
+			res.add("Score: "+pool.getConf(recommId).getTotalScore());
+			pool.addQueriedString(recommId+" - "+res.toString());
+			
+			
 			return res;
 		}
 		catch(Exception e){
@@ -113,7 +137,7 @@ public class Recommendation {
 	}
 	
 	/**
-	 * curl http://127.0.0.1:8089/fpr/recommendations/hui-001-0/reason
+	 * curl http://127.0.0.1:8089/fpr/recommendations/abc-001--0/reason
 	 * @param recommId
 	 * @return
 	 */
@@ -138,7 +162,7 @@ public class Recommendation {
 	}
 	
 	/**
-	 * curl http://127.0.0.1:8089/fpr/recommendations/hui-001-0/response
+	 * curl http://127.0.0.1:8089/fpr/recommendations/abc-001--0/response
 	 * 
 	 * @param recommId
 	 * @return
@@ -153,7 +177,7 @@ public class Recommendation {
 	}
 	
 	/**
-	 * curl -X PUT -d "yes" http://127.0.0.1:8089/fpr/recommendations/hui-001-0/response
+	 * curl -X PUT -d "yes" http://127.0.0.1:8089/fpr/recommendations/abc-001--0/response
 	 * @param recommId
 	 * @param accepted
 	 */
@@ -167,11 +191,41 @@ public class Recommendation {
 		this.getConfigPool(recommId).setResponse(recommId, "yes".equals(accepted));	
 	}
 	
+	@Path("history")
+	@GET
+	public Object getHistory(){
+		List<Object> res = new LinkedList<Object>();
+		
+		for(DivaRoot root : Repository.historyRoots){
+		
+			Map<String, Object> item = new LinkedHashMap<String, Object>();
+		
+			item.put("request", root.getCombinedId());
+			List<String> configs = new LinkedList<String>();
+			ConfigurationsPool pool = root.getConfigurationPool();
+			for(String id : pool.listAllQueried()){
+				configs.add(id);
+			}
+			
+			item.put("configs", configs);
+			item.put("time", root.getTimeQueried().toLocaleString());
+			item.put("responses", pool.getFullResponseRepr());
+			
+			res.add(item);
+		}
+		
+		return res;
+	}
+	
 
 	private ConfigurationsPool getConfigPool(String recommId){
-		String prefix = recommId.split("--")[0];
+		String prefix = getUserProfileId(recommId);
 		ConfigurationsPool pool = Repository.divaRoots.get(prefix).getConfigurationPool();
 		return pool;
+	}
+	
+	private String getUserProfileId(String recommId){
+		return recommId.split("--")[0];
 	}
 	
 }
