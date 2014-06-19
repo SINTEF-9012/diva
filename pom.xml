@@ -128,6 +128,8 @@
 
     <modules>
         <module>diva.model</module>
+		<module>diva.model.simulation</module>
+		<module>diva.model.simulation.ui</module>
     </modules>
 
     <distributionManagement>
