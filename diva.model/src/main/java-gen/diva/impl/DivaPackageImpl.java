@@ -28,8 +28,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
@@ -51,8 +49,6 @@ import diva.EnumVariable;
 import diva.EnumVariableValue;
 import diva.Expression;
 import diva.Invariant;
-import diva.Model;
-import diva.ModelContainer;
 import diva.MultiplicityConstraint;
 import diva.NamedElement;
 import diva.NaryTerm;
@@ -109,13 +105,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 * @generated
 	 */
 	private EClass variableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass modelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -416,13 +405,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelContainerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass cePableEClass = null;
 
 	/**
@@ -600,24 +582,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 */
 	public EClass getVariable() {
 		return variableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getModel() {
-		return modelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getModel_Uri() {
-		return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -879,15 +843,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 */
 	public EReference getVariant_Required() {
 		return (EReference)variantEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getVariant_WeaveLevel() {
-		return (EAttribute)variantEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1543,24 +1498,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getModelContainer() {
-		return modelContainerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModelContainer_Model() {
-		return (EReference)modelContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCEPable() {
 		return cePableEClass;
 	}
@@ -1642,9 +1579,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 
 		variableEClass = createEClass(VARIABLE);
 
-		modelEClass = createEClass(MODEL);
-		createEAttribute(modelEClass, MODEL__URI);
-
 		enumVariableEClass = createEClass(ENUM_VARIABLE);
 		createEReference(enumVariableEClass, ENUM_VARIABLE__LITERAL);
 
@@ -1689,7 +1623,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		createEReference(variantEClass, VARIANT__DEPENDENCY);
 		createEReference(variantEClass, VARIANT__AVAILABLE);
 		createEReference(variantEClass, VARIANT__REQUIRED);
-		createEAttribute(variantEClass, VARIANT__WEAVE_LEVEL);
 
 		dimensionEClass = createEClass(DIMENSION);
 		createEReference(dimensionEClass, DIMENSION__VARIANT);
@@ -1789,9 +1722,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		contextModelEClass = createEClass(CONTEXT_MODEL);
 		createEReference(contextModelEClass, CONTEXT_MODEL__VARIABLE);
 
-		modelContainerEClass = createEClass(MODEL_CONTAINER);
-		createEReference(modelContainerEClass, MODEL_CONTAINER__MODEL);
-
 		cePableEClass = createEClass(CE_PABLE);
 		createEAttribute(cePableEClass, CE_PABLE__QUERY);
 
@@ -1837,10 +1767,8 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		variabilityModelEClass.getESuperTypes().add(this.getModelContainer());
 		invariantEClass.getESuperTypes().add(this.getConstraint());
 		variableEClass.getESuperTypes().add(this.getNamedElement());
-		modelEClass.getESuperTypes().add(this.getDiVAModelElement());
 		enumVariableEClass.getESuperTypes().add(this.getVariable());
 		booleanVariableEClass.getESuperTypes().add(this.getVariable());
 		booleanVariableEClass.getESuperTypes().add(this.getCEPable());
@@ -1859,7 +1787,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		namedElementEClass.getESuperTypes().add(this.getDiVAModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		variantEClass.getESuperTypes().add(this.getNamedElement());
-		variantEClass.getESuperTypes().add(this.getModelContainer());
 		dimensionEClass.getESuperTypes().add(this.getNamedElement());
 		expressionEClass.getESuperTypes().add(this.getDiVAModelElement());
 		contextExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1886,7 +1813,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		configurationModelEClass.getESuperTypes().add(theVisitorsPackage.getVisitable());
 		suitableConfigurationEClass.getESuperTypes().add(theVisitorsPackage.getVisitable());
 		contextModelEClass.getESuperTypes().add(theVisitorsPackage.getVisitable());
-		modelContainerEClass.getESuperTypes().add(theVisitorsPackage.getVisitable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(variabilityModelEClass, VariabilityModel.class, "VariabilityModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1929,9 +1855,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		initEOperation(op, g1);
 
 		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(modelEClass, Model.class, "Model", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModel_Uri(), this.getString(), "uri", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumVariableEClass, EnumVariable.class, "EnumVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumVariable_Literal(), this.getEnumLiteral(), null, "literal", null, 1, -1, EnumVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2103,7 +2026,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		initEReference(getVariant_Dependency(), this.getVariantExpression(), null, "dependency", null, 0, 1, Variant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariant_Available(), this.getContextExpression(), null, "available", null, 0, 1, Variant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariant_Required(), this.getContextExpression(), null, "required", null, 0, 1, Variant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariant_WeaveLevel(), this.getInteger(), "weaveLevel", null, 0, 1, Variant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(variantEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		t1 = addETypeParameter(op, "C");
@@ -2539,11 +2461,8 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		g1 = createEGenericType(t2);
 		initEOperation(op, g1);
 
-		initEClass(modelContainerEClass, ModelContainer.class, "ModelContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelContainer_Model(), this.getModel(), null, "model", null, 1, 1, ModelContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(cePableEClass, CEPable.class, "CEPable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCEPable_Query(), ecorePackage.getEString(), "query", null, 0, 1, CEPable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCEPable_Query(), this.getString(), "query", null, 0, 1, CEPable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(verdictEEnum, Verdict.class, "Verdict");

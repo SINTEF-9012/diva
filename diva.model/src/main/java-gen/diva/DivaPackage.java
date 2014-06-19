@@ -73,34 +73,6 @@ public interface DivaPackage extends EPackage {
 	DivaPackage eINSTANCE = diva.impl.DivaPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link diva.impl.ModelContainerImpl <em>Model Container</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see diva.impl.ModelContainerImpl
-	 * @see diva.impl.DivaPackageImpl#getModelContainer()
-	 * @generated
-	 */
-	int MODEL_CONTAINER = 46;
-
-	/**
-	 * The feature id for the '<em><b>Model</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CONTAINER__MODEL = VisitorsPackage.VISITABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Model Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CONTAINER_FEATURE_COUNT = VisitorsPackage.VISITABLE_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link diva.impl.DiVAModelElementImpl <em>Di VA Model Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,7 +80,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getDiVAModelElement()
 	 * @generated
 	 */
-	int DI_VA_MODEL_ELEMENT = 31;
+	int DI_VA_MODEL_ELEMENT = 30;
 
 	/**
 	 * The meta object id for the '{@link diva.impl.VariabilityModelImpl <em>Variability Model</em>}' class.
@@ -121,22 +93,13 @@ public interface DivaPackage extends EPackage {
 	int VARIABILITY_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Model</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABILITY_MODEL__MODEL = MODEL_CONTAINER__MODEL;
-
-	/**
 	 * The feature id for the '<em><b>Context</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL__CONTEXT = MODEL_CONTAINER_FEATURE_COUNT + 0;
+	int VARIABILITY_MODEL__CONTEXT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' containment reference list.
@@ -145,7 +108,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL__PROPERTY = MODEL_CONTAINER_FEATURE_COUNT + 1;
+	int VARIABILITY_MODEL__PROPERTY = 1;
 
 	/**
 	 * The feature id for the '<em><b>Dimension</b></em>' containment reference list.
@@ -154,7 +117,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL__DIMENSION = MODEL_CONTAINER_FEATURE_COUNT + 2;
+	int VARIABILITY_MODEL__DIMENSION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' containment reference list.
@@ -163,7 +126,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL__RULE = MODEL_CONTAINER_FEATURE_COUNT + 3;
+	int VARIABILITY_MODEL__RULE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -172,7 +135,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL__CONSTRAINT = MODEL_CONTAINER_FEATURE_COUNT + 4;
+	int VARIABILITY_MODEL__CONSTRAINT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Simulation</b></em>' containment reference.
@@ -181,7 +144,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL__SIMULATION = MODEL_CONTAINER_FEATURE_COUNT + 5;
+	int VARIABILITY_MODEL__SIMULATION = 5;
 
 	/**
 	 * The number of structural features of the '<em>Variability Model</em>' class.
@@ -190,7 +153,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABILITY_MODEL_FEATURE_COUNT = MODEL_CONTAINER_FEATURE_COUNT + 6;
+	int VARIABILITY_MODEL_FEATURE_COUNT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -218,7 +181,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 17;
+	int NAMED_ELEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -264,7 +227,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 18;
+	int CONSTRAINT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -404,43 +367,6 @@ public interface DivaPackage extends EPackage {
 	int VARIABLE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link diva.impl.ModelImpl <em>Model</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see diva.impl.ModelImpl
-	 * @see diva.impl.DivaPackageImpl#getModel()
-	 * @generated
-	 */
-	int MODEL = 3;
-
-	/**
-	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__ANNOTATION = DI_VA_MODEL_ELEMENT__ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__URI = DI_VA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_FEATURE_COUNT = DI_VA_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link diva.impl.EnumVariableImpl <em>Enum Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -448,7 +374,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getEnumVariable()
 	 * @generated
 	 */
-	int ENUM_VARIABLE = 4;
+	int ENUM_VARIABLE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -503,7 +429,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getBooleanVariable()
 	 * @generated
 	 */
-	int BOOLEAN_VARIABLE = 5;
+	int BOOLEAN_VARIABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -558,7 +484,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getTerm()
 	 * @generated
 	 */
-	int TERM = 6;
+	int TERM = 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -586,7 +512,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getNaryTerm()
 	 * @generated
 	 */
-	int NARY_TERM = 10;
+	int NARY_TERM = 9;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -623,7 +549,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getAndTerm()
 	 * @generated
 	 */
-	int AND_TERM = 7;
+	int AND_TERM = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -660,7 +586,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getOrTerm()
 	 * @generated
 	 */
-	int OR_TERM = 8;
+	int OR_TERM = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -697,7 +623,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getNotTerm()
 	 * @generated
 	 */
-	int NOT_TERM = 9;
+	int NOT_TERM = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -734,7 +660,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getVariantTerm()
 	 * @generated
 	 */
-	int VARIANT_TERM = 11;
+	int VARIANT_TERM = 10;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -771,7 +697,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getVariableTerm()
 	 * @generated
 	 */
-	int VARIABLE_TERM = 12;
+	int VARIABLE_TERM = 11;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -808,7 +734,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getEnumTerm()
 	 * @generated
 	 */
-	int ENUM_TERM = 13;
+	int ENUM_TERM = 12;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -854,7 +780,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getBooleanTerm()
 	 * @generated
 	 */
-	int BOOLEAN_TERM = 14;
+	int BOOLEAN_TERM = 13;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -891,7 +817,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getRule()
 	 * @generated
 	 */
-	int RULE = 15;
+	int RULE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -937,7 +863,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getEnumLiteral()
 	 * @generated
 	 */
-	int ENUM_LITERAL = 16;
+	int ENUM_LITERAL = 15;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -992,7 +918,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getVariant()
 	 * @generated
 	 */
-	int VARIANT = 19;
+	int VARIANT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1022,22 +948,13 @@ public interface DivaPackage extends EPackage {
 	int VARIANT__ID = NAMED_ELEMENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Model</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIANT__MODEL = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIANT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int VARIANT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Value</b></em>' containment reference list.
@@ -1046,7 +963,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIANT__PROPERTY_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int VARIANT__PROPERTY_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Dependency</b></em>' containment reference.
@@ -1055,7 +972,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIANT__DEPENDENCY = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int VARIANT__DEPENDENCY = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Available</b></em>' containment reference.
@@ -1064,7 +981,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIANT__AVAILABLE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int VARIANT__AVAILABLE = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' containment reference.
@@ -1073,16 +990,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIANT__REQUIRED = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Weave Level</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIANT__WEAVE_LEVEL = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int VARIANT__REQUIRED = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Variant</em>' class.
@@ -1091,7 +999,7 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIANT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int VARIANT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link diva.impl.DimensionImpl <em>Dimension</em>}' class.
@@ -1101,7 +1009,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getDimension()
 	 * @generated
 	 */
-	int DIMENSION = 20;
+	int DIMENSION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1192,7 +1100,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 21;
+	int EXPRESSION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1238,7 +1146,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getContextExpression()
 	 * @generated
 	 */
-	int CONTEXT_EXPRESSION = 22;
+	int CONTEXT_EXPRESSION = 21;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1284,7 +1192,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getVariantExpression()
 	 * @generated
 	 */
-	int VARIANT_EXPRESSION = 23;
+	int VARIANT_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1330,7 +1238,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getPriorityRule()
 	 * @generated
 	 */
-	int PRIORITY_RULE = 24;
+	int PRIORITY_RULE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1394,7 +1302,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 25;
+	int PROPERTY = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1458,7 +1366,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getPropertyLiteral()
 	 * @generated
 	 */
-	int PROPERTY_LITERAL = 26;
+	int PROPERTY_LITERAL = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1513,7 +1421,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getPropertyValue()
 	 * @generated
 	 */
-	int PROPERTY_VALUE = 27;
+	int PROPERTY_VALUE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1559,7 +1467,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getPropertyPriority()
 	 * @generated
 	 */
-	int PROPERTY_PRIORITY = 28;
+	int PROPERTY_PRIORITY = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1605,7 +1513,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getMultiplicityConstraint()
 	 * @generated
 	 */
-	int MULTIPLICITY_CONSTRAINT = 29;
+	int MULTIPLICITY_CONSTRAINT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1678,7 +1586,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getAnnotation()
 	 * @generated
 	 */
-	int ANNOTATION = 30;
+	int ANNOTATION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1715,7 +1623,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getSimulationModel()
 	 * @generated
 	 */
-	int SIMULATION_MODEL = 32;
+	int SIMULATION_MODEL = 31;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1761,7 +1669,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getContext()
 	 * @generated
 	 */
-	int CONTEXT = 33;
+	int CONTEXT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1852,7 +1760,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getScoredElement()
 	 * @generated
 	 */
-	int SCORED_ELEMENT = 37;
+	int SCORED_ELEMENT = 36;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1898,7 +1806,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getConfiguration()
 	 * @generated
 	 */
-	int CONFIGURATION = 34;
+	int CONFIGURATION = 33;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -1962,7 +1870,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getConfigVariant()
 	 * @generated
 	 */
-	int CONFIG_VARIANT = 35;
+	int CONFIG_VARIANT = 34;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2017,7 +1925,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getScenario()
 	 * @generated
 	 */
-	int SCENARIO = 36;
+	int SCENARIO = 35;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2072,7 +1980,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getScore()
 	 * @generated
 	 */
-	int SCORE = 38;
+	int SCORE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2118,7 +2026,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getPriority()
 	 * @generated
 	 */
-	int PRIORITY = 39;
+	int PRIORITY = 38;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2164,7 +2072,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getVariableValue()
 	 * @generated
 	 */
-	int VARIABLE_VALUE = 40;
+	int VARIABLE_VALUE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2201,7 +2109,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getBoolVariableValue()
 	 * @generated
 	 */
-	int BOOL_VARIABLE_VALUE = 41;
+	int BOOL_VARIABLE_VALUE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2247,7 +2155,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getEnumVariableValue()
 	 * @generated
 	 */
-	int ENUM_VARIABLE_VALUE = 42;
+	int ENUM_VARIABLE_VALUE = 41;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
@@ -2293,7 +2201,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getConfigurationModel()
 	 * @generated
 	 */
-	int CONFIGURATION_MODEL = 43;
+	int CONFIGURATION_MODEL = 42;
 
 	/**
 	 * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
@@ -2321,7 +2229,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getSuitableConfiguration()
 	 * @generated
 	 */
-	int SUITABLE_CONFIGURATION = 44;
+	int SUITABLE_CONFIGURATION = 43;
 
 	/**
 	 * The feature id for the '<em><b>Score</b></em>' attribute.
@@ -2358,7 +2266,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getContextModel()
 	 * @generated
 	 */
-	int CONTEXT_MODEL = 45;
+	int CONTEXT_MODEL = 44;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' containment reference list.
@@ -2386,7 +2294,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getCEPable()
 	 * @generated
 	 */
-	int CE_PABLE = 47;
+	int CE_PABLE = 45;
 
 	/**
 	 * The feature id for the '<em><b>Query</b></em>' attribute.
@@ -2414,7 +2322,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getVerdict()
 	 * @generated
 	 */
-	int VERDICT = 48;
+	int VERDICT = 46;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -2424,7 +2332,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 49;
+	int STRING = 47;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -2433,7 +2341,7 @@ public interface DivaPackage extends EPackage {
 	 * @see diva.impl.DivaPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 50;
+	int INTEGER = 48;
 
 
 	/**
@@ -2542,27 +2450,6 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getVariable();
-
-	/**
-	 * Returns the meta object for class '{@link diva.Model <em>Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model</em>'.
-	 * @see diva.Model
-	 * @generated
-	 */
-	EClass getModel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link diva.Model#getUri <em>Uri</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Uri</em>'.
-	 * @see diva.Model#getUri()
-	 * @see #getModel()
-	 * @generated
-	 */
-	EAttribute getModel_Uri();
 
 	/**
 	 * Returns the meta object for class '{@link diva.EnumVariable <em>Enum Variable</em>}'.
@@ -2866,17 +2753,6 @@ public interface DivaPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVariant_Required();
-
-	/**
-	 * Returns the meta object for the attribute '{@link diva.Variant#getWeaveLevel <em>Weave Level</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Weave Level</em>'.
-	 * @see diva.Variant#getWeaveLevel()
-	 * @see #getVariant()
-	 * @generated
-	 */
-	EAttribute getVariant_WeaveLevel();
 
 	/**
 	 * Returns the meta object for class '{@link diva.Dimension <em>Dimension</em>}'.
@@ -3645,27 +3521,6 @@ public interface DivaPackage extends EPackage {
 	EReference getContextModel_Variable();
 
 	/**
-	 * Returns the meta object for class '{@link diva.ModelContainer <em>Model Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Container</em>'.
-	 * @see diva.ModelContainer
-	 * @generated
-	 */
-	EClass getModelContainer();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link diva.ModelContainer#getModel <em>Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Model</em>'.
-	 * @see diva.ModelContainer#getModel()
-	 * @see #getModelContainer()
-	 * @generated
-	 */
-	EReference getModelContainer_Model();
-
-	/**
 	 * Returns the meta object for class '{@link diva.CEPable <em>CE Pable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3824,24 +3679,6 @@ public interface DivaPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE = eINSTANCE.getVariable();
-
-		/**
-		 * The meta object literal for the '{@link diva.impl.ModelImpl <em>Model</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see diva.impl.ModelImpl
-		 * @see diva.impl.DivaPackageImpl#getModel()
-		 * @generated
-		 */
-		EClass MODEL = eINSTANCE.getModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MODEL__URI = eINSTANCE.getModel_Uri();
 
 		/**
 		 * The meta object literal for the '{@link diva.impl.EnumVariableImpl <em>Enum Variable</em>}' class.
@@ -4106,14 +3943,6 @@ public interface DivaPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIANT__REQUIRED = eINSTANCE.getVariant_Required();
-
-		/**
-		 * The meta object literal for the '<em><b>Weave Level</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIANT__WEAVE_LEVEL = eINSTANCE.getVariant_WeaveLevel();
 
 		/**
 		 * The meta object literal for the '{@link diva.impl.DimensionImpl <em>Dimension</em>}' class.
@@ -4742,24 +4571,6 @@ public interface DivaPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONTEXT_MODEL__VARIABLE = eINSTANCE.getContextModel_Variable();
-
-		/**
-		 * The meta object literal for the '{@link diva.impl.ModelContainerImpl <em>Model Container</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see diva.impl.ModelContainerImpl
-		 * @see diva.impl.DivaPackageImpl#getModelContainer()
-		 * @generated
-		 */
-		EClass MODEL_CONTAINER = eINSTANCE.getModelContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Model</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_CONTAINER__MODEL = eINSTANCE.getModelContainer_Model();
 
 		/**
 		 * The meta object literal for the '{@link diva.impl.CEPableImpl <em>CE Pable</em>}' class.

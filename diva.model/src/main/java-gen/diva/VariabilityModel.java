@@ -16,6 +16,7 @@
 package diva;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 import diva.visitors.Visitor;
 
@@ -40,7 +41,7 @@ import diva.visitors.Visitor;
  * @model
  * @generated
  */
-public interface VariabilityModel extends ModelContainer {
+public interface VariabilityModel extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Context</b></em>' containment reference list.
 	 * The list contents are of type {@link diva.Variable}.

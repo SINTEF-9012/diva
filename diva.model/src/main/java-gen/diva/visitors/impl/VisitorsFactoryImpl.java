@@ -15,7 +15,6 @@
  */
 package diva.visitors.impl;
 
-import diva.visitors.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

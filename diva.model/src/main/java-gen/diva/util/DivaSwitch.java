@@ -15,18 +15,16 @@
  */
 package diva.util;
 
-import diva.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
+import diva.CEPable;
 import diva.ConfigVariant;
 import diva.Configuration;
 import diva.ConfigurationModel;
@@ -43,8 +41,6 @@ import diva.EnumVariable;
 import diva.EnumVariableValue;
 import diva.Expression;
 import diva.Invariant;
-import diva.Model;
-import diva.ModelContainer;
 import diva.MultiplicityConstraint;
 import diva.NamedElement;
 import diva.NaryTerm;
@@ -132,8 +128,6 @@ public class DivaSwitch<T> extends Switch<T> {
 			case DivaPackage.VARIABILITY_MODEL: {
 				VariabilityModel variabilityModel = (VariabilityModel)theEObject;
 				T result = caseVariabilityModel(variabilityModel);
-				if (result == null) result = caseModelContainer(variabilityModel);
-				if (result == null) result = caseVisitable(variabilityModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -153,14 +147,6 @@ public class DivaSwitch<T> extends Switch<T> {
 				if (result == null) result = caseNamedElement(variable);
 				if (result == null) result = caseDiVAModelElement(variable);
 				if (result == null) result = caseVisitable(variable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DivaPackage.MODEL: {
-				Model model = (Model)theEObject;
-				T result = caseModel(model);
-				if (result == null) result = caseDiVAModelElement(model);
-				if (result == null) result = caseVisitable(model);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -309,7 +295,6 @@ public class DivaSwitch<T> extends Switch<T> {
 				Variant variant = (Variant)theEObject;
 				T result = caseVariant(variant);
 				if (result == null) result = caseNamedElement(variant);
-				if (result == null) result = caseModelContainer(variant);
 				if (result == null) result = caseDiVAModelElement(variant);
 				if (result == null) result = caseVisitable(variant);
 				if (result == null) result = defaultCase(theEObject);
@@ -533,13 +518,6 @@ public class DivaSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DivaPackage.MODEL_CONTAINER: {
-				ModelContainer modelContainer = (ModelContainer)theEObject;
-				T result = caseModelContainer(modelContainer);
-				if (result == null) result = caseVisitable(modelContainer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case DivaPackage.CE_PABLE: {
 				CEPable cePable = (CEPable)theEObject;
 				T result = caseCEPable(cePable);
@@ -592,21 +570,6 @@ public class DivaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariable(Variable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModel(Model object) {
 		return null;
 	}
 
@@ -1237,21 +1200,6 @@ public class DivaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseContextModel(ContextModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Container</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModelContainer(ModelContainer object) {
 		return null;
 	}
 

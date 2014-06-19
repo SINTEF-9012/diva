@@ -15,7 +15,6 @@
  */
 package diva.impl;
 
-import diva.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -25,8 +24,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;

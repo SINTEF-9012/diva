@@ -21,8 +21,6 @@ import org.eclipse.swt.widgets.Display;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
 import diva.ConfigVariant;
@@ -77,14 +75,6 @@ public class DiVABackgroundProvider extends EObjectImpl implements Visitor<Strin
 	
 	public Color visitAndTerm(AndTerm node, String context) {
 		return expColor;
-	}
-
-	public Color visitAspectModel(AspectModel node, String context) {
-		return grey;
-	}
-
-	public Color visitBaseModel(BaseModel node, String context) {
-		return grey;
 	}
 
 	public Color visitBooleanTerm(BooleanTerm node, String context) {

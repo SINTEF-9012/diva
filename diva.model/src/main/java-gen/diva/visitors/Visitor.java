@@ -19,8 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;

@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
@@ -75,16 +73,6 @@ public class DiVATextProvider extends EObjectImpl implements Visitor<String, Str
 		}
 		result += ")";
 		return result;
-	}
-
-	
-	public String visitAspectModel(AspectModel node, String context) {
-		return "AspectModel";
-	}
-
-	
-	public String visitBaseModel(BaseModel node, String context) {
-		return "BaseModel";
 	}
 
 	

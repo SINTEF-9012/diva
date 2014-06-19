@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
@@ -93,7 +91,6 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * @generated
 	 */
 	public ResultType visitVariabilityModel(final VariabilityModel node, final ContextType context) {
-		if (node.getModel() != null) { node.getModel().accept(this, context); }
 		for (int i=0; i<node.getContext().size(); i++) { ((diva.Variable)node.getContext().get(i)).accept(this, context); }
 		for (int i=0; i<node.getProperty().size(); i++) { ((diva.Property)node.getProperty().get(i)).accept(this, context); }
 		for (int i=0; i<node.getDimension().size(); i++) { ((diva.Dimension)node.getDimension().get(i)).accept(this, context); }
@@ -225,7 +222,6 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * @generated
 	 */
 	public ResultType visitVariant(final Variant node, final ContextType context) {
-		if (node.getModel() != null) { node.getModel().accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getPropertyValue().size(); i++) { ((diva.PropertyValue)node.getPropertyValue().get(i)).accept(this, context); }
 		if (node.getDependency() != null) { node.getDependency().accept(this, context); }

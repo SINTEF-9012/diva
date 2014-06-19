@@ -15,30 +15,35 @@
  */
 package diva.impl;
 
-import diva.CEPable;
-import org.eclipse.emf.ecore.EClass;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import diva.DivaPackage;
-import diva.EnumLiteral;
-import diva.EnumVariable;
-import diva.visitors.Visitor;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import diva.BoolVariableValue;
+import diva.BooleanVariable;
+import diva.CEPable;
+import diva.DivaFactory;
+import diva.DivaPackage;
+import diva.VariableValue;
+import diva.visitors.Visitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enum Literal</b></em>'.
+ * An implementation of the model object '<em><b>Boolean Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link diva.impl.EnumLiteralImpl#getQuery <em>Query</em>}</li>
+ *   <li>{@link diva.impl.BooleanVariableImpl#getQuery <em>Query</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
+public class BooleanVariableImpl extends VariableImpl implements BooleanVariable {
 	/**
 	 * The default value of the '{@link #getQuery() <em>Query</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -63,7 +68,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EnumLiteralImpl() {
+	protected BooleanVariableImpl() {
 		super();
 	}
 
@@ -74,7 +79,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DivaPackage.Literals.ENUM_LITERAL;
+		return DivaPackage.Literals.BOOLEAN_VARIABLE;
 	}
 
 	/**
@@ -95,7 +100,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 		String oldQuery = query;
 		query = newQuery;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DivaPackage.ENUM_LITERAL__QUERY, oldQuery, query));
+			eNotify(new ENotificationImpl(this, Notification.SET, DivaPackage.BOOLEAN_VARIABLE__QUERY, oldQuery, query));
 	}
 
 	/**
@@ -104,9 +109,9 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	 * @generated
 	 */
 	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
-		return visitor.visitEnumLiteral(this, context);
+		return visitor.visitBooleanVariable(this, context);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,7 +120,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DivaPackage.ENUM_LITERAL__QUERY:
+			case DivaPackage.BOOLEAN_VARIABLE__QUERY:
 				return getQuery();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -129,7 +134,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DivaPackage.ENUM_LITERAL__QUERY:
+			case DivaPackage.BOOLEAN_VARIABLE__QUERY:
 				setQuery((String)newValue);
 				return;
 		}
@@ -144,7 +149,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DivaPackage.ENUM_LITERAL__QUERY:
+			case DivaPackage.BOOLEAN_VARIABLE__QUERY:
 				setQuery(QUERY_EDEFAULT);
 				return;
 		}
@@ -159,7 +164,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DivaPackage.ENUM_LITERAL__QUERY:
+			case DivaPackage.BOOLEAN_VARIABLE__QUERY:
 				return QUERY_EDEFAULT == null ? query != null : !QUERY_EDEFAULT.equals(query);
 		}
 		return super.eIsSet(featureID);
@@ -174,7 +179,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == CEPable.class) {
 			switch (derivedFeatureID) {
-				case DivaPackage.ENUM_LITERAL__QUERY: return DivaPackage.CE_PABLE__QUERY;
+				case DivaPackage.BOOLEAN_VARIABLE__QUERY: return DivaPackage.CE_PABLE__QUERY;
 				default: return -1;
 			}
 		}
@@ -190,7 +195,7 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == CEPable.class) {
 			switch (baseFeatureID) {
-				case DivaPackage.CE_PABLE__QUERY: return DivaPackage.ENUM_LITERAL__QUERY;
+				case DivaPackage.CE_PABLE__QUERY: return DivaPackage.BOOLEAN_VARIABLE__QUERY;
 				default: return -1;
 			}
 		}
@@ -217,6 +222,28 @@ public class EnumLiteralImpl extends NamedElementImpl implements EnumLiteral {
 	 * @generated NOT
 	 */
 	public void toAlloy(StringBuilder builder) {
-		builder.append("lone sig " + ((EnumVariable)eContainer()).getId() + "_" + getId() + " extends " + ((EnumVariable)eContainer()).getId() + " {}\n");
+		builder.append("lone sig " + getId() + " extends Context {}\n");
 	}
-} //EnumLiteralImpl
+	
+	/**
+	 * @generaed NOT 
+	 */
+	@Override
+	public List<VariableValue> allValue() {
+		List<VariableValue> vals = new ArrayList<VariableValue>();
+		
+		BoolVariableValue bvv = DivaFactory.eINSTANCE.createBoolVariableValue();
+		bvv.setBool(true);
+		bvv.setVariable(this);
+		
+		BoolVariableValue bvv2 = DivaFactory.eINSTANCE.createBoolVariableValue();
+		bvv2.setBool(false);
+		bvv2.setVariable(this);
+		
+		vals.add(bvv);
+		vals.add(bvv2);
+		
+		return vals;
+	}
+
+} //BooleanVariableImpl

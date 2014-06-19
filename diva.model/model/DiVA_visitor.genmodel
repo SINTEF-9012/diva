@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/diva.model/src" modelPluginID="diva.model" modelName="DiVA_visitor"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/diva.model/src/main/java-gen" modelPluginID="diva.model"
+    modelName="DiVA_visitor" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false">
   <foreignModel>DiVA_visitor.ecore</foreignModel>
   <genPackages prefix="Diva" disposableProviderFactory="true" ecorePackage="DiVA_visitor.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="DiVA_visitor.ecore#//Verdict">
@@ -37,23 +38,6 @@
     <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Variable"/>
     <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Model/uri"/>
-    </genClasses>
-    <genClasses ecoreClass="DiVA_visitor.ecore#//BaseModel">
-      <genOperations ecoreOperation="DiVA_visitor.ecore#//BaseModel/weave"/>
-      <genOperations ecoreOperation="DiVA_visitor.ecore#//BaseModel/accept">
-        <genParameters ecoreParameter="DiVA_visitor.ecore#//BaseModel/accept/visitor"/>
-        <genParameters ecoreParameter="DiVA_visitor.ecore#//BaseModel/accept/context"/>
-        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BaseModel/accept/C"/>
-        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//BaseModel/accept/R"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="DiVA_visitor.ecore#//AspectModel">
-      <genOperations ecoreOperation="DiVA_visitor.ecore#//AspectModel/accept">
-        <genParameters ecoreParameter="DiVA_visitor.ecore#//AspectModel/accept/visitor"/>
-        <genParameters ecoreParameter="DiVA_visitor.ecore#//AspectModel/accept/context"/>
-        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//AspectModel/accept/C"/>
-        <genTypeParameters ecoreTypeParameter="DiVA_visitor.ecore#//AspectModel/accept/R"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="DiVA_visitor.ecore#//EnumVariable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//EnumVariable/literal"/>
@@ -150,7 +134,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/dependency"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/available"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//Variant/required"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//Variant/weaveLevel"/>
       <genOperations ecoreOperation="DiVA_visitor.ecore#//Variant/accept">
         <genParameters ecoreParameter="DiVA_visitor.ecore#//Variant/accept/visitor"/>
         <genParameters ecoreParameter="DiVA_visitor.ecore#//Variant/accept/context"/>
@@ -397,6 +380,9 @@
     <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//ModelContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DiVA_visitor.ecore#//ModelContainer/model"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//CEPable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DiVA_visitor.ecore#//CEPable/query"/>
+    </genClasses>
     <nestedGenPackages prefix="Visitors" disposableProviderFactory="true" ecorePackage="DiVA_visitor.ecore#//visitors">
       <genClasses image="false" ecoreClass="DiVA_visitor.ecore#//visitors/Visitable">
         <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitable/accept">
@@ -416,14 +402,6 @@
         <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitInvariant">
           <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitInvariant/node"/>
           <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitInvariant/context"/>
-        </genOperations>
-        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitBaseModel">
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBaseModel/node"/>
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitBaseModel/context"/>
-        </genOperations>
-        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitAspectModel">
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAspectModel/node"/>
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitAspectModel/context"/>
         </genOperations>
         <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariable">
           <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/Visitor/visitEnumVariable/node"/>
@@ -568,14 +546,6 @@
         <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitInvariant">
           <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitInvariant/node"/>
           <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitInvariant/context"/>
-        </genOperations>
-        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBaseModel">
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBaseModel/node"/>
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitBaseModel/context"/>
-        </genOperations>
-        <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAspectModel">
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAspectModel/node"/>
-          <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitAspectModel/context"/>
         </genOperations>
         <genOperations ecoreOperation="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariable">
           <genParameters ecoreParameter="DiVA_visitor.ecore#//visitors/TopDownVisitor/visitEnumVariable/node"/>

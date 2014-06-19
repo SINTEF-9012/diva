@@ -30,8 +30,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import diva.ContextExpression;
 import diva.Dimension;
 import diva.DivaPackage;
-import diva.Model;
-import diva.ModelContainer;
 import diva.PropertyValue;
 import diva.Variant;
 import diva.VariantExpression;
@@ -44,29 +42,17 @@ import diva.visitors.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link diva.impl.VariantImpl#getModel <em>Model</em>}</li>
  *   <li>{@link diva.impl.VariantImpl#getType <em>Type</em>}</li>
  *   <li>{@link diva.impl.VariantImpl#getPropertyValue <em>Property Value</em>}</li>
  *   <li>{@link diva.impl.VariantImpl#getDependency <em>Dependency</em>}</li>
  *   <li>{@link diva.impl.VariantImpl#getAvailable <em>Available</em>}</li>
  *   <li>{@link diva.impl.VariantImpl#getRequired <em>Required</em>}</li>
- *   <li>{@link diva.impl.VariantImpl#getWeaveLevel <em>Weave Level</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class VariantImpl extends NamedElementImpl implements Variant {
-	/**
-	 * The cached value of the '{@link #getModel() <em>Model</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getModel()
-	 * @generated
-	 * @ordered
-	 */
-	protected Model model;
-
 	/**
 	 * The cached value of the '{@link #getPropertyValue() <em>Property Value</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -108,26 +94,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	protected ContextExpression required;
 
 	/**
-	 * The default value of the '{@link #getWeaveLevel() <em>Weave Level</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWeaveLevel()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int WEAVE_LEVEL_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getWeaveLevel() <em>Weave Level</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWeaveLevel()
-	 * @generated
-	 * @ordered
-	 */
-	protected int weaveLevel = WEAVE_LEVEL_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -144,49 +110,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	@Override
 	protected EClass eStaticClass() {
 		return DivaPackage.Literals.VARIANT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Model getModel() {
-		return model;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetModel(Model newModel, NotificationChain msgs) {
-		Model oldModel = model;
-		model = newModel;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DivaPackage.VARIANT__MODEL, oldModel, newModel);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setModel(Model newModel) {
-		if (newModel != model) {
-			NotificationChain msgs = null;
-			if (model != null)
-				msgs = ((InternalEObject)model).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DivaPackage.VARIANT__MODEL, null, msgs);
-			if (newModel != null)
-				msgs = ((InternalEObject)newModel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DivaPackage.VARIANT__MODEL, null, msgs);
-			msgs = basicSetModel(newModel, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DivaPackage.VARIANT__MODEL, newModel, newModel));
 	}
 
 	/**
@@ -376,27 +299,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getWeaveLevel() {
-		return weaveLevel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWeaveLevel(int newWeaveLevel) {
-		int oldWeaveLevel = weaveLevel;
-		weaveLevel = newWeaveLevel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DivaPackage.VARIANT__WEAVE_LEVEL, oldWeaveLevel, weaveLevel));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitVariant(this, context);
 	}
@@ -425,8 +327,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DivaPackage.VARIANT__MODEL:
-				return basicSetModel(null, msgs);
 			case DivaPackage.VARIANT__TYPE:
 				return basicSetType(null, msgs);
 			case DivaPackage.VARIANT__PROPERTY_VALUE:
@@ -463,8 +363,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DivaPackage.VARIANT__MODEL:
-				return getModel();
 			case DivaPackage.VARIANT__TYPE:
 				return getType();
 			case DivaPackage.VARIANT__PROPERTY_VALUE:
@@ -475,8 +373,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 				return getAvailable();
 			case DivaPackage.VARIANT__REQUIRED:
 				return getRequired();
-			case DivaPackage.VARIANT__WEAVE_LEVEL:
-				return getWeaveLevel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -490,9 +386,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DivaPackage.VARIANT__MODEL:
-				setModel((Model)newValue);
-				return;
 			case DivaPackage.VARIANT__TYPE:
 				setType((Dimension)newValue);
 				return;
@@ -509,9 +402,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 			case DivaPackage.VARIANT__REQUIRED:
 				setRequired((ContextExpression)newValue);
 				return;
-			case DivaPackage.VARIANT__WEAVE_LEVEL:
-				setWeaveLevel((Integer)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -524,9 +414,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DivaPackage.VARIANT__MODEL:
-				setModel((Model)null);
-				return;
 			case DivaPackage.VARIANT__TYPE:
 				setType((Dimension)null);
 				return;
@@ -542,9 +429,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 			case DivaPackage.VARIANT__REQUIRED:
 				setRequired((ContextExpression)null);
 				return;
-			case DivaPackage.VARIANT__WEAVE_LEVEL:
-				setWeaveLevel(WEAVE_LEVEL_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -557,8 +441,6 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DivaPackage.VARIANT__MODEL:
-				return model != null;
 			case DivaPackage.VARIANT__TYPE:
 				return getType() != null;
 			case DivaPackage.VARIANT__PROPERTY_VALUE:
@@ -569,60 +451,10 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 				return available != null;
 			case DivaPackage.VARIANT__REQUIRED:
 				return required != null;
-			case DivaPackage.VARIANT__WEAVE_LEVEL:
-				return weaveLevel != WEAVE_LEVEL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ModelContainer.class) {
-			switch (derivedFeatureID) {
-				case DivaPackage.VARIANT__MODEL: return DivaPackage.MODEL_CONTAINER__MODEL;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ModelContainer.class) {
-			switch (baseFeatureID) {
-				case DivaPackage.MODEL_CONTAINER__MODEL: return DivaPackage.VARIANT__MODEL;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (weaveLevel: ");
-		result.append(weaveLevel);
-		result.append(')');
-		return result.toString();
-	}
-	
 	/**
 	 * @generated NOT
 	 */

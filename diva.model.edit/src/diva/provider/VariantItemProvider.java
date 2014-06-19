@@ -71,31 +71,8 @@ public class VariantItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addWeaveLevelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Weave Level feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addWeaveLevelPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Variant_weaveLevel_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Variant_weaveLevel_feature", "_UI_Variant_type"),
-				 DivaPackage.Literals.VARIANT__WEAVE_LEVEL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -110,7 +87,6 @@ public class VariantItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(DivaPackage.Literals.MODEL_CONTAINER__MODEL);
 			childrenFeatures.add(DivaPackage.Literals.VARIANT__PROPERTY_VALUE);
 			childrenFeatures.add(DivaPackage.Literals.VARIANT__DEPENDENCY);
 			childrenFeatures.add(DivaPackage.Literals.VARIANT__AVAILABLE);
@@ -169,10 +145,6 @@ public class VariantItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Variant.class)) {
-			case DivaPackage.VARIANT__WEAVE_LEVEL:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case DivaPackage.VARIANT__MODEL:
 			case DivaPackage.VARIANT__PROPERTY_VALUE:
 			case DivaPackage.VARIANT__DEPENDENCY:
 			case DivaPackage.VARIANT__AVAILABLE:

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="diva" nsURI="http://www.diva.org/diva" nsPrefix="diva">
-  <eClassifiers xsi:type="ecore:EClass" name="VariabilityModel" eSuperTypes="#//ModelContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="VariabilityModel">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return visitor.visitVariabilityModel(this, context);"/>
@@ -62,9 +62,6 @@
         eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Model" abstract="true" eSuperTypes="#//DiVAModelElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//String"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumVariable" eSuperTypes="#//Variable">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -295,7 +292,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true" eSuperTypes="#//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Variant" eSuperTypes="#//NamedElement #//ModelContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="Variant" eSuperTypes="#//NamedElement">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return visitor.visitVariant(this, context);"/>
@@ -942,10 +939,6 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
         eType="#//VariableValue" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelContainer" abstract="true" eSuperTypes="#//visitors/Visitable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//Model"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CEPable" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="#//String"/>

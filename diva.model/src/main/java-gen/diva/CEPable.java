@@ -47,7 +47,7 @@ public interface CEPable extends EObject {
 	 * @return the value of the '<em>Query</em>' attribute.
 	 * @see #setQuery(String)
 	 * @see diva.DivaPackage#getCEPable_Query()
-	 * @model
+	 * @model dataType="diva.String"
 	 * @generated
 	 */
 	String getQuery();

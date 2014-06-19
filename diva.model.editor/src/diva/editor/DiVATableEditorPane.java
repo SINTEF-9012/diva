@@ -57,23 +57,6 @@ public abstract class DiVATableEditorPane extends TableEditorPane {
 		// This is to enable tooltips on the cells:
 		ColumnViewerToolTipSupport.enableFor(treeViewerWithColumns);
 	}
-	
-	protected void createModelURIColumn(EReference property, Adapter adapter) {
-		// create the column to edit the uri of a model
-		TreeViewerColumn viewerColumn;
-		TreeColumn column;
-		viewerColumn = new TreeViewerColumn(treeViewerWithColumns, SWT.LEAD);
-		column = viewerColumn.getColumn();
-		columns.add(column);
-		column.setText("Model");
-		column.setAlignment(SWT.LEFT);
-		column.setWidth(100);
-		viewerColumn.setLabelProvider(new ModelURIColumnLabelProvider(property, treeViewerWithColumns, editor));
-		viewerColumn.setEditingSupport(new ModelURIEditingSupport(treeViewerWithColumns, property, editor));
-		
-		// This is to enable tooltips on the cells:
-		ColumnViewerToolTipSupport.enableFor(treeViewerWithColumns);
-	}
 
 	@Override
 	public void requestActivation() {

@@ -19,8 +19,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import diva.AndTerm;
 import diva.Annotation;
-import diva.AspectModel;
-import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
@@ -68,17 +66,6 @@ public class DiVATypeLabelProvider extends EObjectImpl implements Visitor<String
 	public String visitAndTerm(AndTerm node, String context) {
 		return "And";
 	}
-
-	
-	public String visitAspectModel(AspectModel node, String context) {
-		return "Aspect";
-	}
-
-	
-	public String visitBaseModel(BaseModel node, String context) {
-		return "Base";
-	}
-
 	
 	public String visitBooleanTerm(BooleanTerm node, String context) {
 		return "Boolean Term";

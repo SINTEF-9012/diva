@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -62,7 +63,7 @@ import diva.visitors.Visitor;
  *
  * @generated
  */
-public class VariabilityModelImpl extends ModelContainerImpl implements VariabilityModel {
+public class VariabilityModelImpl extends EObjectImpl implements VariabilityModel {
 	/**
 	 * The cached value of the '{@link #getContext() <em>Context</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

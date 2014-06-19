@@ -32,7 +32,6 @@ import diva.visitors.Visitor;
  *   <li>{@link diva.Variant#getDependency <em>Dependency</em>}</li>
  *   <li>{@link diva.Variant#getAvailable <em>Available</em>}</li>
  *   <li>{@link diva.Variant#getRequired <em>Required</em>}</li>
- *   <li>{@link diva.Variant#getWeaveLevel <em>Weave Level</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,7 +39,7 @@ import diva.visitors.Visitor;
  * @model
  * @generated
  */
-public interface Variant extends NamedElement, ModelContainer {
+public interface Variant extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link diva.Dimension#getVariant <em>Variant</em>}'.
@@ -162,32 +161,6 @@ public interface Variant extends NamedElement, ModelContainer {
 	 * @generated
 	 */
 	void setRequired(ContextExpression value);
-
-	/**
-	 * Returns the value of the '<em><b>Weave Level</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Weave Level</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Weave Level</em>' attribute.
-	 * @see #setWeaveLevel(int)
-	 * @see diva.DivaPackage#getVariant_WeaveLevel()
-	 * @model dataType="diva.Integer"
-	 * @generated
-	 */
-	int getWeaveLevel();
-
-	/**
-	 * Sets the value of the '{@link diva.Variant#getWeaveLevel <em>Weave Level</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Weave Level</em>' attribute.
-	 * @see #getWeaveLevel()
-	 * @generated
-	 */
-	void setWeaveLevel(int value);
 
 	/**
 	 * <!-- begin-user-doc -->
