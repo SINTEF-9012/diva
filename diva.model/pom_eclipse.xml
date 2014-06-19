@@ -1,4 +1,6 @@
-====
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
     Copyright 2014 SINTEF <brice.morin@sintef.no>
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,43 +14,20 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-====
 
-// $ANTLR : expression.g -> DivaExpressionParserTokenTypes.txt$
-DivaExpressionParser    // output token vocab name
-OR=4
-AND=5
-NOT=6
-OPEN_PAREN=7
-CLOSE_PAREN=8
-ID=9
-EQUALS=10
-DOT=11
-LCURLY=12
-RCURLY=13
-LBRAK=14
-RBRAK=15
-PLUS=16
-MINUS=17
-DOLLAR=18
-COL_COL=19
-SCOL=20
-AS=21
-CREATE=22
-TRUE=23
-FALSE=24
-ARROW=25
-COLON=26
-COMMA=27
-STRING_LITERAL=28
-CHAR_LITERAL=29
-ESC=30
-INT_LITERAL=31
-REAL_LITERAL=32
-EXPONENT=33
-DIGIT=34
-WS=35
-SINGLE_LINE_COMMENT=36
-CONTEXT_MULTI_LINE_COMMENT=37
-EMPTY_LINE_COMMENT=38
-MULTI_LINE_COMMENT=39
+-->
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../org.sintef.diva.eclipse/pom_eclipse.xml</relativePath>
+		<groupId>org.sintef.diva</groupId>
+		<artifactId>eclipse_parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>org.sintef.diva.model</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<name>DiVA Model Eclipse Plugin</name>
+</project> 
