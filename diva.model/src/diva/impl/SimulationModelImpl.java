@@ -94,7 +94,7 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	 */
 	public VariabilityModel getModel() {
 		if (eContainerFeatureID() != DivaPackage.SIMULATION_MODEL__MODEL) return null;
-		return (VariabilityModel)eContainer();
+		return (VariabilityModel)eInternalContainer();
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitSimulationModel(this, context);
 	}
 
@@ -145,10 +145,10 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetModel((VariabilityModel)otherEnd, msgs);
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetModel((VariabilityModel)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -161,10 +161,10 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case DivaPackage.SIMULATION_MODEL__SCENARIO:
-			return ((InternalEList<?>)getScenario()).basicRemove(otherEnd, msgs);
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			return basicSetModel(null, msgs);
+			case DivaPackage.SIMULATION_MODEL__SCENARIO:
+				return ((InternalEList<?>)getScenario()).basicRemove(otherEnd, msgs);
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				return basicSetModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -177,8 +177,8 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			return eInternalContainer().eInverseRemove(this, DivaPackage.VARIABILITY_MODEL__SIMULATION, VariabilityModel.class, msgs);
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				return eInternalContainer().eInverseRemove(this, DivaPackage.VARIABILITY_MODEL__SIMULATION, VariabilityModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -191,10 +191,10 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case DivaPackage.SIMULATION_MODEL__SCENARIO:
-			return getScenario();
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			return getModel();
+			case DivaPackage.SIMULATION_MODEL__SCENARIO:
+				return getScenario();
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				return getModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,13 +208,13 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case DivaPackage.SIMULATION_MODEL__SCENARIO:
-			getScenario().clear();
-			getScenario().addAll((Collection<? extends Scenario>)newValue);
-			return;
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			setModel((VariabilityModel)newValue);
-			return;
+			case DivaPackage.SIMULATION_MODEL__SCENARIO:
+				getScenario().clear();
+				getScenario().addAll((Collection<? extends Scenario>)newValue);
+				return;
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				setModel((VariabilityModel)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -227,12 +227,12 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case DivaPackage.SIMULATION_MODEL__SCENARIO:
-			getScenario().clear();
-			return;
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			setModel((VariabilityModel)null);
-			return;
+			case DivaPackage.SIMULATION_MODEL__SCENARIO:
+				getScenario().clear();
+				return;
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				setModel((VariabilityModel)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -245,10 +245,10 @@ public class SimulationModelImpl extends DiVAModelElementImpl implements Simulat
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case DivaPackage.SIMULATION_MODEL__SCENARIO:
-			return scenario != null && !scenario.isEmpty();
-		case DivaPackage.SIMULATION_MODEL__MODEL:
-			return getModel() != null;
+			case DivaPackage.SIMULATION_MODEL__SCENARIO:
+				return scenario != null && !scenario.isEmpty();
+			case DivaPackage.SIMULATION_MODEL__MODEL:
+				return getModel() != null;
 		}
 		return super.eIsSet(featureID);
 	}

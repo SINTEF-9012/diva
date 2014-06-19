@@ -121,52 +121,6 @@ public class DivaItemProviderAdapterFactory extends DivaAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link diva.BaseModel} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BaseModelItemProvider baseModelItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link diva.BaseModel}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBaseModelAdapter() {
-		if (baseModelItemProvider == null) {
-			baseModelItemProvider = new BaseModelItemProvider(this);
-		}
-
-		return baseModelItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link diva.AspectModel} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AspectModelItemProvider aspectModelItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link diva.AspectModel}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAspectModelAdapter() {
-		if (aspectModelItemProvider == null) {
-			aspectModelItemProvider = new AspectModelItemProvider(this);
-		}
-
-		return aspectModelItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link diva.EnumVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1026,8 +980,6 @@ public class DivaItemProviderAdapterFactory extends DivaAdapterFactory implement
 	public void dispose() {
 		if (variabilityModelItemProvider != null) variabilityModelItemProvider.dispose();
 		if (invariantItemProvider != null) invariantItemProvider.dispose();
-		if (baseModelItemProvider != null) baseModelItemProvider.dispose();
-		if (aspectModelItemProvider != null) aspectModelItemProvider.dispose();
 		if (enumVariableItemProvider != null) enumVariableItemProvider.dispose();
 		if (booleanVariableItemProvider != null) booleanVariableItemProvider.dispose();
 		if (andTermItemProvider != null) andTermItemProvider.dispose();

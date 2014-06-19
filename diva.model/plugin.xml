@@ -16,6 +16,14 @@
        class = "diva.DivaPackage"
        genModel = "model/DiVA.genmodel" /> 
   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DiVA_visitor -->
+      <package
+            uri="visitors"
+            class="diva.visitors.VisitorsPackage"
+            genModel="model/DiVA_visitor.genmodel"/>
+   </extension>
   
   
  

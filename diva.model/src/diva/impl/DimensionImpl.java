@@ -216,7 +216,7 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitDimension(this, context);
 	}
 
@@ -229,8 +229,8 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case DivaPackage.DIMENSION__VARIANT:
-			return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariant()).basicAdd(otherEnd, msgs);
+			case DivaPackage.DIMENSION__VARIANT:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariant()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -243,10 +243,10 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case DivaPackage.DIMENSION__VARIANT:
-			return ((InternalEList<?>)getVariant()).basicRemove(otherEnd, msgs);
-		case DivaPackage.DIMENSION__CONSTRAINTS:
-			return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case DivaPackage.DIMENSION__VARIANT:
+				return ((InternalEList<?>)getVariant()).basicRemove(otherEnd, msgs);
+			case DivaPackage.DIMENSION__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -259,16 +259,16 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case DivaPackage.DIMENSION__VARIANT:
-			return getVariant();
-		case DivaPackage.DIMENSION__PROPERTY:
-			return getProperty();
-		case DivaPackage.DIMENSION__UPPER:
-			return getUpper();
-		case DivaPackage.DIMENSION__LOWER:
-			return getLower();
-		case DivaPackage.DIMENSION__CONSTRAINTS:
-			return getConstraints();
+			case DivaPackage.DIMENSION__VARIANT:
+				return getVariant();
+			case DivaPackage.DIMENSION__PROPERTY:
+				return getProperty();
+			case DivaPackage.DIMENSION__UPPER:
+				return getUpper();
+			case DivaPackage.DIMENSION__LOWER:
+				return getLower();
+			case DivaPackage.DIMENSION__CONSTRAINTS:
+				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -282,24 +282,24 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case DivaPackage.DIMENSION__VARIANT:
-			getVariant().clear();
-			getVariant().addAll((Collection<? extends Variant>)newValue);
-			return;
-		case DivaPackage.DIMENSION__PROPERTY:
-			getProperty().clear();
-			getProperty().addAll((Collection<? extends Property>)newValue);
-			return;
-		case DivaPackage.DIMENSION__UPPER:
-			setUpper((Integer)newValue);
-			return;
-		case DivaPackage.DIMENSION__LOWER:
-			setLower((Integer)newValue);
-			return;
-		case DivaPackage.DIMENSION__CONSTRAINTS:
-			getConstraints().clear();
-			getConstraints().addAll((Collection<? extends MultiplicityConstraint>)newValue);
-			return;
+			case DivaPackage.DIMENSION__VARIANT:
+				getVariant().clear();
+				getVariant().addAll((Collection<? extends Variant>)newValue);
+				return;
+			case DivaPackage.DIMENSION__PROPERTY:
+				getProperty().clear();
+				getProperty().addAll((Collection<? extends Property>)newValue);
+				return;
+			case DivaPackage.DIMENSION__UPPER:
+				setUpper((Integer)newValue);
+				return;
+			case DivaPackage.DIMENSION__LOWER:
+				setLower((Integer)newValue);
+				return;
+			case DivaPackage.DIMENSION__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends MultiplicityConstraint>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -312,21 +312,21 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case DivaPackage.DIMENSION__VARIANT:
-			getVariant().clear();
-			return;
-		case DivaPackage.DIMENSION__PROPERTY:
-			getProperty().clear();
-			return;
-		case DivaPackage.DIMENSION__UPPER:
-			setUpper(UPPER_EDEFAULT);
-			return;
-		case DivaPackage.DIMENSION__LOWER:
-			setLower(LOWER_EDEFAULT);
-			return;
-		case DivaPackage.DIMENSION__CONSTRAINTS:
-			getConstraints().clear();
-			return;
+			case DivaPackage.DIMENSION__VARIANT:
+				getVariant().clear();
+				return;
+			case DivaPackage.DIMENSION__PROPERTY:
+				getProperty().clear();
+				return;
+			case DivaPackage.DIMENSION__UPPER:
+				setUpper(UPPER_EDEFAULT);
+				return;
+			case DivaPackage.DIMENSION__LOWER:
+				setLower(LOWER_EDEFAULT);
+				return;
+			case DivaPackage.DIMENSION__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -339,16 +339,16 @@ public class DimensionImpl extends NamedElementImpl implements Dimension {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case DivaPackage.DIMENSION__VARIANT:
-			return variant != null && !variant.isEmpty();
-		case DivaPackage.DIMENSION__PROPERTY:
-			return property != null && !property.isEmpty();
-		case DivaPackage.DIMENSION__UPPER:
-			return upper != UPPER_EDEFAULT;
-		case DivaPackage.DIMENSION__LOWER:
-			return lower != LOWER_EDEFAULT;
-		case DivaPackage.DIMENSION__CONSTRAINTS:
-			return constraints != null && !constraints.isEmpty();
+			case DivaPackage.DIMENSION__VARIANT:
+				return variant != null && !variant.isEmpty();
+			case DivaPackage.DIMENSION__PROPERTY:
+				return property != null && !property.isEmpty();
+			case DivaPackage.DIMENSION__UPPER:
+				return upper != UPPER_EDEFAULT;
+			case DivaPackage.DIMENSION__LOWER:
+				return lower != LOWER_EDEFAULT;
+			case DivaPackage.DIMENSION__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

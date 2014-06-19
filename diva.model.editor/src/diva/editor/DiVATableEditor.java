@@ -137,15 +137,6 @@ public class DiVATableEditor extends DivaEditor {
 				setPageText(pageIndex, "Variability Editor");
 			}
 			
-			// This is the page for Aspect Editor
-			//
-			{
-				AspectsEditorPane viewerPane = new AspectsEditorPane(this, getSite().getPage(), DiVATableEditor.this);
-				createContextMenuFor(viewerPane.getStructuredviewer());
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, "Aspects Linker");
-			}
-			
 			// This is the page for the QoS Property definition
 			//
 			{

@@ -136,16 +136,6 @@ public class ModelContainerItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DivaPackage.Literals.MODEL_CONTAINER__MODEL,
-				 DivaFactory.eINSTANCE.createBaseModel()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DivaPackage.Literals.MODEL_CONTAINER__MODEL,
-				 DivaFactory.eINSTANCE.createAspectModel()));
 	}
 
 	/**

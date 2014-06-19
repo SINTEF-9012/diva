@@ -187,16 +187,6 @@ public class VariantItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DivaPackage.Literals.MODEL_CONTAINER__MODEL,
-				 DivaFactory.eINSTANCE.createBaseModel()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DivaPackage.Literals.MODEL_CONTAINER__MODEL,
-				 DivaFactory.eINSTANCE.createAspectModel()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(DivaPackage.Literals.VARIANT__PROPERTY_VALUE,
 				 DivaFactory.eINSTANCE.createPropertyValue()));
 

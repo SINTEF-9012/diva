@@ -6,6 +6,7 @@
  */
 package diva.impl;
 
+import diva.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -69,7 +70,7 @@ public class DivaFactoryImpl extends EFactoryImpl implements DivaFactory {
 	 */
 	public static DivaFactory init() {
 		try {
-			DivaFactory theDivaFactory = (DivaFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.diva.org/diva"); 
+			DivaFactory theDivaFactory = (DivaFactory)EPackage.Registry.INSTANCE.getEFactory(DivaPackage.eNS_URI);
 			if (theDivaFactory != null) {
 				return theDivaFactory;
 			}
@@ -100,8 +101,6 @@ public class DivaFactoryImpl extends EFactoryImpl implements DivaFactory {
 		switch (eClass.getClassifierID()) {
 			case DivaPackage.VARIABILITY_MODEL: return createVariabilityModel();
 			case DivaPackage.INVARIANT: return createInvariant();
-			case DivaPackage.BASE_MODEL: return createBaseModel();
-			case DivaPackage.ASPECT_MODEL: return createAspectModel();
 			case DivaPackage.ENUM_VARIABLE: return createEnumVariable();
 			case DivaPackage.BOOLEAN_VARIABLE: return createBooleanVariable();
 			case DivaPackage.AND_TERM: return createAndTerm();
@@ -196,26 +195,6 @@ public class DivaFactoryImpl extends EFactoryImpl implements DivaFactory {
 	public Invariant createInvariant() {
 		InvariantImpl invariant = new InvariantImpl();
 		return invariant;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BaseModel createBaseModel() {
-		BaseModelImpl baseModel = new BaseModelImpl();
-		return baseModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AspectModel createAspectModel() {
-		AspectModelImpl aspectModel = new AspectModelImpl();
-		return aspectModel;
 	}
 
 	/**

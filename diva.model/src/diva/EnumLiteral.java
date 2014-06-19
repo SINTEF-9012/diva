@@ -18,7 +18,7 @@ import diva.visitors.Visitor;
  * @model
  * @generated
  */
-public interface EnumLiteral extends NamedElement {
+public interface EnumLiteral extends NamedElement, CEPable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

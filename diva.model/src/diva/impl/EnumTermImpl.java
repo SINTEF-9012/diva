@@ -106,7 +106,7 @@ public class EnumTermImpl extends VariableTermImpl implements EnumTerm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitEnumTerm(this, context);
 	}
 

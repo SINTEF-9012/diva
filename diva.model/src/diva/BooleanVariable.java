@@ -18,7 +18,7 @@ import diva.visitors.Visitor;
  * @model
  * @generated
  */
-public interface BooleanVariable extends Variable {
+public interface BooleanVariable extends Variable, CEPable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -24,6 +24,7 @@ import diva.BaseModel;
 import diva.BoolVariableValue;
 import diva.BooleanTerm;
 import diva.BooleanVariable;
+import diva.CEPable;
 import diva.ConfigVariant;
 import diva.Configuration;
 import diva.ConfigurationModel;
@@ -106,20 +107,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 * @generated
 	 */
 	private EClass modelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass baseModelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass aspectModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -427,6 +414,13 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass cePableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum verdictEEnum = null;
 
 	/**
@@ -615,24 +609,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 */
 	public EAttribute getModel_Uri() {
 		return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBaseModel() {
-		return baseModelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAspectModel() {
-		return aspectModelEClass;
 	}
 
 	/**
@@ -1576,6 +1552,24 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCEPable() {
+		return cePableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCEPable_Query() {
+		return (EAttribute)cePableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getVerdict() {
 		return verdictEEnum;
 	}
@@ -1641,10 +1635,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 
 		modelEClass = createEClass(MODEL);
 		createEAttribute(modelEClass, MODEL__URI);
-
-		baseModelEClass = createEClass(BASE_MODEL);
-
-		aspectModelEClass = createEClass(ASPECT_MODEL);
 
 		enumVariableEClass = createEClass(ENUM_VARIABLE);
 		createEReference(enumVariableEClass, ENUM_VARIABLE__LITERAL);
@@ -1793,6 +1783,9 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		modelContainerEClass = createEClass(MODEL_CONTAINER);
 		createEReference(modelContainerEClass, MODEL_CONTAINER__MODEL);
 
+		cePableEClass = createEClass(CE_PABLE);
+		createEAttribute(cePableEClass, CE_PABLE__QUERY);
+
 		// Create enums
 		verdictEEnum = createEEnum(VERDICT);
 
@@ -1839,10 +1832,9 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		invariantEClass.getESuperTypes().add(this.getConstraint());
 		variableEClass.getESuperTypes().add(this.getNamedElement());
 		modelEClass.getESuperTypes().add(this.getDiVAModelElement());
-		baseModelEClass.getESuperTypes().add(this.getModel());
-		aspectModelEClass.getESuperTypes().add(this.getModel());
 		enumVariableEClass.getESuperTypes().add(this.getVariable());
 		booleanVariableEClass.getESuperTypes().add(this.getVariable());
+		booleanVariableEClass.getESuperTypes().add(this.getCEPable());
 		termEClass.getESuperTypes().add(this.getDiVAModelElement());
 		andTermEClass.getESuperTypes().add(this.getNaryTerm());
 		orTermEClass.getESuperTypes().add(this.getNaryTerm());
@@ -1854,6 +1846,7 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		booleanTermEClass.getESuperTypes().add(this.getVariableTerm());
 		ruleEClass.getESuperTypes().add(this.getNamedElement());
 		enumLiteralEClass.getESuperTypes().add(this.getNamedElement());
+		enumLiteralEClass.getESuperTypes().add(this.getCEPable());
 		namedElementEClass.getESuperTypes().add(this.getDiVAModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		variantEClass.getESuperTypes().add(this.getNamedElement());
@@ -1930,40 +1923,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 
 		initEClass(modelEClass, Model.class, "Model", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModel_Uri(), this.getString(), "uri", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(baseModelEClass, BaseModel.class, "BaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(baseModelEClass, null, "weave", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(baseModelEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "C");
-		t2 = addETypeParameter(op, "R");
-		g1 = createEGenericType(theVisitorsPackage.getVisitor());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(t2);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "visitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(t1);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(t2);
-		initEOperation(op, g1);
-
-		initEClass(aspectModelEClass, AspectModel.class, "AspectModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		op = addEOperation(aspectModelEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "C");
-		t2 = addETypeParameter(op, "R");
-		g1 = createEGenericType(theVisitorsPackage.getVisitor());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(t2);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "visitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(t1);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(t2);
-		initEOperation(op, g1);
 
 		initEClass(enumVariableEClass, EnumVariable.class, "EnumVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumVariable_Literal(), this.getEnumLiteral(), null, "literal", null, 1, -1, EnumVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2574,6 +2533,9 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		initEClass(modelContainerEClass, ModelContainer.class, "ModelContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelContainer_Model(), this.getModel(), null, "model", null, 1, 1, ModelContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(cePableEClass, CEPable.class, "CEPable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCEPable_Query(), ecorePackage.getEString(), "query", null, 0, 1, CEPable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(verdictEEnum, Verdict.class, "Verdict");
 		addEEnumLiteral(verdictEEnum, Verdict.NONE);
@@ -2612,20 +2574,6 @@ public class DivaPackageImpl extends EPackageImpl implements DivaPackage {
 		   source, 
 		   new String[] {
 			 "body", "do\nresult := visitor.visitInvariant(self, context)\nend",
-			 "isAbstract", "false"
-		   });			
-		addAnnotation
-		  (baseModelEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] {
-			 "body", "do\nresult := visitor.visitBaseModel(self, context)\nend",
-			 "isAbstract", "false"
-		   });			
-		addAnnotation
-		  (aspectModelEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "do\nresult := visitor.visitAspectModel(self, context)\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation

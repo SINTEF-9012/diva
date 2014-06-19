@@ -6,6 +6,7 @@
  */
 package diva.util;
 
+import diva.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -154,24 +155,6 @@ public class DivaSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DivaPackage.BASE_MODEL: {
-				BaseModel baseModel = (BaseModel)theEObject;
-				T result = caseBaseModel(baseModel);
-				if (result == null) result = caseModel(baseModel);
-				if (result == null) result = caseDiVAModelElement(baseModel);
-				if (result == null) result = caseVisitable(baseModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DivaPackage.ASPECT_MODEL: {
-				AspectModel aspectModel = (AspectModel)theEObject;
-				T result = caseAspectModel(aspectModel);
-				if (result == null) result = caseModel(aspectModel);
-				if (result == null) result = caseDiVAModelElement(aspectModel);
-				if (result == null) result = caseVisitable(aspectModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case DivaPackage.ENUM_VARIABLE: {
 				EnumVariable enumVariable = (EnumVariable)theEObject;
 				T result = caseEnumVariable(enumVariable);
@@ -186,6 +169,7 @@ public class DivaSwitch<T> extends Switch<T> {
 				BooleanVariable booleanVariable = (BooleanVariable)theEObject;
 				T result = caseBooleanVariable(booleanVariable);
 				if (result == null) result = caseVariable(booleanVariable);
+				if (result == null) result = caseCEPable(booleanVariable);
 				if (result == null) result = caseNamedElement(booleanVariable);
 				if (result == null) result = caseDiVAModelElement(booleanVariable);
 				if (result == null) result = caseVisitable(booleanVariable);
@@ -289,6 +273,7 @@ public class DivaSwitch<T> extends Switch<T> {
 				EnumLiteral enumLiteral = (EnumLiteral)theEObject;
 				T result = caseEnumLiteral(enumLiteral);
 				if (result == null) result = caseNamedElement(enumLiteral);
+				if (result == null) result = caseCEPable(enumLiteral);
 				if (result == null) result = caseDiVAModelElement(enumLiteral);
 				if (result == null) result = caseVisitable(enumLiteral);
 				if (result == null) result = defaultCase(theEObject);
@@ -546,6 +531,12 @@ public class DivaSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DivaPackage.CE_PABLE: {
+				CEPable cePable = (CEPable)theEObject;
+				T result = caseCEPable(cePable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -607,36 +598,6 @@ public class DivaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModel(Model object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Base Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Base Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBaseModel(BaseModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Aspect Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Aspect Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAspectModel(AspectModel object) {
 		return null;
 	}
 
@@ -1282,6 +1243,21 @@ public class DivaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModelContainer(ModelContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CE Pable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CE Pable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCEPable(CEPable object) {
 		return null;
 	}
 

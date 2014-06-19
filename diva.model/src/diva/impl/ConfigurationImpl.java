@@ -132,7 +132,7 @@ public class ConfigurationImpl extends ScoredElementImpl implements Configuratio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitConfiguration(this, context);
 	}
 

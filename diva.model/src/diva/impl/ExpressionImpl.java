@@ -152,7 +152,7 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitExpression(this, context);
 	}
 
@@ -164,8 +164,8 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case DivaPackage.EXPRESSION__TERM:
-			return basicSetTerm(null, msgs);
+			case DivaPackage.EXPRESSION__TERM:
+				return basicSetTerm(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -178,10 +178,10 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case DivaPackage.EXPRESSION__TERM:
-			return getTerm();
-		case DivaPackage.EXPRESSION__TEXT:
-			return getText();
+			case DivaPackage.EXPRESSION__TERM:
+				return getTerm();
+			case DivaPackage.EXPRESSION__TEXT:
+				return getText();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -194,12 +194,12 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case DivaPackage.EXPRESSION__TERM:
-			setTerm((Term)newValue);
-			return;
-		case DivaPackage.EXPRESSION__TEXT:
-			setText((String)newValue);
-			return;
+			case DivaPackage.EXPRESSION__TERM:
+				setTerm((Term)newValue);
+				return;
+			case DivaPackage.EXPRESSION__TEXT:
+				setText((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -212,12 +212,12 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case DivaPackage.EXPRESSION__TERM:
-			setTerm((Term)null);
-			return;
-		case DivaPackage.EXPRESSION__TEXT:
-			setText(TEXT_EDEFAULT);
-			return;
+			case DivaPackage.EXPRESSION__TERM:
+				setTerm((Term)null);
+				return;
+			case DivaPackage.EXPRESSION__TEXT:
+				setText(TEXT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -230,10 +230,10 @@ public class ExpressionImpl extends DiVAModelElementImpl implements Expression {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case DivaPackage.EXPRESSION__TERM:
-			return term != null;
-		case DivaPackage.EXPRESSION__TEXT:
-			return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
+			case DivaPackage.EXPRESSION__TERM:
+				return term != null;
+			case DivaPackage.EXPRESSION__TEXT:
+				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);
 	}

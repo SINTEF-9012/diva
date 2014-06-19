@@ -6,6 +6,7 @@
  */
 package diva.util;
 
+import diva.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -134,14 +135,6 @@ public class DivaAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseModel(Model object) {
 				return createModelAdapter();
-			}
-			@Override
-			public Adapter caseBaseModel(BaseModel object) {
-				return createBaseModelAdapter();
-			}
-			@Override
-			public Adapter caseAspectModel(AspectModel object) {
-				return createAspectModelAdapter();
 			}
 			@Override
 			public Adapter caseEnumVariable(EnumVariable object) {
@@ -316,6 +309,10 @@ public class DivaAdapterFactory extends AdapterFactoryImpl {
 				return createModelContainerAdapter();
 			}
 			@Override
+			public Adapter caseCEPable(CEPable object) {
+				return createCEPableAdapter();
+			}
+			@Override
 			public Adapter caseVisitable(Visitable object) {
 				return createVisitableAdapter();
 			}
@@ -392,34 +389,6 @@ public class DivaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link diva.BaseModel <em>Base Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see diva.BaseModel
-	 * @generated
-	 */
-	public Adapter createBaseModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link diva.AspectModel <em>Aspect Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see diva.AspectModel
-	 * @generated
-	 */
-	public Adapter createAspectModelAdapter() {
 		return null;
 	}
 
@@ -1022,6 +991,20 @@ public class DivaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link diva.CEPable <em>CE Pable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see diva.CEPable
+	 * @generated
+	 */
+	public Adapter createCEPableAdapter() {
 		return null;
 	}
 

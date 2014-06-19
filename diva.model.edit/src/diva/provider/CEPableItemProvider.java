@@ -1,34 +1,38 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package diva.provider;
 
+
+import diva.CEPable;
+import diva.DivaPackage;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import diva.AspectModel;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link diva.AspectModel} object.
+ * This is the item provider adapter for a {@link diva.CEPable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AspectModelItemProvider
-	extends ModelItemProvider
+public class CEPableItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -41,7 +45,7 @@ public class AspectModelItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AspectModelItemProvider(AdapterFactory adapterFactory) {
+	public CEPableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -56,19 +60,31 @@ public class AspectModelItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addQueryPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns AspectModel.gif.
+	 * This adds a property descriptor for the Query feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/AspectModel"));
+	protected void addQueryPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CEPable_query_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CEPable_query_feature", "_UI_CEPable_type"),
+				 DivaPackage.Literals.CE_PABLE__QUERY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -79,10 +95,10 @@ public class AspectModelItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AspectModel)object).getUri();
+		String label = ((CEPable)object).getQuery();
 		return label == null || label.length() == 0 ?
-			getString("_UI_AspectModel_type") :
-			getString("_UI_AspectModel_type") + " " + label;
+			getString("_UI_CEPable_type") :
+			getString("_UI_CEPable_type") + " " + label;
 	}
 
 	/**
@@ -95,6 +111,12 @@ public class AspectModelItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(CEPable.class)) {
+			case DivaPackage.CE_PABLE__QUERY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -108,6 +130,17 @@ public class AspectModelItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return DiVA_visitorEditPlugin.INSTANCE;
 	}
 
 }

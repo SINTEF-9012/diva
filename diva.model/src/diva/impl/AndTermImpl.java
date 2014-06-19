@@ -49,7 +49,7 @@ public class AndTermImpl extends NaryTermImpl implements AndTerm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitAndTerm(this, context);
 	}
 	

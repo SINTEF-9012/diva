@@ -252,20 +252,6 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 		g1 = createEGenericType(visitorEClass_ResultType);
 		initEOperation(op, g1);
 
-		op = addEOperation(visitorEClass, null, "visitBaseModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theDivaPackage.getBaseModel(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(visitorEClass_ContextType);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(visitorEClass_ResultType);
-		initEOperation(op, g1);
-
-		op = addEOperation(visitorEClass, null, "visitAspectModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theDivaPackage.getAspectModel(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(visitorEClass_ContextType);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(visitorEClass_ResultType);
-		initEOperation(op, g1);
-
 		op = addEOperation(visitorEClass, null, "visitEnumVariable", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theDivaPackage.getEnumVariable(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(visitorEClass_ContextType);
@@ -508,20 +494,6 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 
 		op = addEOperation(topDownVisitorEClass, null, "visitInvariant", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theDivaPackage.getInvariant(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(topDownVisitorEClass_ContextType);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(topDownVisitorEClass_ResultType);
-		initEOperation(op, g1);
-
-		op = addEOperation(topDownVisitorEClass, null, "visitBaseModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theDivaPackage.getBaseModel(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(topDownVisitorEClass_ContextType);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(topDownVisitorEClass_ResultType);
-		initEOperation(op, g1);
-
-		op = addEOperation(topDownVisitorEClass, null, "visitAspectModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theDivaPackage.getAspectModel(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(topDownVisitorEClass_ContextType);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(topDownVisitorEClass_ResultType);
@@ -789,7 +761,7 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 		  (topDownVisitorEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.literal.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
@@ -803,35 +775,35 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 		  (topDownVisitorEClass.getEOperations().get(4), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.literal.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.term.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(5), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.term.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(6), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.term.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.term != void then node.term.accept(self, context) end\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(7), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.term.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.term != void then node.term.accept(self, context) end\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
@@ -852,63 +824,63 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 		  (topDownVisitorEClass.getEOperations().get(11), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nif node.model != void then node.model.accept(self, context) end\nnode.annotation.each{ e | e.accept(self, context) }\nnode.propertyValue.each{ e | e.accept(self, context) }\nif node.dependency != void then node.dependency.accept(self, context) end\nif node.available != void then node.available.accept(self, context) end\nif node.required != void then node.required.accept(self, context) end\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(12), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.variant.each{ e | e.accept(self, context) }\nnode.constraints.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(13), 
 		   source, 
 		   new String[] {
-			 "body", "do\nif node.model != void then node.model.accept(self, context) end\nnode.annotation.each{ e | e.accept(self, context) }\nnode.propertyValue.each{ e | e.accept(self, context) }\nif node.dependency != void then node.dependency.accept(self, context) end\nif node.available != void then node.available.accept(self, context) end\nif node.required != void then node.required.accept(self, context) end\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.term != void then node.term.accept(self, context) end\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(14), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.variant.each{ e | e.accept(self, context) }\nnode.constraints.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nif node.term != void then node.term.accept(self, context) end\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(15), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.term != void then node.term.accept(self, context) end\nend",
+			 "body", "do\nif node.term != void then node.term.accept(self, context) end\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(16), 
 		   source, 
 		   new String[] {
-			 "body", "do\nif node.term != void then node.term.accept(self, context) end\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.context != void then node.context.accept(self, context) end\nnode.priority.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(17), 
 		   source, 
 		   new String[] {
-			 "body", "do\nif node.term != void then node.term.accept(self, context) end\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.literal.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(18), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.context != void then node.context.accept(self, context) end\nnode.priority.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(19), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.literal.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
@@ -922,63 +894,63 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 		  (topDownVisitorEClass.getEOperations().get(21), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.available != void then node.available.accept(self, context) end\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(22), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(23), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nif node.available != void then node.available.accept(self, context) end\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.scenario.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(24), 
 		   source, 
 		   new String[] {
-			 "body", "do\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.variable.each{ e | e.accept(self, context) }\nnode.configuration.each{ e | e.accept(self, context) }\nif node.oracle != void then node.oracle.accept(self, context) end\nnode.priority.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(25), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.scenario.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.score.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nnode.variant.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(26), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.variable.each{ e | e.accept(self, context) }\nnode.configuration.each{ e | e.accept(self, context) }\nif node.oracle != void then node.oracle.accept(self, context) end\nnode.priority.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.score.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(27), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.score.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nnode.variant.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.context.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(28), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.score.each{ e | e.accept(self, context) }\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(29), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.context.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
@@ -999,32 +971,18 @@ public class VisitorsPackageImpl extends EPackageImpl implements VisitorsPackage
 		  (topDownVisitorEClass.getEOperations().get(32), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
+			 "body", "do\nnode.configurations.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
 		  (topDownVisitorEClass.getEOperations().get(33), 
 		   source, 
 		   new String[] {
-			 "body", "do\nnode.annotation.each{ e | e.accept(self, context) }\nend",
-			 "isAbstract", "false"
-		   });			
-		addAnnotation
-		  (topDownVisitorEClass.getEOperations().get(34), 
-		   source, 
-		   new String[] {
-			 "body", "do\nnode.configurations.each{ e | e.accept(self, context) }\nend",
-			 "isAbstract", "false"
-		   });			
-		addAnnotation
-		  (topDownVisitorEClass.getEOperations().get(35), 
-		   source, 
-		   new String[] {
 			 "body", "do\nnode.variant.each{ e | e.accept(self, context) }\nend",
 			 "isAbstract", "false"
 		   });			
 		addAnnotation
-		  (topDownVisitorEClass.getEOperations().get(36), 
+		  (topDownVisitorEClass.getEOperations().get(34), 
 		   source, 
 		   new String[] {
 			 "body", "do\nnode.variable.each{ e | e.accept(self, context) }\nend",

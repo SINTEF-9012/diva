@@ -79,22 +79,6 @@ public interface Visitor<ContextType, ResultType> extends EObject {
 	 * @model
 	 * @generated
 	 */
-	ResultType visitBaseModel(BaseModel node, ContextType context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	ResultType visitAspectModel(AspectModel node, ContextType context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
 	ResultType visitEnumVariable(EnumVariable node, ContextType context);
 
 	/**

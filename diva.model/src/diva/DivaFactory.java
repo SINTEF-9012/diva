@@ -44,24 +44,6 @@ public interface DivaFactory extends EFactory {
 	Invariant createInvariant();
 
 	/**
-	 * Returns a new object of class '<em>Base Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Base Model</em>'.
-	 * @generated
-	 */
-	BaseModel createBaseModel();
-
-	/**
-	 * Returns a new object of class '<em>Aspect Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aspect Model</em>'.
-	 * @generated
-	 */
-	AspectModel createAspectModel();
-
-	/**
 	 * Returns a new object of class '<em>Enum Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

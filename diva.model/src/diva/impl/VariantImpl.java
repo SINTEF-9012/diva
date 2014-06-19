@@ -187,7 +187,7 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	 */
 	public Dimension getType() {
 		if (eContainerFeatureID() != DivaPackage.VARIANT__TYPE) return null;
-		return (Dimension)eContainer();
+		return (Dimension)eInternalContainer();
 	}
 
 	/**
@@ -388,7 +388,7 @@ public class VariantImpl extends NamedElementImpl implements Variant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <C, R> R accept(Visitor<C, R> visitor, C context) {
+	public <C, R> R accept(final Visitor<C, R> visitor, final C context) {
 		return visitor.visitVariant(this, context);
 	}
 

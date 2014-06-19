@@ -6,6 +6,7 @@
  */
 package diva.visitors.impl;
 
+import diva.visitors.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -30,7 +31,7 @@ public class VisitorsFactoryImpl extends EFactoryImpl implements VisitorsFactory
 	 */
 	public static VisitorsFactory init() {
 		try {
-			VisitorsFactory theVisitorsFactory = (VisitorsFactory)EPackage.Registry.INSTANCE.getEFactory("visitors"); 
+			VisitorsFactory theVisitorsFactory = (VisitorsFactory)EPackage.Registry.INSTANCE.getEFactory(VisitorsPackage.eNS_URI);
 			if (theVisitorsFactory != null) {
 				return theVisitorsFactory;
 			}

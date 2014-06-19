@@ -76,24 +76,6 @@ public interface TopDownVisitor<ContextType, ResultType> extends Visitor<Context
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta body='do\nnode.annotation.each{ e | e.accept(self, context) }\nend' isAbstract='false'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }\nreturn null;\n'"
-	 * @generated
-	 */
-	ResultType visitBaseModel(BaseModel node, ContextType context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta body='do\nnode.annotation.each{ e | e.accept(self, context) }\nend' isAbstract='false'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }\nreturn null;\n'"
-	 * @generated
-	 */
-	ResultType visitAspectModel(AspectModel node, ContextType context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta body='do\nnode.annotation.each{ e | e.accept(self, context) }\nnode.literal.each{ e | e.accept(self, context) }\nend' isAbstract='false'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }\nfor (int i=0; i<node.getLiteral().size(); i++) { ((diva.EnumLiteral)node.getLiteral().get(i)).accept(this, context); }\nreturn null;\n'"
 	 * @generated

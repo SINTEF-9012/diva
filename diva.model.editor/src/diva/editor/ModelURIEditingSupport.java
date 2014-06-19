@@ -35,7 +35,7 @@ public class ModelURIEditingSupport extends EditingSupport {
 	protected CellEditor getCellEditor(Object element) {
 		CellEditor result = null;
 		//result = new TextCellEditor((Composite) getViewer().getControl());
-		result = new URIDialogCellEditor((Composite) getViewer().getControl(), "Aspect Model Selection");
+		result = new URIDialogCellEditor((Composite) getViewer().getControl(), "CEP Query Selection");
 		return result;
 	}
 

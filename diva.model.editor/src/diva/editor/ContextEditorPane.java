@@ -94,6 +94,7 @@ public class ContextEditorPane extends DiVATableEditorPane {
 		list.add(new ColumnDescriptor("Name", null, "name"));
 		list.add(new ColumnDescriptor("ID", null, "id"));
 		list.add(new ColumnDescriptor("Values", null, "literal"));
+		list.add(new ColumnDescriptor("Query", null, "query"));
 		return list;
 	}
 	

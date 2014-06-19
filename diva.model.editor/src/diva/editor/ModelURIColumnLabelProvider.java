@@ -123,7 +123,7 @@ public class ModelURIColumnLabelProvider extends ColumnLabelProvider implements 
 	protected boolean fixObject(Object element) {
 		Model m = getModel(element);
 		
-		if (m == null) {
+		/*if (m == null) {
 			// create a Model
 			if (element instanceof EObject) {
 				EObject target = (EObject) element;
@@ -166,7 +166,7 @@ public class ModelURIColumnLabelProvider extends ColumnLabelProvider implements 
 			} catch (Exception e) {
 				return false;
 			}
-		}
+		}*/
 		return false;
 	}
 

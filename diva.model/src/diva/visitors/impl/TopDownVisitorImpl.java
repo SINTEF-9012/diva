@@ -83,7 +83,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitVariabilityModel(VariabilityModel node, ContextType context) {
+	public ResultType visitVariabilityModel(final VariabilityModel node, final ContextType context) {
 		if (node.getModel() != null) { node.getModel().accept(this, context); }
 		for (int i=0; i<node.getContext().size(); i++) { ((diva.Variable)node.getContext().get(i)).accept(this, context); }
 		for (int i=0; i<node.getProperty().size(); i++) { ((diva.Property)node.getProperty().get(i)).accept(this, context); }
@@ -100,7 +100,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitInvariant(Invariant node, ContextType context) {
+	public ResultType visitInvariant(final Invariant node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		if (node.getExpression() != null) { node.getExpression().accept(this, context); }
 		return null;
@@ -112,29 +112,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitBaseModel(BaseModel node, ContextType context) {
-		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
-		return null;
-		
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ResultType visitAspectModel(AspectModel node, ContextType context) {
-		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
-		return null;
-		
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ResultType visitEnumVariable(EnumVariable node, ContextType context) {
+	public ResultType visitEnumVariable(final EnumVariable node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getLiteral().size(); i++) { ((diva.EnumLiteral)node.getLiteral().get(i)).accept(this, context); }
 		return null;
@@ -146,7 +124,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitBooleanVariable(BooleanVariable node, ContextType context) {
+	public ResultType visitBooleanVariable(final BooleanVariable node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -157,7 +135,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitAndTerm(AndTerm node, ContextType context) {
+	public ResultType visitAndTerm(final AndTerm node, final ContextType context) {
 		for (int i=0; i<node.getTerm().size(); i++) { ((diva.Term)node.getTerm().get(i)).accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
@@ -169,7 +147,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitOrTerm(OrTerm node, ContextType context) {
+	public ResultType visitOrTerm(final OrTerm node, final ContextType context) {
 		for (int i=0; i<node.getTerm().size(); i++) { ((diva.Term)node.getTerm().get(i)).accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
@@ -181,7 +159,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitNotTerm(NotTerm node, ContextType context) {
+	public ResultType visitNotTerm(final NotTerm node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		if (node.getTerm() != null) { node.getTerm().accept(this, context); }
 		return null;
@@ -193,7 +171,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitVariantTerm(VariantTerm node, ContextType context) {
+	public ResultType visitVariantTerm(final VariantTerm node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -204,7 +182,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitEnumTerm(EnumTerm node, ContextType context) {
+	public ResultType visitEnumTerm(final EnumTerm node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -215,7 +193,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitBooleanTerm(BooleanTerm node, ContextType context) {
+	public ResultType visitBooleanTerm(final BooleanTerm node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -226,7 +204,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitEnumLiteral(EnumLiteral node, ContextType context) {
+	public ResultType visitEnumLiteral(final EnumLiteral node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -237,7 +215,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitVariant(Variant node, ContextType context) {
+	public ResultType visitVariant(final Variant node, final ContextType context) {
 		if (node.getModel() != null) { node.getModel().accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getPropertyValue().size(); i++) { ((diva.PropertyValue)node.getPropertyValue().get(i)).accept(this, context); }
@@ -253,7 +231,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitDimension(Dimension node, ContextType context) {
+	public ResultType visitDimension(final Dimension node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getVariant().size(); i++) { ((diva.Variant)node.getVariant().get(i)).accept(this, context); }
 		for (int i=0; i<node.getConstraints().size(); i++) { ((diva.MultiplicityConstraint)node.getConstraints().get(i)).accept(this, context); }
@@ -266,7 +244,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitExpression(Expression node, ContextType context) {
+	public ResultType visitExpression(final Expression node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		if (node.getTerm() != null) { node.getTerm().accept(this, context); }
 		return null;
@@ -278,7 +256,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitContextExpression(ContextExpression node, ContextType context) {
+	public ResultType visitContextExpression(final ContextExpression node, final ContextType context) {
 		if (node.getTerm() != null) { node.getTerm().accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
@@ -290,7 +268,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitVariantExpression(VariantExpression node, ContextType context) {
+	public ResultType visitVariantExpression(final VariantExpression node, final ContextType context) {
 		if (node.getTerm() != null) { node.getTerm().accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
@@ -302,7 +280,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitPriorityRule(PriorityRule node, ContextType context) {
+	public ResultType visitPriorityRule(final PriorityRule node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		if (node.getContext() != null) { node.getContext().accept(this, context); }
 		for (int i=0; i<node.getPriority().size(); i++) { ((diva.PropertyPriority)node.getPriority().get(i)).accept(this, context); }
@@ -315,7 +293,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitProperty(Property node, ContextType context) {
+	public ResultType visitProperty(final Property node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getLiteral().size(); i++) { ((diva.PropertyLiteral)node.getLiteral().get(i)).accept(this, context); }
 		return null;
@@ -327,7 +305,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitPropertyLiteral(PropertyLiteral node, ContextType context) {
+	public ResultType visitPropertyLiteral(final PropertyLiteral node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -338,7 +316,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitPropertyValue(PropertyValue node, ContextType context) {
+	public ResultType visitPropertyValue(final PropertyValue node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -349,7 +327,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitPropertyPriority(PropertyPriority node, ContextType context) {
+	public ResultType visitPropertyPriority(final PropertyPriority node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -360,7 +338,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitMultiplicityConstraint(MultiplicityConstraint node, ContextType context) {
+	public ResultType visitMultiplicityConstraint(final MultiplicityConstraint node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		if (node.getAvailable() != null) { node.getAvailable().accept(this, context); }
 		return null;
@@ -372,7 +350,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitAnnotation(Annotation node, ContextType context) {
+	public ResultType visitAnnotation(final Annotation node, final ContextType context) {
 		return null;
 		
 	}
@@ -382,7 +360,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitSimulationModel(SimulationModel node, ContextType context) {
+	public ResultType visitSimulationModel(final SimulationModel node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getScenario().size(); i++) { ((diva.Scenario)node.getScenario().get(i)).accept(this, context); }
 		return null;
@@ -394,7 +372,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitContext(Context node, ContextType context) {
+	public ResultType visitContext(final Context node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getVariable().size(); i++) { ((diva.VariableValue)node.getVariable().get(i)).accept(this, context); }
 		for (int i=0; i<node.getConfiguration().size(); i++) { ((diva.Configuration)node.getConfiguration().get(i)).accept(this, context); }
@@ -409,7 +387,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitConfiguration(Configuration node, ContextType context) {
+	public ResultType visitConfiguration(final Configuration node, final ContextType context) {
 		for (int i=0; i<node.getScore().size(); i++) { ((diva.Score)node.getScore().get(i)).accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getVariant().size(); i++) { ((diva.ConfigVariant)node.getVariant().get(i)).accept(this, context); }
@@ -422,7 +400,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitConfigVariant(ConfigVariant node, ContextType context) {
+	public ResultType visitConfigVariant(final ConfigVariant node, final ContextType context) {
 		for (int i=0; i<node.getScore().size(); i++) { ((diva.Score)node.getScore().get(i)).accept(this, context); }
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
@@ -434,7 +412,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitScenario(Scenario node, ContextType context) {
+	public ResultType visitScenario(final Scenario node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		for (int i=0; i<node.getContext().size(); i++) { ((diva.Context)node.getContext().get(i)).accept(this, context); }
 		return null;
@@ -446,7 +424,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitScore(Score node, ContextType context) {
+	public ResultType visitScore(final Score node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -457,7 +435,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitPriority(Priority node, ContextType context) {
+	public ResultType visitPriority(final Priority node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -468,7 +446,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitBoolVariableValue(BoolVariableValue node, ContextType context) {
+	public ResultType visitBoolVariableValue(final BoolVariableValue node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -479,7 +457,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitEnumVariableValue(EnumVariableValue node, ContextType context) {
+	public ResultType visitEnumVariableValue(final EnumVariableValue node, final ContextType context) {
 		for (int i=0; i<node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }
 		return null;
 		
@@ -490,7 +468,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitConfigurationModel(ConfigurationModel node, ContextType context) {
+	public ResultType visitConfigurationModel(final ConfigurationModel node, final ContextType context) {
 		for (int i=0; i<node.getConfigurations().size(); i++) { ((diva.SuitableConfiguration)node.getConfigurations().get(i)).accept(this, context); }
 		return null;
 		
@@ -501,7 +479,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitSuitableConfiguration(SuitableConfiguration node, ContextType context) {
+	public ResultType visitSuitableConfiguration(final SuitableConfiguration node, final ContextType context) {
 		for (int i=0; i<node.getVariant().size(); i++) { ((diva.ConfigVariant)node.getVariant().get(i)).accept(this, context); }
 		return null;
 		
@@ -512,7 +490,7 @@ public abstract class TopDownVisitorImpl<ContextType, ResultType> extends EObjec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResultType visitContextModel(ContextModel node, ContextType context) {
+	public ResultType visitContextModel(final ContextModel node, final ContextType context) {
 		for (int i=0; i<node.getVariable().size(); i++) { ((diva.VariableValue)node.getVariable().get(i)).accept(this, context); }
 		return null;
 		

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="diva"
-    nsURI="http://www.diva.org/diva" nsPrefix="diva">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="diva" nsURI="http://www.diva.org/diva" nsPrefix="diva">
   <eClassifiers xsi:type="ecore:EClass" name="VariabilityModel" eSuperTypes="#//ModelContainer">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -67,53 +65,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model" abstract="true" eSuperTypes="#//DiVAModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BaseModel" eSuperTypes="#//Model">
-    <eOperations name="weave"/>
-    <eOperations name="accept">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return visitor.visitBaseModel(this, context);"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="body" value="do&#xA;result := visitor.visitBaseModel(self, context)&#xA;end"/>
-        <details key="isAbstract" value="false"/>
-      </eAnnotations>
-      <eGenericType eTypeParameter="#//BaseModel/accept/R"/>
-      <eTypeParameters name="C"/>
-      <eTypeParameters name="R"/>
-      <eParameters name="visitor">
-        <eGenericType eClassifier="#//visitors/Visitor">
-          <eTypeArguments eTypeParameter="#//BaseModel/accept/C"/>
-          <eTypeArguments eTypeParameter="#//BaseModel/accept/R"/>
-        </eGenericType>
-      </eParameters>
-      <eParameters name="context">
-        <eGenericType eTypeParameter="#//BaseModel/accept/C"/>
-      </eParameters>
-    </eOperations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AspectModel" eSuperTypes="#//Model">
-    <eOperations name="accept">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return visitor.visitAspectModel(this, context);"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="body" value="do&#xA;result := visitor.visitAspectModel(self, context)&#xA;end"/>
-        <details key="isAbstract" value="false"/>
-      </eAnnotations>
-      <eGenericType eTypeParameter="#//AspectModel/accept/R"/>
-      <eTypeParameters name="C"/>
-      <eTypeParameters name="R"/>
-      <eParameters name="visitor">
-        <eGenericType eClassifier="#//visitors/Visitor">
-          <eTypeArguments eTypeParameter="#//AspectModel/accept/C"/>
-          <eTypeArguments eTypeParameter="#//AspectModel/accept/R"/>
-        </eGenericType>
-      </eParameters>
-      <eParameters name="context">
-        <eGenericType eTypeParameter="#//AspectModel/accept/C"/>
-      </eParameters>
-    </eOperations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumVariable" eSuperTypes="#//Variable">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -139,7 +90,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="literal" lowerBound="1"
         upperBound="-1" eType="#//EnumLiteral" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariable" eSuperTypes="#//Variable">
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariable" eSuperTypes="#//Variable #//CEPable">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return visitor.visitBooleanVariable(this, context);"/>
@@ -316,7 +267,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteral" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteral" eSuperTypes="#//NamedElement #//CEPable">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return visitor.visitEnumLiteral(this, context);"/>
@@ -376,7 +327,6 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" eType="#//ContextExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weaveLevel" eType="#//Integer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dimension" eSuperTypes="#//NamedElement">
     <eOperations name="accept">
@@ -997,6 +947,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//Model"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CEPable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="#//String"/>
+  </eClassifiers>
   <eSubpackages name="visitors" nsURI="visitors" nsPrefix="visitors">
     <eClassifiers xsi:type="ecore:EClass" name="Visitable" abstract="true" interface="true">
       <eOperations name="accept">
@@ -1027,20 +980,6 @@
       <eOperations name="visitInvariant">
         <eGenericType eTypeParameter="#//visitors/Visitor/ResultType"/>
         <eParameters name="node" eType="#//Invariant"/>
-        <eParameters name="context">
-          <eGenericType eTypeParameter="#//visitors/Visitor/ContextType"/>
-        </eParameters>
-      </eOperations>
-      <eOperations name="visitBaseModel">
-        <eGenericType eTypeParameter="#//visitors/Visitor/ResultType"/>
-        <eParameters name="node" eType="#//BaseModel"/>
-        <eParameters name="context">
-          <eGenericType eTypeParameter="#//visitors/Visitor/ContextType"/>
-        </eParameters>
-      </eOperations>
-      <eOperations name="visitAspectModel">
-        <eGenericType eTypeParameter="#//visitors/Visitor/ResultType"/>
-        <eParameters name="node" eType="#//AspectModel"/>
         <eParameters name="context">
           <eGenericType eTypeParameter="#//visitors/Visitor/ContextType"/>
         </eParameters>
@@ -1304,34 +1243,6 @@
         </eAnnotations>
         <eGenericType eTypeParameter="#//visitors/TopDownVisitor/ResultType"/>
         <eParameters name="node" eType="#//Invariant"/>
-        <eParameters name="context">
-          <eGenericType eTypeParameter="#//visitors/TopDownVisitor/ContextType"/>
-        </eParameters>
-      </eOperations>
-      <eOperations name="visitBaseModel">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;node.annotation.each{ e | e.accept(self, context) }&#xA;end"/>
-          <details key="isAbstract" value="false"/>
-        </eAnnotations>
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="for (int i=0; i&lt;node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }&#xA;return null;&#xA;"/>
-        </eAnnotations>
-        <eGenericType eTypeParameter="#//visitors/TopDownVisitor/ResultType"/>
-        <eParameters name="node" eType="#//BaseModel"/>
-        <eParameters name="context">
-          <eGenericType eTypeParameter="#//visitors/TopDownVisitor/ContextType"/>
-        </eParameters>
-      </eOperations>
-      <eOperations name="visitAspectModel">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;node.annotation.each{ e | e.accept(self, context) }&#xA;end"/>
-          <details key="isAbstract" value="false"/>
-        </eAnnotations>
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="for (int i=0; i&lt;node.getAnnotation().size(); i++) { ((diva.Annotation)node.getAnnotation().get(i)).accept(this, context); }&#xA;return null;&#xA;"/>
-        </eAnnotations>
-        <eGenericType eTypeParameter="#//visitors/TopDownVisitor/ResultType"/>
-        <eParameters name="node" eType="#//AspectModel"/>
         <eParameters name="context">
           <eGenericType eTypeParameter="#//visitors/TopDownVisitor/ContextType"/>
         </eParameters>
