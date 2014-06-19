@@ -15,7 +15,7 @@ Modeling Language for Dynamic Variability
 - run those plugins as an Eclipse configuration
 - it should open another Eclipse where those plugins are activated
 
+# Supporting Project
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/SINTEF-9012/diva/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+- EU FP7 Broker@Cloud
+- EU FP7 DiVA
