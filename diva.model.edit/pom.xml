@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.sintef.diva</groupId>
-    <artifactId>org.sintef.diva.editor.eclipse</artifactId>
-    <name>DiVA :: Editor :: Eclipse</name>
+    <artifactId>org.sintef.diva.edit.eclipse</artifactId>
+    <name>DiVA :: Edit :: Eclipse</name>
     <packaging>bundle</packaging>
 	
     <parent>
@@ -132,13 +132,6 @@
             <artifactId>org.sintef.diva.model</artifactId>
             <version>${thingml.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.sintef</groupId>
-            <artifactId>org.sintef.diva.edit.eclise</artifactId>
-            <version>${thingml.version}</version>
-        </dependency>
-				
 				
         <dependency>
             <groupId>org.osgi</groupId>
