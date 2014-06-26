@@ -128,8 +128,8 @@
     <dependencies>
 		
         <dependency>
-            <groupId>org.thingml</groupId>
-            <artifactId>org.thingml.model</artifactId>
+            <groupId>org.sintef</groupId>
+            <artifactId>org.sintef.diva.moedl</artifactId>
             <version>${thingml.version}</version>
         </dependency>
 				

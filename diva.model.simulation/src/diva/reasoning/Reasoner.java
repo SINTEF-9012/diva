@@ -21,6 +21,7 @@ import diva.DivaFactory;
 import diva.SimulationModel;
 import diva.VariabilityModel;
 import diva.helpers.DivaHelper;
+import org.eclipse.emf.ecore.EObject;
 
 public class Reasoner {
 	
@@ -218,7 +219,7 @@ public class Reasoner {
 		}		
 	}
 	
-	public static void printAlloySpecs(String file_uri) {
+	public static void printAlloySpecs(VariabilityModel model) {
 		StringBuilder builder = new StringBuilder();
 		model.toAlloy(builder);
 		System.out.println(builder.toString());		
@@ -227,7 +228,7 @@ public class Reasoner {
 		
 	
 	public static void printAlloySpecs(String file_uri) {
-		System.out.println("Launching DiVA Simulator on file : " + file_uri.getLocation().toOSString() + "...\n\n");
+		System.out.println("Launching DiVA Simulator on file : " + file_uri + "...\n\n");
 		
 		try {			
 				

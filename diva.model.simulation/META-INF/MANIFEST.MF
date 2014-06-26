@@ -1,27 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Simulation
-Bundle-SymbolicName: diva.model.simulation.ui;singleton:=true
+Bundle-SymbolicName: diva.model.simulation;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: diva.model.simulation.Activator
 Bundle-Vendor: SINTEF
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Require-Bundle: diva.model,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
- org.apache.commons.logging,
- diva.model,
- org.eclipse.ui.ide,
- diva.model.editor,
- diva.model.simulation
+ org.eclipse.emf;bundle-version="2.6.0",
+ org.eclipse.core.runtime
 Bundle-ClassPath: .,
  lib/alloy4.2.jar
-Export-Package: diva.ksimulator.ui,
- diva.model.simulation
-Import-Package: org.eclipse.emf.edit,
- org.eclipse.emf.edit.command,
- org.eclipse.emf.edit.domain,
+Export-Package: diva.alloy,
  diva.reasoning,
  diva.helpers
+Import-Package: diva,
+  org.eclipse.core.runtime

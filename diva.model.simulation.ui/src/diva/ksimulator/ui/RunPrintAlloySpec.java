@@ -15,7 +15,6 @@
  */
 package diva.ksimulator.ui;
 
-import java.io.File;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -25,9 +24,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-
-import diva.VariabilityModel;
-import diva.helpers.DivaHelper;
 
 
 public class RunPrintAlloySpec implements IObjectActionDelegate, Runnable {
@@ -41,7 +37,7 @@ public class RunPrintAlloySpec implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 			String file_uri = file.getLocation().toOSString();
-			diva.reasoning.Reasoner.exportAlloySpecs(file_uri);
+			diva.reasoning.Reasoner.printAlloySpecs(file_uri);
 	}
 
 	/**

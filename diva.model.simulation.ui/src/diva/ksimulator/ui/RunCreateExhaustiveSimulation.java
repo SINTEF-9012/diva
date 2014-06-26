@@ -15,7 +15,6 @@
  */
 package diva.ksimulator.ui;
 
-import java.io.File;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -25,11 +24,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-
-import diva.DivaFactory;
-import diva.SimulationModel;
-import diva.VariabilityModel;
-import diva.helpers.DivaHelper;
 
 
 public class RunCreateExhaustiveSimulation implements IObjectActionDelegate, Runnable {
