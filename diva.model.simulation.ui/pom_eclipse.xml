@@ -26,8 +26,8 @@
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>org.sintef.diva.model</artifactId>
+	<artifactId>org.sintef.diva.reasoner.ui</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
-	<name>DiVA Model Eclipse Plugin</name>
+	<name>DiVA Reasoner-UI Eclipse Plugin</name>
 </project> 

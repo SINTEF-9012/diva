@@ -29,5 +29,5 @@
 	<artifactId>org.sintef.diva.model</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
-	<name>DiVA Model Eclipse Plugin</name>
+	<name>DiVA Editor Eclipse Plugin</name>
 </project> 
