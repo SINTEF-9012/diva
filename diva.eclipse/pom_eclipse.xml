@@ -24,6 +24,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>../diva.model/pom_eclipse.xml</module>
+	<module>../diva.model.edit/pom_eclipse.xml</module>
     <module>../diva.model.editor/pom_eclipse.xml</module>
 	<module>../diva.model.simulation.ui/pom_eclipse.xml</module>
     <module>../diva.eclipse.feature/pom_eclipse.xml</module>
