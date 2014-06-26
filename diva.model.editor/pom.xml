@@ -1,0 +1,286 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sintef.diva</groupId>
+    <artifactId>org.sintef.diva.editor.eclipse</artifactId>
+    <name>DiVA :: Editor :: Eclipse</name>
+    <packaging>bundle</packaging>
+	
+    <parent>
+        <artifactId>org.sintef.diva.root</artifactId>
+        <groupId>org.sintef.diva</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+  
+    <build>
+		<!-- Manage mutli-source java project. Copy the src files inside the targetPath, the unique location for maven compiling
+		Drawback : once compiled the sources are not visible as java packages -->
+        <sourceDirectory>src</sourceDirectory>
+		<!--<outputDirectory>target/classes/</outputDirectory>-->
+        <resources>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>plugin.properties</include>
+                    <include>plugin.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>icons</directory>
+                <targetPath>icons</targetPath>
+            </resource>
+            <resource>
+                <directory>css</directory>
+                <targetPath>css</targetPath>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <argLine>-Xmx1024m</argLine>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+			 <!-- Add generated source to build cycle -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src-gen</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			
+			
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.4</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>org.sintef.diva.editor;singleton:=true</Bundle-SymbolicName>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Bundle-Vendor>SINTEF</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+             <!-- Dependency used for compiling all the bundle (with dependecy to org.eclipse.core.* -->
+                        <Bundle-Activator>
+                            org.sintef.thingml.resource.thingml.ui.ThingmlUIPlugin
+                        </Bundle-Activator>
+                        <Require-Bundle>
+                                
+                                  org.emftext.access;resolution:=optional,
+                                <!--  org.eclipse.emf, -->
+                                  org.eclipse.emf.codegen.ecore,
+                                  org.eclipse.emf.ecore,
+                                  org.eclipse.emf.ecore.edit,
+                                  org.eclipse.emf.edit.ui,
+                                  org.eclipse.emf.workspace,
+                                  org.eclipse.jface,
+                                  org.eclipse.jface.text,
+                                  org.eclipse.ui,
+                                  org.eclipse.ui.editors,
+                                  org.eclipse.ui.ide,
+                                  org.eclipse.ui.views,
+                                  org.emftext.commons.antlr3_3_0,
+                                  org.sintef.thingml.model
+
+                        </Require-Bundle>
+            
+                        <Export-Package>
+                            diva.ksimulator.ui
+                        </Export-Package>
+                      
+                        <Private-Package>
+                        </Private-Package>
+            <!--
+              specify the packages that should be imported to correctly build
+              the bundle (i.e <packaging>bundle<packaging> ".*" to also include
+              sub packages use the ! for avoiding to import some packages that
+              are already there with the Require-Bundle
+            -->
+                        <Import-Package>
+              !*
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+			
+        </plugins>
+    </build>
+    <dependencies>
+		
+        <dependency>
+            <groupId>org.thingml</groupId>
+            <artifactId>org.thingml.model</artifactId>
+            <version>${thingml.version}</version>
+        </dependency>
+				
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        
+        <!-- OSGI Version of EMF -->
+	
+        <dependency>
+            <groupId>org.kevoree.extra</groupId>
+            <artifactId>org.kevoree.extra.emf.library</artifactId>
+            <version>${emf.version}</version>
+        </dependency>
+        
+        <!-- DEPENDANCIES TO ECLIPSE PLUGINS (just for compiling) -->
+
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.emf.validation</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+     
+
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.emf.edit</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.emf.edit.ui</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.emf.ecore.edit</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.emf.ecore</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+	
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.ui</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.ui.workbench</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.ui.editors</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.ui.ide</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.jface</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.jface.text</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.text</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.swt</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.swt.win32.win32.x86</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.ui.workbench.texteditor</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.ui.views</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.core.runtime</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.core.commands</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.core.resources</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.core.jobs</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.equinox.common</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.equinox.registry</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.equinox.preferences</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.maven</groupId>
+            <artifactId>org.eclipse.core.filebuffers</artifactId>
+            <version>${eclipse.version}</version>
+        </dependency>
+  	<dependency>
+      		<groupId>org.eclipse.maven</groupId>
+      		<artifactId>org.eclipse.emf.common.ui</artifactId>
+      		<version>3.7.0</version>
+   	 </dependency>
+	<dependency>
+	      	<groupId>org.eclipse.maven</groupId>
+	      	<artifactId>org.eclipse.core.expressions</artifactId>
+	      	<version>3.7.0</version>
+    </dependency>
+    </dependencies>
+</project>
