@@ -17,5 +17,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
  diva.model.edit;bundle-version="2.0.0",
- org.emftext.commons.antlr3_3_0;bundle-version="3.3.0"
+ org.antlr;bundle-version="2.7.6"
 Bundle-ActivationPolicy: lazy
