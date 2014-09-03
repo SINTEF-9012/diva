@@ -2,6 +2,7 @@ package diva.rest.input.sparql;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -18,6 +19,7 @@ import org.eclipse.core.commands.operations.DefaultOperationHistory;
 public class SparqlQuery {
 	
 	public static SparqlQuery INSTANCE = new SparqlQuery();
+	
 	
 	public String prefixes = 
 	        "prefix sp: <http://www.broker-cloud.eu/service-descriptions/CAS/service-provider#> \n" +
@@ -40,6 +42,14 @@ public class SparqlQuery {
 	
 	public String server = "http://netserv.seerc.org:3030/BrokerAtCloud/query";
 	
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
 	public String query(String query, String output){
 		String q = prefixes + "\n" + query;
 		
@@ -79,6 +89,13 @@ public class SparqlQuery {
 		 return mapper.readValue(s, Map.class);
 		 
 		
+	}
+	
+	public Collection queryToJsonResults(String query) throws JsonParseException, JsonMappingException, IOException{
+		Map m = queryToJsonMap(query);
+		Map mResults = (Map) m.get("results");
+		Collection mBindings = (Collection) mResults.get("bindings");
+		return mBindings;
 	}
 
 }

@@ -64,6 +64,8 @@ public class QueryAttempt {
 	}
 	
 	public static void main(String[] args) throws ClientProtocolException, URISyntaxException, IOException{
-		System.out.println(new ServiceCategorySparql().getCategories());
+		ServiceCategorySparql sc = new ServiceCategorySparql();
+		System.out.println(sc.getCategories());
+		System.out.println(sc.getServices("http://www.broker-cloud.eu/service-descriptions/CAS/categories#contacts"));
 	}
 }
