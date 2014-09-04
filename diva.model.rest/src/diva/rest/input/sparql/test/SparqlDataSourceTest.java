@@ -39,6 +39,12 @@ public class SparqlDataSourceTest {
 		ServiceAttributeSparql sa = new ServiceAttributeSparql();
 		Object s = sa.get("sp:CASAddressApp", "availability");
 		assertEquals("99", s);
+		
+		Object price = sa.get("sp:CASAddressApp", "gr:hasPriceSpecification");
+		assertEquals("4.99", price);
+		
+		Object response = sa.get("sp:CASAddressApp", "cas:hasMinimumResponseTime");
+		assertEquals("800", response);
 	}
 	
 	@Test

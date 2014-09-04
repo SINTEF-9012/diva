@@ -1,5 +1,6 @@
 package diva.rest.input.sparql;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,14 +12,21 @@ import diva.rest.input.ServiceAttribute;
 public class ServiceAttributeSparql extends ServiceAttribute {
 	
 	private static Map<String, List<String>> alias = new HashMap<String, List<String>>();
-	
+	private static Map<String, String> literals = new HashMap<String, String>();
 	static{
 		alias.put("sp:hasAvailability", Arrays.asList("Avail", "Availability", "availability", "hasAvailability"));
+		alias.put("gr:hasPriceSpecification", Arrays.asList("Price", "hasPriceSpecification"));
+		alias.put("cas:hasMinimumResponseTime", Arrays.asList("minimumResponseTime") );
+		literals.put("sp:hasAvailability", "gr:hasValue");
+		literals.put("gr:hasPriceSpecification", "gr:hasCurrencyValue");
+		literals.put("cas:hasMinimumResponseTime", "gr:hasValue");
 	}
 	
 	@Override
 	public List<String> listCommonAttributes(){
-		return Arrays.asList("sp:hasAvailability");
+		ArrayList<String> result = new ArrayList<String>();
+		result.addAll(literals.keySet());
+		return result;
 	}
 	
 	public Object get(String service, String attribute){
@@ -37,8 +45,8 @@ public class ServiceAttributeSparql extends ServiceAttribute {
 				"WHERE\n" +
 				"  {\n" +
 				"    GRAPH ?src\n" +
-				"    { "+ s +" sp:hasAvailability ?v\n" +
-				"      optional {?v gr:hasValue ?value} ." +
+				"    { "+ s +" " + attr + " ?v\n" +
+				"      optional {?v " + literals.get(attr) + " ?value} ." +
 				"    }\n" +
 				"  }";
 		try{ 
