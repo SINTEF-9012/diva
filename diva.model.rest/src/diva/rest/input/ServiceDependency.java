@@ -27,9 +27,8 @@ public class ServiceDependency {
 	private Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
 	
 	private void initFake(){
-		fakeRepo.put("Metro", Arrays.asList("BingMap"));
-		fakeRepo.put("FakeRouter", Arrays.asList("Metro"));
-		fakeRepo.put("ToyRouter", Arrays.asList("GoogleMap"));
+		fakeRepo.put("LyncAddr", Arrays.asList("OutlookCal"));
+		fakeRepo.put("OutlookCal", Arrays.asList("LyncAddr"));
 	}
 	
 	public ServiceDependency(){

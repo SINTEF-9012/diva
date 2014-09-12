@@ -15,6 +15,7 @@
  */
 package diva.rest.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,12 +32,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import diva.BoolVariableValue;
+import diva.BooleanVariable;
 import diva.Context;
 import diva.ContextExpression;
 import diva.Dimension;
 import diva.DivaFactory;
+import diva.EnumLiteral;
+import diva.EnumVariable;
+import diva.EnumVariableValue;
+import diva.Priority;
+import diva.PriorityRule;
 import diva.Property;
 import diva.PropertyValue;
 import diva.Scenario;
@@ -47,6 +55,7 @@ import diva.Variant;
 import diva.VariantExpression;
 import diva.helpers.DivaHelper;
 import diva.parser.DivaExpressionParser;
+import diva.rest.input.AdaptRule;
 import diva.rest.input.ConsumerProfile;
 import diva.rest.input.ServiceAttribute;
 import diva.rest.input.ServiceCategory;
@@ -143,6 +152,82 @@ public class DivaRoot {
 		}
 	}
 	
+	/*Before Category*/
+	private void updatePropertyDef(){
+		for(String s : ServiceAttribute.INSTANCE.listCommonAttributes()){
+			Property p = factory.createProperty();
+			p.setDirection(0);
+			p.setName(s);
+			p.setId(s);
+			root.getProperty().add(p);
+		}
+		
+	}
+	
+	private void updateFixed(){
+
+		
+		
+		AdaptRule rules = AdaptRule.INSTANCE;
+		for(String ruleName : rules.allRuleNames()){
+			PriorityRule rule = factory.createPriorityRule();
+			rule.setId(ruleName);
+			rule.setName(ruleName);
+			for(Property p : root.getProperty()){
+				Priority priority = factory.createPriority();
+				priority.setProperty(p);
+				priority.setPriority(rules.getPriority(ruleName, p.getId()));
+			}
+		}
+	}
+	private void updateAutoFullAvailability(){
+		for(Dimension dim : root.getDimension())
+			for(Variant vrt : dim.getVariant()){
+				
+				String name = vrt.getName();
+				
+				EnumVariable variable = factory.createEnumVariable();
+				variable.setName(name+"S");
+				variable.setId(name+"S");
+				EnumLiteral avail = factory.createEnumLiteral();
+				avail.setName(name+"A");
+				avail.setId(name+"A");
+				EnumLiteral fail = factory.createEnumLiteral();
+				fail.setName(name+"F");
+				fail.setId(name+"F");
+				variable.getLiteral().add(avail);
+				variable.getLiteral().add(fail);
+				
+				root.getContext().add(variable);
+					
+				if(vrt.getAvailable() == null){
+					vrt.setAvailable(factory.createContextExpression());
+				}
+				ContextExpression expr = vrt.getAvailable();
+				expr.setText(String.format("%sS=%sA", name, name));
+				try{
+					Term term = DivaExpressionParser.parse(root, expr.getText().trim());
+					expr.setTerm(term);
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				
+			}
+		
+		BooleanVariable bv = factory.createBooleanVariable();
+		bv.setName("CpuOLoad");
+		bv.setId("CpuOLoad");
+		root.getContext().add(bv);
+		
+		bv = factory.createBooleanVariable();
+		bv.setName("RamOLoad");
+		bv.setId("RamOLoad");
+		root.getContext().add(bv);
+		
+	}
+	
 	private void updateAvailable(){
 		for(Dimension dim : root.getDimension())
 			for(Variant vrt : dim.getVariant()){
@@ -181,6 +266,7 @@ public class DivaRoot {
 	}
 	
 	private void updateProperty(){
+		
 		for(Dimension dim : root.getDimension()){
 			for(Variant var : dim.getVariant()){
 				for(PropertyValue pv : var.getPropertyValue()){
@@ -201,31 +287,38 @@ public class DivaRoot {
 		context.getVariable().clear();
 		Map<String, Object> prf = (Map<String, Object>) ConsumerProfile.INSTANCE.getRequired(consumer, profile);
 		
-		
-		
 		if(prf != null){
-			for(Map.Entry<String, Object> entry : prf.entrySet()){
-				Object value = entry.getValue();
-				Variable var = null;
-				for(Variable v : root.getContext())
-					if(v.getId().equals(entry.getKey()))
-						var = v;
-				
-				if(value instanceof Boolean && var != null){
-					BoolVariableValue bvv = factory.createBoolVariableValue();
-					bvv.setVariable(var);
-					bvv.setBool(((Boolean)value).booleanValue());
-					context.getVariable().add(bvv);
-				}
-				
-				//Check if a user want a service from any dimension
-				for(Dimension d : root.getDimension()){
-					if(Boolean.valueOf(true).equals(entry.getValue()) && 
-							d.getName().equals(entry.getKey())){
-						d.setLower(1);
+			for(Variable v: root.getContext()){
+				Object value = prf.get(v.getName());
+				if(v instanceof EnumVariable){
+					EnumLiteral el = null;
+					if(value == null)
+						el = ((EnumVariable) v).getLiteral().get(0);
+					for(EnumLiteral literal : ((EnumVariable) v).getLiteral()){
+						if(literal.getName().equals(value))
+							el = literal;
 					}
+					EnumVariableValue vv = factory.createEnumVariableValue();
+					vv.setVariable(v);
+					vv.setLiteral(el);
+					context.getVariable().add(vv);
 				}
-				
+				else{
+					BoolVariableValue vv = factory.createBoolVariableValue();
+					vv.setVariable(v);
+					if(Boolean.valueOf(true).equals(value)){
+						vv.setBool(true);
+					}
+					else
+						vv.setBool(false);
+					context.getVariable().add(vv);
+				}
+			}
+			
+			for(Dimension d : root.getDimension()){
+				if(Boolean.valueOf(true).equals(prf.get(d.getName()))){
+					d.setLower(1);
+				}
 			}
 		}
 	}
@@ -258,16 +351,23 @@ public class DivaRoot {
 	}
 
 	public void updateModel() {
+		
 		root.getDimension().clear();
+		root.getContext().clear();
+		root.getRule().clear();
+		root.getProperty().clear();
+		updatePropertyDef();
 		updateCategoryAndService();
 		updateDependency();
-		updateAvailable();
+		updateProperty();
+		updateAutoFullAvailability();
+		updateFixed();
 	}
 	
 
 	public void updateOnRequest(String consumer, String profile){
 		this.updateProfileContext(consumer, profile);
-		this.updateProperty();
+		//this.updateProperty();
 	}
 	
 	public DivaRoot fork(){
@@ -277,6 +377,17 @@ public class DivaRoot {
 	
 	public ConfigurationsPool getConfigurationPool(){
 		return configPool;
+	}
+	
+	public void saveModel(org.eclipse.emf.common.util.URI uri){
+		Resource res = new XMIResourceImpl(uri);
+		res.getContents().add(root);
+		try {
+			res.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

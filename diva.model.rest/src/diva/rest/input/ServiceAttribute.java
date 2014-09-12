@@ -31,9 +31,43 @@ public class ServiceAttribute {
 	private Map<String, Object> fakedRepo = new HashMap<String, Object>();
 	
 	private void initFake(){
-		fakedRepo.put("GoogleMap-Bicycle", true);
-		fakedRepo.put("GoogleMap-LiveTraffic", true);
-		fakedRepo.put("BingMap-LiveTraffic", true);
+		fakedRepo.put("LyncAddr-Price", 1);
+		fakedRepo.put("LyncAddr-Response", 3);
+		fakedRepo.put("LyncAddr-CPU", 1);
+		fakedRepo.put("LyncAddr-RAM", 3);
+		fakedRepo.put("LyncAddr-Failure", 0);
+		
+		fakedRepo.put("GMailAddr-Price", 0);
+		fakedRepo.put("GMailAddr-Response", 5);
+		fakedRepo.put("GMailAddr-CPU", 3);
+		fakedRepo.put("GMailAddr-RAM", 1);
+		fakedRepo.put("GMailAddr-Failure", 0);
+		
+		fakedRepo.put("OutlookCal-Price", 0);
+		fakedRepo.put("OutlookCal-Response", 5);
+		fakedRepo.put("OutlookCal-CPU", 1);
+		fakedRepo.put("OutlookCal-RAM", 3);
+		fakedRepo.put("OutlookCal-Failure", 0);
+		
+		fakedRepo.put("GoogleCal-Price", 0);
+		fakedRepo.put("GoogleCal-Response", 3);
+		fakedRepo.put("GoogleCal-CPU", 3);
+		fakedRepo.put("GoogleCal-RAM", 1);
+		fakedRepo.put("GoogleCal-Failure", 0);
+		
+		fakedRepo.put("BingMap-Price", 0);
+		fakedRepo.put("BingMap-Response", 9);
+		fakedRepo.put("BingMap-CPU", 1);
+		fakedRepo.put("BingMap-RAM", 3);
+		fakedRepo.put("BingMap-Failure", 0);
+		
+		fakedRepo.put("YellowMap-Price", 1);
+		fakedRepo.put("YellowMap-Response", 3);
+		fakedRepo.put("YellowMap-CPU", 1);
+		fakedRepo.put("YellowMap-RAM", 1);
+		fakedRepo.put("YellowMap-Failure", 0);	
+		
+		
 	}
 	
 	public ServiceAttribute(){
@@ -45,8 +79,9 @@ public class ServiceAttribute {
 	}
 	
 	public List<String> listCommonAttributes(){
-		return Arrays.asList("Avail");
+		return Arrays.asList("Price","Failure", "Response","CPU","RAM");
 	}
+	
 	
 	public Object get(String service, String attribute){
 		if("FailTen".equals(attribute))

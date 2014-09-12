@@ -32,15 +32,27 @@ public class ServiceCategory {
 		initFake();
 	}
 	
+//	private void initFake(){
+//		fakeRepo.put("Map", 
+//				Arrays.asList("GoogleMap", "BingMap", "AppleMap")
+//			);
+//		fakeRepo.put("PubTrans", 
+//				Arrays.asList("Metro")
+//			);
+//		fakeRepo.put("RoutePlan", 
+//				Arrays.asList("FakeRouter", "ToyRouter")
+//			);
+//	}
+	
 	private void initFake(){
 		fakeRepo.put("Map", 
-				Arrays.asList("GoogleMap", "BingMap", "AppleMap")
+				Arrays.asList("GoogleMap", "BingMap", "YellowMap")
 			);
-		fakeRepo.put("PubTrans", 
-				Arrays.asList("Metro")
+		fakeRepo.put("Calendar", 
+				Arrays.asList("OutlookCal", "GoogleCal")
 			);
-		fakeRepo.put("RoutePlan", 
-				Arrays.asList("FakeRouter", "ToyRouter")
+		fakeRepo.put("Address", 
+				Arrays.asList("LyncAddr", "GMailAddr")
 			);
 	}
 	

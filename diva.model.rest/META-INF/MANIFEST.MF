@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  diva.model.simulation;bundle-version="2.0.0",
  diva.model.editor;bundle-version="2.0.0",
  org.apache.commons.io;bundle-version="2.0.1",
- org.junit
+ org.junit,
+ org.antlr;bundle-version="2.7.6"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/aopalliance-repackaged-2.2.0.jar,

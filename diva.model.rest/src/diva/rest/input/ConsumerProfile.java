@@ -37,12 +37,13 @@ public class ConsumerProfile {
 	
 	private void initFake(){
 		Map<String, Object> prf = new HashMap<String, Object>();
-		prf.put("Bicycle", true);
-		prf.put("LiveTraffic", false);
+		prf.put("GoogleMapS", "GoogleMapF");
+		prf.put("CpuOLoad", true);
+		prf.put("Address", true);
 		//I put currently used services here too, but in practice, it may be obtained from 
 		//a different service
 		prf.put(CURRENT_USED, new HashSet<String>(Arrays.asList(
-					"AppleMap"
+					"GoogleMap"
 				))	
 			);
 		fakedRequired.put("abc-001", prf);

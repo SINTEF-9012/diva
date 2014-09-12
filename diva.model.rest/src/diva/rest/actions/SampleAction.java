@@ -70,6 +70,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 //					Repository.mainRoot.getScenarios().iterator().next().getContext().get(0)
 //				);
 		
+		updateAndSave();
 		
 		URI uri = UriBuilder.fromUri("http://0.0.0.0/").port(8089).build();
 		ResourceConfig resourceConfig = new ResourceConfig(Demo.class);
@@ -130,5 +131,13 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	 */
 	public void init(IWorkbenchWindow window) {
 		this.window = window;
+	}
+	
+	public void updateAndSave(){
+		DivaRoot d = Repository.mainRoot.fork();
+		d.updateModel();
+		d.updateOnRequest("abc", "001");
+		d.saveModel(org.eclipse.emf.common.util.URI
+				.createPlatformResourceURI("org.diva.samples/model/broker/Broker-generated.diva"));
 	}
 }
