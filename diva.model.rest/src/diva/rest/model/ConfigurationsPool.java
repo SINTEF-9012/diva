@@ -17,6 +17,8 @@ package diva.rest.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -60,7 +62,17 @@ public class ConfigurationsPool {
 
 	public ConfigurationsPool(Context context){
 		int i = context.getConfiguration().size();
-		for(Configuration conf : context.getConfiguration()){
+		List<Configuration> confs = new ArrayList<Configuration>();
+		confs.addAll(context.getConfiguration());
+		Collections.sort(confs, new Comparator<Configuration>(){
+
+			@Override
+			public int compare(Configuration o1, Configuration o2) {
+				return Integer.compare(o1.getTotalScore(), o2.getTotalScore());
+			}
+			
+		});
+		for(Configuration conf : confs){
 			pool.put(String.format("%2d", i), conf);
 			original.add(conf);
 			i -= 1;

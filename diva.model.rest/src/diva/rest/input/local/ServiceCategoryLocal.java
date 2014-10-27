@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input;
+package diva.rest.input.local;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,13 +22,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServiceCategory {
+import diva.rest.input.abstracts.ServiceCategory;
+
+public class ServiceCategoryLocal extends ServiceCategory {
 	
-	public static ServiceCategory INSTANCE = new ServiceCategory();
+	public static ServiceCategoryLocal INSTANCE = new ServiceCategoryLocal();
 	
 	public Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
 	
-	public ServiceCategory(){
+	public ServiceCategoryLocal(){
 		initFake();
 	}
 	
@@ -56,10 +58,12 @@ public class ServiceCategory {
 			);
 	}
 	
+	@Override
 	public List<String> getCategories(){
 		return new ArrayList<String>(fakeRepo.keySet());
 	}
 	
+	@Override
 	public List<String> getServices(String category){
 		return fakeRepo.get(category);
 	}

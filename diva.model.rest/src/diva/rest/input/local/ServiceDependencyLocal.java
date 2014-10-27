@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input;
+package diva.rest.input.local;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServiceDependency {
+import diva.rest.input.abstracts.ServiceDependency;
+
+public class ServiceDependencyLocal extends ServiceDependency {
 	
-	public static ServiceDependency INSTANCE = new ServiceDependency();
+	public static ServiceDependencyLocal INSTANCE = new ServiceDependencyLocal();
 	
 	private Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
 	
@@ -31,10 +33,11 @@ public class ServiceDependency {
 		fakeRepo.put("OutlookCal", Arrays.asList("LyncAddr"));
 	}
 	
-	public ServiceDependency(){
+	public ServiceDependencyLocal(){
 		initFake();
 	}
 	
+	@Override
 	public List<String> getDependency(String srv){
 		return fakeRepo.get(srv);
 	}

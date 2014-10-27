@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import diva.rest.input.ServiceDependency;
+import diva.rest.input.local.ServiceDependencyLocal;
 
 /**
  * Each per request id
@@ -43,7 +43,7 @@ public class DcSession {
 		Set<String> required = new HashSet<String>();
 		for(String s : allServices){
 			try{
-				List<String> dep = ServiceDependency.INSTANCE.getDependency(s);
+				List<String> dep = ServiceDependencyLocal.INSTANCE.getDependency(s);
 				if(dep !=null)
 					required.addAll(dep);
 			}

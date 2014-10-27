@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import diva.rest.input.ServiceAttribute;
+import diva.rest.input.local.ServiceAttributeLocal;
 
-public class ServiceAttributeSparql extends ServiceAttribute {
+public class ServiceAttributeSparql extends ServiceAttributeLocal {
 	
 	private static Map<String, List<String>> alias = new HashMap<String, List<String>>();
 	private static Map<String, String> literals = new HashMap<String, String>();

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input;
+package diva.rest.input.local;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,21 +25,24 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-public class ConsumerProfile {
+import diva.rest.input.abstracts.ConsumerProfile;
 
-	public static ConsumerProfile INSTANCE = new ConsumerProfile();
+public class ConsumerProfileLocal extends ConsumerProfile {
+
+	public static ConsumerProfileLocal INSTANCE = new ConsumerProfileLocal();
 	
 	private static final String CURRENT_USED = "CURRENT_USED";
 	
 	Random random = new Random();
 	
-	private Map<String, Object> fakedRequired = new HashMap<String, Object>();
+	public Map<String, Object> fakedRequired = new HashMap<String, Object>();
 	
 	private void initFake(){
 		Map<String, Object> prf = new HashMap<String, Object>();
-		prf.put("GoogleMapS", "GoogleMapF");
+		//prf.put("GoogleMapS", "GoogleMapF");
 		prf.put("CpuOLoad", true);
 		prf.put("Address", true);
+		prf.put("Map", true);
 		//I put currently used services here too, but in practice, it may be obtained from 
 		//a different service
 		prf.put(CURRENT_USED, new HashSet<String>(Arrays.asList(
@@ -59,29 +62,35 @@ public class ConsumerProfile {
 		fakedRequired.put("abc-002", prf);	
 	}
 	
-	public ConsumerProfile(){
+	public ConsumerProfileLocal(){
 		initFake();
 	}
 	
 	
+	@Override
 	public Object getRequired(String consumer, String profile){
 		
 		return fakedRequired.get(combineIds(consumer, profile));
 		
 	}
 	
-	private String combineIds(String consumer, String profile){
+	@Override
+	protected String combineIds(String consumer, String profile){
 		return consumer+"-"+profile;
 	}
 	
+	@Override
 	public Collection<String> getCurrentServices(String consumer, String profile){
 		return this.getCurrentServices(combineIds(consumer, profile));
 	}
 	
+	@Override
 	public Collection<String> getCurrentServices(String consumerProfile){
 		Set<String> current = (Set<String>)((Map)fakedRequired.get(consumerProfile)).get(CURRENT_USED);
 		return new HashSet<String>( current);
 	}
+	
+	public Map<String, String> publicStatus = new HashMap<String, String>();
 	
 	
 }

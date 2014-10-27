@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -46,22 +47,47 @@ import diva.EnumVariableValue;
 import diva.Priority;
 import diva.PriorityRule;
 import diva.Property;
+import diva.PropertyPriority;
 import diva.PropertyValue;
+import diva.Rule;
 import diva.Scenario;
 import diva.Term;
 import diva.VariabilityModel;
 import diva.Variable;
+import diva.VariableValue;
 import diva.Variant;
 import diva.VariantExpression;
 import diva.helpers.DivaHelper;
 import diva.parser.DivaExpressionParser;
-import diva.rest.input.AdaptRule;
-import diva.rest.input.ConsumerProfile;
-import diva.rest.input.ServiceAttribute;
-import diva.rest.input.ServiceCategory;
-import diva.rest.input.ServiceDependency;
+import diva.rest.input.abstracts.AdaptRule;
+import diva.rest.input.abstracts.ConsumerProfile;
+import diva.rest.input.abstracts.ServiceAttribute;
+import diva.rest.input.abstracts.ServiceCategory;
+import diva.rest.input.abstracts.ServiceDependency;
+import diva.rest.input.local.AdaptRuleLocal;
+import diva.rest.input.local.ConsumerProfileLocal;
+import diva.rest.input.local.ServiceAttributeLocal;
+import diva.rest.input.local.ServiceCategoryLocal;
+import diva.rest.input.local.ServiceDependencyLocal;
 
 public class DivaRoot {
+	
+	private static final String NONE = "NoImpendingFailure";
+	private static final String LOW = "ImpendingFailureLow";
+	private static final String MEDIUM = "ImpendingFailureMedium";
+	private static final String HIGH = "ImpendingFailureHigh";
+	private static final String FAILED = "OccurredFailure";
+	private static final String RECOVERED = "FailureRecovered";
+	
+	private int getFailureNumValue(String s){
+		switch(s){
+		case NONE: return 0;
+		case LOW: return 1;
+		case MEDIUM: return 2;
+		case HIGH: return 4;
+		}
+		return -1;
+	}
 	
 	private DivaFactory factory = DivaFactory.eINSTANCE;
 	
@@ -113,11 +139,13 @@ public class DivaRoot {
 	public void runSimulation(){
 		if(root.getSimulation()==null)
 			return;
-		DivaHelper.computeSuitableConfigurations(root, 0);
-		
-		setTimeQueried(Calendar.getInstance().getTime());
-		
 		root.getSimulation().populatePriorities();
+		root.getSimulation().populateScores();
+		root.getSimulation().populateVerdicts();
+		DivaHelper.computeSuitableConfigurations(root, 0);
+		//root.getSimulation().getScenario().get(0).getContext().get(0).
+		setTimeQueried(Calendar.getInstance().getTime());
+		//root.getSimulation().
 		root.getSimulation().populateScores();
 		root.getSimulation().populateVerdicts();
 		configPool = new ConfigurationsPool(
@@ -275,7 +303,7 @@ public class DivaRoot {
 							pv.getProperty().getId()
 						);
 					if(res != null && res instanceof Integer)
-						var.getPropertyValue().get(0).setValue((Integer)res);
+						pv.setValue((Integer)res);
 					// TODO: handle properties in other types.
 				}
 			}
@@ -287,13 +315,21 @@ public class DivaRoot {
 		context.getVariable().clear();
 		Map<String, Object> prf = (Map<String, Object>) ConsumerProfile.INSTANCE.getRequired(consumer, profile);
 		
+		
+		
 		if(prf != null){
 			for(Variable v: root.getContext()){
 				Object value = prf.get(v.getName());
 				if(v instanceof EnumVariable){
 					EnumLiteral el = null;
-					if(value == null)
-						el = ((EnumVariable) v).getLiteral().get(0);
+					if(value == null){
+						String pubValue = ConsumerProfileLocal.INSTANCE.publicStatus.get(v.getName());
+						
+						if(pubValue==null)
+							el = ((EnumVariable) v).getLiteral().get(0);
+						value = pubValue;
+						
+					}
 					for(EnumLiteral literal : ((EnumVariable) v).getLiteral()){
 						if(literal.getName().equals(value))
 							el = literal;
@@ -309,6 +345,8 @@ public class DivaRoot {
 					if(Boolean.valueOf(true).equals(value)){
 						vv.setBool(true);
 					}
+					else if("true".equals(ConsumerProfileLocal.INSTANCE.publicStatus.get(v.getName())))
+						vv.setBool(true);
 					else
 						vv.setBool(false);
 					context.getVariable().add(vv);
@@ -320,6 +358,8 @@ public class DivaRoot {
 					d.setLower(1);
 				}
 			}
+			
+			this.generateRule();
 		}
 	}
 	
@@ -364,6 +404,58 @@ public class DivaRoot {
 		updateFixed();
 	}
 	
+	public String updateFailureLikelihood(String service, String likelihood){
+		if("CpuOLoad".equals(service)){
+			if("recovered".equals(likelihood.toLowerCase()))
+				ConsumerProfileLocal.INSTANCE.publicStatus.remove(service);
+			else
+				ConsumerProfileLocal.INSTANCE.publicStatus.put(service, "true");
+			return "CPU updated";
+		}
+		if("RamOLoad".equals(service)){
+			if("recovered".equals(likelihood.toLowerCase()))
+				ConsumerProfileLocal.INSTANCE.publicStatus.remove(service);
+			else
+				ConsumerProfileLocal.INSTANCE.publicStatus.put(service, "true");
+			return "Ram updated";
+		}
+		if(FAILED.toLowerCase().equals(likelihood.toLowerCase()) || RECOVERED.toLowerCase().equals(likelihood.toLowerCase())){
+//			for(VariableValue v : root.getSimulation().getScenario().get(0).getContext().get(0).getVariable()){
+//				if(v.getVariable().equals(service+"S")){
+//					for(EnumLiteral l : ((EnumVariable)v.getVariable()).getLiteral()){
+//						if(l.getName().equals(service+"F") || "Failed".equals(likelihood))
+//							((EnumVariableValue)v).setLiteral(l);
+//						else if(l.getName().equals(service+"A") || "Recovered".equals(likelihood))
+//							((EnumVariableValue)v).setLiteral(l);
+//					}
+//				}
+//			}
+			//TODO: Not done by updating DivaRoot...
+			if(FAILED.toLowerCase().equals(likelihood.toLowerCase()))
+				ConsumerProfileLocal.INSTANCE.publicStatus.put(service+"S", service+"F");
+			else
+				ConsumerProfileLocal.INSTANCE.publicStatus.remove(service+"S");
+			return "updated";
+		}
+		int nlikelihood = this.getFailureNumValue(likelihood);
+		if(nlikelihood<0)
+			return "Not a valid level name";
+		for(Dimension d : root.getDimension()){
+			for(Variant v : d.getVariant()){
+				if(v.getName().equals(service)){
+					
+					for(PropertyValue p : v.getPropertyValue()){
+						if("Failure".equals(p.getProperty().getName())){
+							p.setValue(nlikelihood);
+							return String.format("Failure likelihood of %s is changed to %d", v.getName(), nlikelihood);
+						}
+						
+					}
+				}
+			}
+		}
+		return "No specified service found";
+	}
 
 	public void updateOnRequest(String consumer, String profile){
 		this.updateProfileContext(consumer, profile);
@@ -387,6 +479,51 @@ public class DivaRoot {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void generateRule(){
+		
+		Map<String, Integer> priorities = new HashMap<String, Integer>();
+		priorities.put("Price", 2);
+		priorities.put("Response", 2);
+		priorities.put("Failure", 4);
+		this.fillRule("Cpu", "CpuOLoad", priorities);
+		
+		priorities.clear();
+		priorities.put("RAM", 4);
+		priorities.put("Failure", 2);
+		this.fillRule("Ram", "RamOLoad", priorities);
+		
+		priorities.clear();
+		priorities.put("Failure", 2);
+		priorities.put("Price", 2);
+		this.fillRule("None", "not(RamOLoad or CpuOLoad)", priorities);
+		
+	}
+	
+	private void fillRule(String name, String text, Map<String, Integer> priorities){
+		PriorityRule rule = factory.createPriorityRule();
+		root.getRule().add(rule);
+		rule.setName(name);
+		ContextExpression expr = factory.createContextExpression();
+		expr.setText(text);
+		rule.setContext(expr);
+		try {
+			expr.setTerm(DivaExpressionParser.parse(root, expr.getText()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(Property p : root.getProperty()){
+			PropertyPriority priority = factory.createPropertyPriority();
+			priority.setProperty(p);
+			Integer pri = priorities.get(p.getName());
+			if(pri == null)
+				priority.setPriority(0);
+			else
+				priority.setPriority(pri.intValue());
+			rule.getPriority().add(priority);
 		}
 	}
 	

@@ -5,9 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import diva.rest.input.ServiceCategory;
+import diva.rest.input.local.ServiceCategoryLocal;
 
-public class ServiceCategorySparql extends ServiceCategory{
+public class ServiceCategorySparql extends ServiceCategoryLocal{
 	
 	public static final String categoryPrefix = "fc";
 	

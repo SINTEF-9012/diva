@@ -5,9 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import diva.rest.input.ServiceDependency;
+import diva.rest.input.local.ServiceDependencyLocal;
 
-public class ServiceDependencySparql extends ServiceDependency {
+public class ServiceDependencySparql extends ServiceDependencyLocal {
 	@Override
 	public List<String> getDependency(String srv){
 		String service = ServiceCategorySparql.resolveService(srv);

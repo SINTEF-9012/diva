@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input;
+package diva.rest.input.local;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,9 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class ServiceAttribute {
+import diva.rest.input.abstracts.ServiceAttribute;
 
-	public static ServiceAttribute INSTANCE = new ServiceAttribute();
+public class ServiceAttributeLocal extends ServiceAttribute {
+
+	public static ServiceAttributeLocal INSTANCE = new ServiceAttributeLocal();
 	
 	Random random = new Random();
 	
@@ -34,13 +36,13 @@ public class ServiceAttribute {
 		fakedRepo.put("LyncAddr-Price", 1);
 		fakedRepo.put("LyncAddr-Response", 3);
 		fakedRepo.put("LyncAddr-CPU", 1);
-		fakedRepo.put("LyncAddr-RAM", 3);
+		fakedRepo.put("LyncAddr-RAM", 4);
 		fakedRepo.put("LyncAddr-Failure", 0);
 		
 		fakedRepo.put("GMailAddr-Price", 0);
-		fakedRepo.put("GMailAddr-Response", 5);
-		fakedRepo.put("GMailAddr-CPU", 3);
-		fakedRepo.put("GMailAddr-RAM", 1);
+		fakedRepo.put("GMailAddr-Response", 3);
+		fakedRepo.put("GMailAddr-CPU", 1);
+		fakedRepo.put("GMailAddr-RAM", 10);
 		fakedRepo.put("GMailAddr-Failure", 0);
 		
 		fakedRepo.put("OutlookCal-Price", 0);
@@ -67,22 +69,32 @@ public class ServiceAttribute {
 		fakedRepo.put("YellowMap-RAM", 1);
 		fakedRepo.put("YellowMap-Failure", 0);	
 		
+		fakedRepo.put("GoogleMap-Price", 1);
+		fakedRepo.put("GoogleMap-Response", 3);
+		fakedRepo.put("GoogleMap-CPU", 1);
+		fakedRepo.put("GoogleMap-RAM", 10);
+		fakedRepo.put("GoogleMap-Failure", 0);	
 		
 	}
 	
-	public ServiceAttribute(){
+	public ServiceAttributeLocal(){
 		initFake();
 	}
 	
+	@Override
 	public List<String> listAttributes(String service){
 		return Collections.EMPTY_LIST;
 	}
 	
+	@Override
 	public List<String> listCommonAttributes(){
 		return Arrays.asList("Price","Failure", "Response","CPU","RAM");
 	}
 	
+
 	
+	
+	@Override
 	public Object get(String service, String attribute){
 		if("FailTen".equals(attribute))
 			return random.nextInt(10);

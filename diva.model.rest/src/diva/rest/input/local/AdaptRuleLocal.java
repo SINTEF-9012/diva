@@ -1,12 +1,14 @@
-package diva.rest.input;
+package diva.rest.input.local;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdaptRule {
+import diva.rest.input.abstracts.AdaptRule;
 
-	public static AdaptRule INSTANCE = new AdaptRule();
+public class AdaptRuleLocal extends AdaptRule {
+
+	public static AdaptRuleLocal INSTANCE = new AdaptRuleLocal();
 	
 	private Map<String, Map<String, String>> fakedRepo = new HashMap<String, Map<String, String>>();
 	
@@ -35,18 +37,21 @@ public class AdaptRule {
 		
 	}
 	
-	public AdaptRule(){
+	public AdaptRuleLocal(){
 		initFake();
 	}
 	
+	@Override
 	public Collection<String> allRuleNames(){
 		return fakedRepo.keySet();
 	}
 	
+	@Override
 	public String getRule(String name){
 		return fakedRepo.get(name).get("rule");
 	}
 	
+	@Override
 	public int getPriority(String name, String property){
 		String res = fakedRepo.get(name).get(property);
 		if(res == null)

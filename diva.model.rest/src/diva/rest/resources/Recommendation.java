@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -23,7 +24,7 @@ import javax.ws.rs.core.Response;
 import diva.ConfigVariant;
 import diva.Configuration;
 import diva.Score;
-import diva.rest.input.ConsumerProfile;
+import diva.rest.input.local.ConsumerProfileLocal;
 import diva.rest.model.ConfigurationsPool;
 import diva.rest.model.DivaRoot;
 import diva.rest.model.Repository;
@@ -83,7 +84,7 @@ public class Recommendation {
 			@PathParam("scId") String scId, 
 			@PathParam("profileId") String profileId
 	){
-		Map<String, Object> res = new HashMap<String, Object>();
+		Map<String, Object> res = new TreeMap<String, Object>();
 		List<String> lst = this.getRecommList(scId, profileId);
 		for(String s : lst){
 			res.put(s, getRecommConfig(s));
@@ -108,7 +109,7 @@ public class Recommendation {
 			ConfigurationsPool pool = this.getConfigPool(recommId);
 			
 			Collection<String> configured = pool.getConfNames(recommId);
-			Collection<String> used = ConsumerProfile.INSTANCE.getCurrentServices(this.getUserProfileId(recommId));
+			Collection<String> used = ConsumerProfileLocal.INSTANCE.getCurrentServices(this.getUserProfileId(recommId));
 			
 			Set<String> toAdd = new HashSet<String>(configured);
 			Set<String> toRemove = new HashSet<String>(used);
