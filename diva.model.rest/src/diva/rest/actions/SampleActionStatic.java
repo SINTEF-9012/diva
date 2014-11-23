@@ -17,10 +17,15 @@ package diva.rest.actions;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Calendar;
+import java.util.Collections;
 
 import javax.ws.rs.core.UriBuilder;
 
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -30,6 +35,8 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import diva.VariabilityModel;
+import diva.helpers.DivaHelper;
 import diva.rest.Demo;
 import diva.rest.model.ConfigurationsPool;
 import diva.rest.model.DivaRoot;
@@ -46,12 +53,12 @@ import diva.rest.resources.Recommendation;
  * delegated to it.
  * @see IWorkbenchWindowActionDelegate
  */
-public class SampleAction implements IWorkbenchWindowActionDelegate {
+public class SampleActionStatic implements IWorkbenchWindowActionDelegate {
 	private IWorkbenchWindow window;
 	/**
 	 * The constructor.
 	 */
-	public SampleAction() {
+	public SampleActionStatic() {
 	}
 
 	/**
@@ -62,50 +69,43 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	 */
 	public void run(IAction action) {
 		
-		//load a diva model
-		Repository.mainRoot = new DivaRoot(
-					org.eclipse.emf.common.util.URI
-						.createPlatformResourceURI("BrokerAtCloud/model/Orbi.diva")
-				);
-//		Repository.configPool = new ConfigurationsPool(
-//					Repository.mainRoot.getScenarios().iterator().next().getContext().get(0)
-//				);
+		//doit("Orbi-ref");
+		doit("Orbi-comp");
 		
-		updateAndSave();
-		
-		URI uri = UriBuilder.fromUri("http://0.0.0.0/").port(8089).build();
-		ResourceConfig resourceConfig = new ResourceConfig(Demo.class);
-		resourceConfig.register(Recommendation.class);
-		resourceConfig.register(DependencyChecking.class);
-		resourceConfig.register(PubSub.class);
-		resourceConfig.register(JacksonJsonProvider.class);  //Using Jackson for JSON wrapping
-		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri,resourceConfig);
-		try {
-			server.start();
-		} catch (IOException e) {
-			
+	}
+
+	private void doit(String file) {
+		VariabilityModel root = null;
+		ResourceSet rs = new ResourceSetImpl();
+		Resource res = rs.createResource(org.eclipse.emf.common.util.URI
+				.createPlatformResourceURI("BrokerAtCloud/model/"+file+".diva"));
+		try{
+			res.load(Collections.EMPTY_MAP);
+			root = (VariabilityModel) res.getContents().get(0);			
+		}
+		catch(Exception e){
 			e.printStackTrace();
 		}
-		//this.updateAndSave();
 		
-		new Thread(){
-			@Override
-			public void run(){
-				while(true){
-					Repository.mainRoot.updateModel();
-//					Repository.mainRoot.runSimulation();
-//					Repository.configPool = new ConfigurationsPool(
-//							Repository.mainRoot.getScenarios().iterator().next().getContext().get(0)
-//						);
-					try {
-						sleep(60000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}.start();
+		if(root.getSimulation()==null)
+			return;
+		root.getSimulation().populatePriorities();
+		root.getSimulation().populateScores();
+		root.getSimulation().populateVerdicts();
+		DivaHelper.computeSuitableConfigurations(root, 0);
+		root.getSimulation().populateScores();
+		root.getSimulation().populateVerdicts();
+		
+		Resource res2 = rs.createResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(
+				"BrokerAtCloud/model/"+file+"-gen.diva"));
+		
+		res2.getContents().add(root);
+		try {
+			res2.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

@@ -41,6 +41,15 @@
                toolbarPath="divaRestToolBar"
                id="diva.rest.actions.SampleAction">
          </action>
+         <action
+               class="diva.rest.actions.SampleActionStatic"
+               icon="icons/DivaModelFile.gif"
+               id="diva.rest.actions.TestStatic"
+               label="&amp;Test"
+               menubarPath="divaRest/divaRestGroup"
+               toolbarPath="divaRestToolBar"
+               tooltip="Start DiVA Daemon with Rest API">
+         </action>
       </actionSet>
    </extension>
 

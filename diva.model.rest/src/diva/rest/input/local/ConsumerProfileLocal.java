@@ -41,12 +41,17 @@ public class ConsumerProfileLocal extends ConsumerProfile {
 		Map<String, Object> prf = new HashMap<String, Object>();
 		//prf.put("GoogleMapS", "GoogleMapF");
 		prf.put("CpuOLoad", true);
-		prf.put("Address", true);
-		prf.put("Map", true);
+		prf.put("DatabaseOfferingServiceModel", true);
+		prf.put("ApplicationServerOfferingServiceModel", true);
+		prf.put("NetworkCapacityOfferingServiceModel", true);
+		prf.put("OrbiOfferingServiceModel", true);
 		//I put currently used services here too, but in practice, it may be obtained from 
 		//a different service
 		prf.put(CURRENT_USED, new HashSet<String>(Arrays.asList(
-					"GoogleMap"
+					"GoldenOrbiServiceLevelProfile",
+					"SmallElasticDBServiceLevelProfile",
+					"LargeElasticASServiceLevelProfile",
+					"LargeMeteredServiceLevelProfile"
 				))	
 			);
 		fakedRequired.put("abc-001", prf);

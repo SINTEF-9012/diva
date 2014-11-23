@@ -47,14 +47,48 @@ public class ServiceCategoryLocal extends ServiceCategory {
 //	}
 	
 	private void initFake(){
-		fakeRepo.put("Map", 
-				Arrays.asList("GoogleMap", "BingMap", "YellowMap")
+		fakeRepo.put("DatabaseOfferingServiceModel", 
+				Arrays.asList(
+						"SmallMonolithicDBServiceLevelProfile", 
+						"MediumMonolithicDBServiceLevelProfile", 
+						"LargeMonolithicDBServiceLevelProfile",
+						"SmallClusteredDBServiceLevelProfile",
+						"MediumClusteredDBServiceLevelProfile",
+						"LargeClusteredDBServiceLevelProfile",
+						"SmallElasticDBServiceLevelProfile",
+						"MediumElasticDBServiceLevelProfile",
+						"LargeElasticDBServiceLevelProfile"
+					)
 			);
-		fakeRepo.put("Calendar", 
-				Arrays.asList("OutlookCal", "GoogleCal")
+		fakeRepo.put("ApplicationServerOfferingServiceModel", 
+				Arrays.asList(
+						"SmallSingleInstanceASServiceLevelProfile", 
+						"MediumSingleInstanceASServiceLevelProfile", 
+						"LargeSingleInstanceASServiceLevelProfile",
+						"SmallClusteredASServiceLevelProfile",
+						"MediumClusteredASServiceLevelProfile",
+						"LargeClusteredASServiceLevelProfile",
+						"SmallElasticASServiceLevelProfile",
+						"MediumElasticASServiceLevelProfile",
+						"LargeElasticASServiceLevelProfile"
+					)
 			);
-		fakeRepo.put("Address", 
-				Arrays.asList("LyncAddr", "GMailAddr")
+		fakeRepo.put("NetworkCapacityOfferingServiceModel", 
+				Arrays.asList(
+						"SmallMeteredServiceLevelProfile", 
+						"MediumMeteredServiceLevelProfile", 
+						"LargeMeteredServiceLevelProfile",
+						"SmallUnmeteredServiceLevelProfile",
+						"MediumUnmeteredServiceLevelProfile",
+						"LargeUnmeteredServiceLevelProfile"
+					)
+			);
+		fakeRepo.put("OrbiOfferingServiceModel", 
+				Arrays.asList(
+						"GoldenOrbiServiceLevelProfile", 
+						"SilverOrbiServiceLevelProfile",
+						"BronzeOrbiServiceLevelProfile",
+						"FreeOrbiServiceLevelProfile")
 			);
 	}
 	

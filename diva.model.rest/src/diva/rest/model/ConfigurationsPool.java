@@ -63,7 +63,12 @@ public class ConfigurationsPool {
 	public ConfigurationsPool(Context context){
 		int i = context.getConfiguration().size();
 		List<Configuration> confs = new ArrayList<Configuration>();
-		confs.addAll(context.getConfiguration());
+		//confs.addAll(context.getConfiguration());
+		for(Configuration c : context.getConfiguration()){
+			if(c.getTotalScore() > 0-0x1000){
+				confs.add(c);
+			}
+		}
 		Collections.sort(confs, new Comparator<Configuration>(){
 
 			@Override

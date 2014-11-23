@@ -29,8 +29,36 @@ public class ServiceDependencyLocal extends ServiceDependency {
 	private Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
 	
 	private void initFake(){
-		fakeRepo.put("LyncAddr", Arrays.asList("OutlookCal"));
-		fakeRepo.put("OutlookCal", Arrays.asList("LyncAddr"));
+		fakeRepo.put("GoldenOrbiServiceLevelProfile", 
+				Arrays.asList(
+						"SmallElasticDBServiceLevelProfile",
+						"LargeElasticASServiceLevelProfile",
+						"LargeMeteredServiceLevelProfile"
+						
+					));
+		
+		
+		fakeRepo.put("SilverOrbiServiceLevelProfile", 
+				Arrays.asList(
+						"SmallElasticDBServiceLevelProfile",
+						"MediumClusteredASServiceLevelProfile",
+						"LargeMeteredServiceLevelProfile"
+						));
+		
+		fakeRepo.put("BronzeOrbiServiceLevelProfile", 
+				Arrays.asList(
+						"MediumClusteredDBServiceLevelProfile",
+						"SmallClusteredASServiceLevelProfile",
+						"MediumUnmeteredServiceLevelProfile"
+						));
+		
+		fakeRepo.put("FreeOrbiServiceLevelProfile", 
+				Arrays.asList(
+						"MediumMonolithicDBServiceLevelProfile",
+						"LargeSingleInstanceASServiceLevelProfile",
+						"SmallUnmeteredServiceLevelProfile"
+				));
+		
 	}
 	
 	public ServiceDependencyLocal(){

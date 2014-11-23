@@ -87,6 +87,7 @@ public class AlloyWrapper implements Callable<Entry<Context, List<Configuration>
 				solution = TranslateAlloyToKodkod.execute_command(NOP, world.getAllReachableSigs(), world.getAllCommands().get(0), opt);
 			} catch (Err e) {
 				System.err.println("Alloy ERROR:\n" + e.msg);
+				e.printStackTrace();
 				Thread.currentThread().interrupt();
 			} finally {
 				input.delete();
