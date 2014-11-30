@@ -43,7 +43,6 @@
          </action>
          <action
                class="diva.rest.actions.SampleActionStatic"
-               icon="icons/DivaModelFile.gif"
                id="diva.rest.actions.TestStatic"
                label="&amp;Test"
                menubarPath="divaRest/divaRestGroup"

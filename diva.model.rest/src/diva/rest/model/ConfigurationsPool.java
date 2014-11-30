@@ -115,7 +115,7 @@ public class ConfigurationsPool {
 		for(int j = original.size()-1; j>=0; j--){
 			Configuration conf = original.get(j);
 			if(filterConfig(sc, profile)){
-				String configId = combinedId + "--" + String.valueOf(i);
+				String configId = combinedId + "--" + String.format("%02d", i);
 				pool.put(configId, conf);
 				newIds.add(configId);
 				i = i + 1;

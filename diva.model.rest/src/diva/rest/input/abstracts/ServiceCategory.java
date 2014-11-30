@@ -15,5 +15,7 @@ public abstract class ServiceCategory {
 	public abstract List<String> getServices(String category);
 
 	public abstract List<String> getCategories();
+	
+	public abstract List<String> getGroup(String service);
 
 }

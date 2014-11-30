@@ -92,6 +92,45 @@ public class Recommendation {
 		return res;
 	}
 	
+	/**
+	 * curl http://127.0.0.1:8089/fpr/recommendations/sc/abc/profile/001/provider
+	 * @param scId
+	 * @param profileId
+	 * @return
+	 */
+	@Path("sc/{scId}/profile/{profileId}/provider")
+	@GET
+	public Object getRecommListForProvider(
+			@PathParam("scId") String scId, 
+			@PathParam("profileId") String profileId
+	){
+		try{
+		Map<String, Object> res = new TreeMap<String, Object>();
+
+		String combinedId = scId+"-"+profileId;
+		DivaRoot root = Repository.mainRoot.fork();
+		root.updateOnRequest(scId, profileId);
+		Repository.registerRoot(combinedId, root);
+		root.runSimulation(true);
+		try{
+			//This is odd: without this sleep, curl gets a "empty result", even if res is not null
+			Thread.sleep(10);
+		}catch(Exception e){
+			//This sleep seems to be interrupted every time (by whom I don't know).
+		}
+		List<String> lst = root.getConfigurationPool().queryScProfile(scId, profileId);
+
+		for(String s : lst){
+			res.put(s, getRecommConfig(s));
+		}
+		return res;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "wrong";
+		}
+	}
+	
 	/*
 	 * curl http://127.0.0.1:8089/fpr/recommendations/abc-001--0/config
 	 * This query should be invoked after one {@link #getRecommList} invocation, otherwise

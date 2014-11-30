@@ -19,4 +19,10 @@ public class ServiceCategoryRest extends ServiceCategory {
 		return null;
 	}
 
+	@Override
+	public List<String> getGroup(String service) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

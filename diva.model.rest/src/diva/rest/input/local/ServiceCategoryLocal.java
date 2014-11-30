@@ -26,6 +26,8 @@ import diva.rest.input.abstracts.ServiceCategory;
 
 public class ServiceCategoryLocal extends ServiceCategory {
 	
+	public List<String> prefixes = Arrays.asList("Small", "Medium", "Large");
+	
 	public static ServiceCategoryLocal INSTANCE = new ServiceCategoryLocal();
 	
 	public Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
@@ -100,6 +102,22 @@ public class ServiceCategoryLocal extends ServiceCategory {
 	@Override
 	public List<String> getServices(String category){
 		return fakeRepo.get(category);
+	}
+
+	@Override
+	public List<String> getGroup(String service) {
+		// TODO Auto-generated method stub
+		List<String> results = new ArrayList<String>();
+		String rest = null;
+		for(String s : prefixes)
+			if(service.startsWith(s))
+				rest = service.substring(s.length());
+		if(rest == null)
+			return null;
+		for(String s : prefixes)
+			results.add(s + rest);
+		return results;
+			
 	}
 	
 	

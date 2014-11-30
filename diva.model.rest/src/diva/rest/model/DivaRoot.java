@@ -86,6 +86,7 @@ public class DivaRoot {
 		case MEDIUM: return 2;
 		case HIGH: return 4;
 		case FAILED: return 0x4000;
+		case RECOVERED: return 0;
 		}
 		return -1;
 	}
@@ -138,6 +139,66 @@ public class DivaRoot {
 	}
 	
 	public void runSimulation(){
+		runSimulation(false);
+	}
+	
+	public void runSimulation(Boolean isAdmin){
+		ServiceCategory serviceCategory = ServiceCategory.INSTANCE;
+		Map<String, String> remember = new HashMap<String, String>();
+		if(isAdmin){
+
+			for(Dimension dim : root.getDimension())
+				for(Variant variant : dim.getVariant()){
+					String dep = null;
+					try{
+						dep = variant.getDependency().getText();
+					}catch(NullPointerException e){
+						continue;
+					}
+					if(dep==null || dep.length()==0)
+						continue;
+					List<String> group = serviceCategory.getGroup(dep.trim());
+					if(group != null && group.size()!=0){
+						String alternative = org.apache.commons.lang.StringUtils.join(group, " or ");
+						alternative = "(" + alternative + ")";
+						remember.put(variant.getName(), dep);
+						variant.getDependency().setText(alternative);
+						try {
+							Term term =  DivaExpressionParser.parse(root, alternative.trim());
+							variant.getDependency().setTerm(term);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				}
+		}
+		
+		_runSimulation();
+		
+		if(isAdmin){
+			for(Dimension dim : root.getDimension())
+				for(Variant variant : dim.getVariant()){
+					String original = remember.get(variant);
+					if(original == null || original.length() == 0 )
+						continue;
+					variant.getDependency().setText(original);
+					try {
+						Term term =  DivaExpressionParser.parse(root, original.trim());
+						variant.getDependency().setTerm(term);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+		}
+		
+		
+	}
+	
+	public void _runSimulation(){
+		
 		if(root.getSimulation()==null)
 			return;
 		root.getSimulation().populatePriorities();
@@ -453,7 +514,13 @@ public class DivaRoot {
 					for(PropertyValue p : v.getPropertyValue()){
 						if("Failure".equals(p.getProperty().getName())){
 							p.setValue(nlikelihood);
-							return String.format("Failure likelihood of %s is changed to %d", v.getName(), nlikelihood);
+							if(FAILED.equals(likelihood))
+								return String.format("%s is set to be failed", v.getName());
+							else if(RECOVERED.equals(likelihood))
+								return String.format("%s is recovered from failure", v.getName());
+							else
+								return String.format("Failure likelihood of %s is changed to %d", v.getName(), nlikelihood);
+								
 						}
 						
 					}
