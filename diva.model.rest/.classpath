@@ -39,5 +39,10 @@
 	<classpathentry kind="lib" path="lib/httpcore-4.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/httpmime-4.3.5.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/andes-client-0.13.wso2v8.1.jar"/>
+	<classpathentry kind="lib" path="lib/axiom.jar"/>
+	<classpathentry kind="lib" path="lib/javax.jms.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-1.5.10.wso2v1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,6 +1,8 @@
 package diva.rest.resources;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.GET;
@@ -20,6 +22,9 @@ import diva.rest.model.Repository;
 @Path("subscriptions/")
 @Produces(MediaType.APPLICATION_JSON)
 public class PubSub {
+	
+	private List<String> allcontexts = Arrays.asList("CpuOLoad", "RamOLoad");
+	
 	private final String cepId = "fprcep";
 	
 	@POST
@@ -38,9 +43,23 @@ public class PubSub {
 		String result = "results:";
 		for(Object entry : ((Map)e).entrySet()){
 			
+			
+			
 			String key = ((Map.Entry)entry).getKey().toString();
-			String value = ((Map.Entry)entry).getValue().toString();
-			result = result + "\n" + root.updateFailureLikelihood(key, value);
+			
+			Map value = (Map)((Map.Entry)entry).getValue();
+			String serviceName = value.get("service").toString();
+			List<String> cause = (List<String>) value.get("cause");
+			
+			result = result + "\n" + root.updateFailureLikelihood(serviceName, key);
+			for(String s : allcontexts){
+				if(cause.contains(s))
+					result = result + "\n" + root.updateFailureLikelihood(s, "true");
+				else
+					result = result + "\n" + root.updateFailureLikelihood(s, "recovered");
+				
+			}
+			
 			
 		}
 		return result;

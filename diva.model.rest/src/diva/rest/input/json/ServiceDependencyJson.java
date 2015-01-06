@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input.local;
+package diva.rest.input.json;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,9 +22,9 @@ import java.util.Map;
 
 import diva.rest.input.abstracts.ServiceDependency;
 
-public class ServiceDependencyLocal extends ServiceDependency {
+public class ServiceDependencyJson extends ServiceDependency {
 	
-	public static ServiceDependencyLocal INSTANCE = new ServiceDependencyLocal();
+	public static ServiceDependencyJson INSTANCE = new ServiceDependencyJson();
 	
 	private Map<String, List<String>> fakeRepo = new HashMap<String, List<String>>();
 	
@@ -61,7 +61,7 @@ public class ServiceDependencyLocal extends ServiceDependency {
 		
 	}
 	
-	public ServiceDependencyLocal(){
+	public ServiceDependencyJson(){
 		initFake();
 	}
 	

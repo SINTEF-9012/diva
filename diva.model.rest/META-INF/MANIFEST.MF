@@ -43,5 +43,17 @@ Bundle-ClassPath: lib/aopalliance-repackaged-2.2.0.jar,
  lib/jackson-core-asl-1.9.13.jar,
  lib/jackson-jaxrs-1.9.13.jar,
  lib/jackson-mapper-asl-1.9.13.jar,
- lib/commons-lang-2.6.jar
+ lib/commons-lang-2.6.jar,
+ lib/andes-client-0.13.wso2v8.1.jar,
+ lib/axiom.jar,
+ lib/commons-codec-1.6.jar,
+ lib/commons-logging-1.1.3.jar,
+ lib/fluent-hc-4.3.5.jar,
+ lib/httpclient-4.3.5.jar,
+ lib/httpclient-cache-4.3.5.jar,
+ lib/httpcore-4.3.2.jar,
+ lib/httpmime-4.3.5.jar,
+ lib/javax.jms.jar,
+ lib/log4j-1.2.17.jar,
+ lib/slf4j-1.5.10.wso2v1.jar
 Import-Package: diva.parser

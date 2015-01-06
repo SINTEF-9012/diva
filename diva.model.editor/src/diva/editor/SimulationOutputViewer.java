@@ -282,7 +282,7 @@ public class SimulationOutputViewer extends DiVATableEditorPane implements Adapt
 		return list;
 	}
 
-	static String[] PriorityValues = { "Lowest", "Very Low", "Low", "Medium", "High", "Very High" };
+	static String[] PriorityValues = { "Lowest", "Very Low", "Low", "Medium", "High", "Very High", "Very High", "Very High","Very High","Very High","Very High","Very High","Very High","Very High" };
 	
 	public class ScoreValueColumnLabelProvider extends ColumnLabelProvider {
 

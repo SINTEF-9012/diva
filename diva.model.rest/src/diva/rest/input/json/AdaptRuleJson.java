@@ -1,4 +1,4 @@
-package diva.rest.input.local;
+package diva.rest.input.json;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -6,9 +6,9 @@ import java.util.Map;
 
 import diva.rest.input.abstracts.AdaptRule;
 
-public class AdaptRuleLocal extends AdaptRule {
+public class AdaptRuleJson extends AdaptRule {
 
-	public static AdaptRuleLocal INSTANCE = new AdaptRuleLocal();
+	public static AdaptRuleJson INSTANCE = new AdaptRuleJson();
 	
 	private Map<String, Map<String, String>> fakedRepo = new HashMap<String, Map<String, String>>();
 	
@@ -55,7 +55,7 @@ public class AdaptRuleLocal extends AdaptRule {
 		
 	}
 	
-	public AdaptRuleLocal(){
+	public AdaptRuleJson(){
 		initFake();
 	}
 	

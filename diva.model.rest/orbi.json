@@ -1,0 +1,197 @@
+[
+    {
+        "OfferingName": "OrbiInstance1",
+        "ServiceProvider": "ServiceProvider1",
+        "BrokerPolicy": "SiloOrbiPolicy",
+        "ServiceLevelProfile": "OrbiServiceLevelProfile",
+        "GroundingURL": "http://www.provider1.org/OrbiInstance1",
+        "VariableSpace": [
+            {
+                "VarName": "HTTPResponseTime",
+                "VarType": "Integer",
+                "VarMeasType": "milliSeconds",
+                "MaxAcceptableThreshold": "2000"
+            },
+            {
+                "VarName": "AmountOfInternalServerErrorsPerMinute",
+                "VarType": "Integer",
+                "VarMeasType": "HTTP 500 Occurrences",
+                "MaxAcceptableThreshold": "2"
+            },
+            {
+                "VarName": "Uptime",
+                "VarType": "Float",
+                "VarMeasType": "Percentage",
+                "MinAcceptableThreshold": "98"
+            },
+            {
+                "VarName": "CPUSpeed",
+                "VarType": "Int",
+                "VarMeasType": "Speed Of vCPU at MHz",
+                "MinAcceptableThreshold": "1500"
+            },
+            {
+                "VarName": "CPUvCores",
+                "VarType": "Int",
+                "VarMeasType": "Amount of Cores of vCPU",
+                "MinAcceptableThreshold": "2"
+            },
+            {
+                "VarName": "CPULoadAvgPerCore",
+                "VarType": "Float",
+                "VarMeasType": "Percentage",
+                "MaxAcceptableThreshold": "0.8"
+            },
+            {
+                "VarName": "MemoryAvailable",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of MBs",
+                "MinAcceptableThreshold": "100000"
+            },
+            {
+                "VarName": "MemoryTotal",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of MBs",
+                "MinAcceptableThreshold": "100000"
+            }
+        ],
+        "ServiceDependencies": [
+            {"ServiceInstanceReferenceName": "DBInstance1"},
+            {"ServiceInstanceReferenceName": "ASInstance1"}
+        ]
+    }
+,
+    {
+        "OfferingName": "DBInstance1",
+        "ServiceProvider": "HostingProvider1",
+        "BrokerPolicy": "SiloDatabasePolicy",
+        "ServiceLevelProfile": "MonolithicDBServiceLevelProfile",
+        "GroundingURL": "hostingprovider1.org:3306/db1",
+        "VariableSpace": [
+            {
+                "VarName": "Threads",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of Threads",
+                "MinAcceptableThreshold": "5"
+            },
+            {
+                "VarName": "Questions",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of Questions",
+                "MaxAcceptableThreshold": "10000"
+            },
+            {
+                "VarName": "SlowQueries",
+                "VarType": "Integer",
+                "VarMeasType": "milliSeconds",
+                "MaxAcceptableThreshold": "5000"
+            },
+            {
+                "VarName": "AvgOfQueriesPecSec",
+                "VarType": "Float",
+                "VarMeasType": "Average of Queries per Second",
+                "MaxAcceptableThreshold": "5000"
+            },
+            {
+                "VarName": "Uptime",
+                "VarType": "Float",
+                "VarMeasType": "Percentage",
+                "MinAcceptableThreshold": "98"
+            },
+            {
+                "VarName": "CPUSpeed",
+                "VarType": "Int",
+                "VarMeasType": "Speed Of vCPU at MHz",
+                "MinAcceptableThreshold": "1500"
+            },
+            {
+                "VarName": "CPUvCores",
+                "VarType": "Int",
+                "VarMeasType": "Amount of Cores of vCPU",
+                "MinAcceptableThreshold": "2"
+            },
+            {
+                "VarName": "CPULoadAvgPerCore",
+                "VarType": "Float",
+                "VarMeasType": "Percentage",
+                "MaxAcceptableThreshold": "0.8"
+            },
+            {
+                "VarName": "MemoryAvailable",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of MBs",
+                "MinAcceptableThreshold": "100000"
+            },
+            {
+                "VarName": "MemoryTotal",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of MBs",
+                "MinAcceptableThreshold": "100000"
+            }
+        ]
+    }
+,
+    {
+        "OfferingName": "ASInstance1",
+        "ServiceProvider": "HostingProvider1",
+        "BrokerPolicy": "SiloApplicationServerPolicy",
+        "ServiceLevelProfile": "SingleInstanceASServiceLevelProfile",
+        "GroundingURL": "hostingprovider1.org/ASInstance1",
+        "VariableSpace": [
+            {
+                "VarName": "TotalAccesses",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of Total Accesses",
+                "MaxAcceptableThreshold": "100000"
+            }, 
+            {
+                "VarName": "TotalKBytes",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of KBytes",
+                "MaxAcceptableThreshold": "100000000"
+            },
+            {
+                "VarName": "RequestsPerSec",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of Requests per Second",
+                "MaxAcceptableThreshold": "100000"
+            },
+            {
+                "VarName": "Uptime",
+                "VarType": "Float",
+                "VarMeasType": "Percentage",
+                "MinAcceptableThreshold": "98"
+            },
+            {
+                "VarName": "CPUSpeed",
+                "VarType": "Int",
+                "VarMeasType": "Speed Of vCPU at MHz",
+                "MinAcceptableThreshold": "1500"
+            },
+            {
+                "VarName": "CPUvCores",
+                "VarType": "Int",
+                "VarMeasType": "Amount of Cores of vCPU",
+                "MinAcceptableThreshold": "2"
+            },
+            {
+                "VarName": "CPULoadAvgPerCore",
+                "VarType": "Float",
+                "VarMeasType": "Percentage",
+                "MaxAcceptableThreshold": "0.8"
+            },
+            {
+                "VarName": "MemoryAvailable",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of MBs",
+                "MinAcceptableThreshold": "100000"
+            },
+            {
+                "VarName": "MemoryTotal",
+                "VarType": "Integer",
+                "VarMeasType": "Amount of MBs",
+                "MinAcceptableThreshold": "100000"
+            }
+        ]
+    }
+]

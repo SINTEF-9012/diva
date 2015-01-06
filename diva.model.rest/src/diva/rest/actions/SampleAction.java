@@ -18,6 +18,7 @@ package diva.rest.actions;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.jms.JMSException;
 import javax.ws.rs.core.UriBuilder;
 
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
@@ -31,6 +32,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import diva.rest.Demo;
+import diva.rest.jms.Subscriber;
 import diva.rest.model.ConfigurationsPool;
 import diva.rest.model.DivaRoot;
 import diva.rest.model.Repository;
@@ -106,6 +108,13 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 				}
 			}
 		}.start();
+		
+		try {
+			Subscriber.startListening();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

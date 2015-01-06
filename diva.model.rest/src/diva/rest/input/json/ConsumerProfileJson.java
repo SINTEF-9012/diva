@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input.local;
+package diva.rest.input.json;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,9 +27,9 @@ import java.util.Set;
 
 import diva.rest.input.abstracts.ConsumerProfile;
 
-public class ConsumerProfileLocal extends ConsumerProfile {
+public class ConsumerProfileJson extends ConsumerProfile {
 
-	public static ConsumerProfileLocal INSTANCE = new ConsumerProfileLocal();
+	public static ConsumerProfileJson INSTANCE = new ConsumerProfileJson();
 	
 	private static final String CURRENT_USED = "CURRENT_USED";
 	
@@ -67,7 +67,7 @@ public class ConsumerProfileLocal extends ConsumerProfile {
 		fakedRequired.put("abc-002", prf);	
 	}
 	
-	public ConsumerProfileLocal(){
+	public ConsumerProfileJson(){
 		initFake();
 	}
 	

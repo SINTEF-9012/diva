@@ -318,6 +318,11 @@ public class DivaRoot {
 		bv.setId("RamOLoad");
 		root.getContext().add(bv);
 		
+		bv = factory.createBooleanVariable();
+		bv.setName("Normal");
+		bv.setId("Normal");
+		root.getContext().add(bv);
+		
 	}
 	
 	/**
@@ -412,10 +417,12 @@ public class DivaRoot {
 					if(Boolean.valueOf(true).equals(value)){
 						vv.setBool(true);
 					}
+					else if("true".equals(ConsumerProfileLocal.INSTANCE.publicStatus.get(v.getName())))
+						vv.setBool(true);
 					else if("false".equals(ConsumerProfileLocal.INSTANCE.publicStatus.get(v.getName())))
 						vv.setBool(false);
 					else
-						vv.setBool(true);
+						vv.setBool(false);
 					context.getVariable().add(vv);
 				}
 			}
@@ -565,7 +572,7 @@ public class DivaRoot {
 			for(String propName : propertyNames){
 				priorities.put(propName, adaptRule.getPriority(name, propName));
 			}
-			priorities.put("Failure", 4);
+			priorities.put("Failure", 16);
 			this.fillRule(name, adaptRule.getRule(name), priorities);
 		}
 				

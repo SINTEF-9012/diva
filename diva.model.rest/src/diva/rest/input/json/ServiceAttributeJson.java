@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package diva.rest.input.local;
+package diva.rest.input.json;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import diva.rest.input.abstracts.ServiceAttribute;
 
-public class ServiceAttributeLocal extends ServiceAttribute {
+public class ServiceAttributeJson extends ServiceAttribute {
 
-	public static ServiceAttributeLocal INSTANCE = new ServiceAttributeLocal();
+	public static ServiceAttributeJson INSTANCE = new ServiceAttributeJson();
 	
 	Random random = new Random();
 	
@@ -222,7 +224,7 @@ public class ServiceAttributeLocal extends ServiceAttribute {
 		
 	}
 	
-	public ServiceAttributeLocal(){
+	public ServiceAttributeJson(){
 		initFake();
 	}
 	
@@ -233,31 +235,15 @@ public class ServiceAttributeLocal extends ServiceAttribute {
 	
 	@Override
 	public List<String> listCommonAttributes(){
-		return Arrays.asList(
-				"VarMaxDownlinkBandwidth",
-				"VarMaxRequestsPerSecond",
-				"VarAmountOfDBAllocatedMemory",
-				"VarMaxTPSSupported",
-				"VarAmountOfDBAllocatedMemoryPerNode",
-				"VarAmountOfASAllocatedMemory",
-				"VarAmountOfWebBalancingNodes",
-				"VarMaxAmountOfUsers",
-				"VarSpeedOfDBAllocatedVCPUs",
-				"VarAmountOfClusterNodes",
-				"VarSpeedOfDBAllocatedVCPUsPerNode",
-				"VarMaxUplinkBandwidth",
-				"VarSpeedOfASAllocatedVCPUs",
-				"VarAmountOfDBAllocatedVCPUsPerNode",
-				"VarDBScaleUpFactor",
-				"VarAmountOfDBAllocatedVCPUs",
-				"VarUpTimePercentage",
-				"VarMaxQPSSupported",
-				"VarMaxAmountOfTrafficPermitted",
-				"VarAmountOfConcurrentUsers",
-				"VarAmountOfASAllocatedVCPUs",
-				"VarASScaleUpFactor",
-				"VarReplicationRatio"
-			);
+		Set<String> vars = new HashSet<String>();
+		for(Object i : JsonRoot.INSTANCE.offerings){
+			Map<String, Object> m = (Map<String, Object>) i;
+			List<Map<String, Object>> varspace = (List<Map<String, Object>>) m.get(JsonRoot.VariableSpace);
+			for(Map<String, Object> var : varspace){
+				vars.add(var.get(JsonRoot.VarName).toString());
+			}
+		}
+		return new ArrayList<String>(vars);
 	}
 	
 
@@ -265,15 +251,35 @@ public class ServiceAttributeLocal extends ServiceAttribute {
 	
 	@Override
 	public Object get(String service, String attribute){
-		
-		if(fakedRepo.containsKey(service+"-"+attribute))
-			return fakedRepo.get(service+"-"+attribute);
-		else
-			return 0;
-		
+		Map<String, Object> offering = JsonRoot.INSTANCE.getOffering(service);
+		List<Map<String, Object>> varspace = (List<Map<String, Object>>) offering.get(JsonRoot.VariableSpace);
+		for(Map<String, Object> var : varspace){
+			if(attribute.equals(var.get(JsonRoot.VarName))){
+				Object value = var.get(JsonRoot.MaxAcceptableThreshold);
+				if(value == null)
+					value = var.get(JsonRoot.MinAcceptableThreshold);
+				if(value != null)
+					return convert(value.toString(), 
+							var.get(JsonRoot.VarType).toString(),
+							var.get(JsonRoot.VarMeasType).toString());
+				
+			}		
+		}
+		return 0;
 	}
 	
-	
+	private int convert(String value, String type, String meas){
+		if("Float".equals(type)){
+			double d = Double.valueOf(value).doubleValue();
+			if(d<1)
+				d = d * 10;
+			return  Double.valueOf( d ).intValue();
+		}
+		if("Integer".equals(type) || "Int".equals(type)){
+			return Integer.valueOf(value);
+		}
+		return 0;
+	}
 }
 
 
